@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopping.Service", "EShopping.Service\EShopping.Service.csproj", "{8489C5E1-9B0C-4960-AF5D-1160E173D49B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopping.Data", "EShopping.Data\EShopping.Data.csproj", "{8D8CFC14-51F7-4170-A4DE-D4E130A0DF50}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopping", "EShopping\EShopping.csproj", "{AD450586-8526-41FB-8917-273E8EBB7838}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8489C5E1-9B0C-4960-AF5D-1160E173D49B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8489C5E1-9B0C-4960-AF5D-1160E173D49B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8489C5E1-9B0C-4960-AF5D-1160E173D49B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8489C5E1-9B0C-4960-AF5D-1160E173D49B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D8CFC14-51F7-4170-A4DE-D4E130A0DF50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D8CFC14-51F7-4170-A4DE-D4E130A0DF50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D8CFC14-51F7-4170-A4DE-D4E130A0DF50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D8CFC14-51F7-4170-A4DE-D4E130A0DF50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD450586-8526-41FB-8917-273E8EBB7838}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD450586-8526-41FB-8917-273E8EBB7838}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD450586-8526-41FB-8917-273E8EBB7838}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD450586-8526-41FB-8917-273E8EBB7838}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
