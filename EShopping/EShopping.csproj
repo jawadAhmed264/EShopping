@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -248,6 +249,12 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Admin\AdminContent\css\pignose.calendar.min.css" />
+    <Content Include="Areas\Admin\AdminContent\css\style.css" />
+    <Content Include="Areas\Admin\AdminContent\images\station_clock.svg" />
+    <Content Include="Areas\Admin\AdminContent\js\canvasjs.min.js" />
+    <Content Include="Areas\Admin\AdminContent\js\pignose.calendar.full.min.js" />
+    <Content Include="Areas\Admin\AdminContent\js\script.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -318,6 +325,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\AdminContent\fonts\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
