@@ -9,5 +9,8 @@ namespace EShopping.Service.CategoryServices
         IEnumerable<Category> AllCategories();
         Category GetCategoryById(int Id);
         Task<bool> AddCategory(Category cat);
+        Task<bool> UpdateCategory(Category cat);
+        Task<bool> Remove(Category cat);
+
     }
 }

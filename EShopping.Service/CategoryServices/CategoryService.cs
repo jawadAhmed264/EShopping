@@ -21,10 +21,21 @@ namespace EShopping.Service.CategoryServices
             _CatRepo.Insert(cat);
             return await _CatRepo.SaveChangesAsync();
         }
+        public async Task<bool> UpdateCategory(Category cat)
+        {
+            _CatRepo.Update(cat);
+            return await _CatRepo.SaveChangesAsync();
+        }
 
         public Category GetCategoryById(int Id)
         {
             return _CatRepo.GetById(Id);
+        }
+
+        public async Task<bool> Remove(Category cat)
+        {
+            _CatRepo.Delete(cat);
+            return await _CatRepo.SaveChangesAsync(); 
         }
     }
 }
