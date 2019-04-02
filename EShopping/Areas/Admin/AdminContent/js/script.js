@@ -36,9 +36,7 @@ function openNav() {
 function closeNav() {
     document.getElementById("mySidenav").style.width = "50px";
 }
-$(document).ready( function () {
-    $('#myTable').DataTable();
-});
+
 
 AmCharts.makeChart("map",{
         "type": "map",

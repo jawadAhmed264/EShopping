@@ -43,6 +43,7 @@ namespace EShopping.Data.Models
         public Nullable<System.DateTime> ModifiedDate { get; set; }
         public string ModifiedBy { get; set; }
         public Nullable<bool> Active { get; set; }
+        public Nullable<bool> IsFeatured { get; set; }
     
         public virtual Brand Brand { get; set; }
         public virtual Category Category { get; set; }

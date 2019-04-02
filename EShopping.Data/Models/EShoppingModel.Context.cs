@@ -18,7 +18,6 @@ namespace EShopping.Data.Models
         public EShoppingEntities()
             : base("name=EShoppingEntities")
         {
-
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

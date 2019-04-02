@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="EShoppingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="EShoppingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -111,6 +111,7 @@
           <Property Name="ModifiedDate" Type="datetime" />
           <Property Name="ModifiedBy" Type="nvarchar" MaxLength="200" />
           <Property Name="Active" Type="bit" />
+          <Property Name="IsFeatured" Type="bit" />
         </EntityType>
         <EntityType Name="Customer">
           <Key>
@@ -215,6 +216,7 @@
           <Property Name="ModifiedDate" Type="datetime" />
           <Property Name="ModifiedBy" Type="nvarchar" MaxLength="200" />
           <Property Name="Active" Type="bit" />
+          <Property Name="IsFeatured" Type="bit" />
         </EntityType>
         <EntityType Name="ProductAttribute">
           <Key>
@@ -733,8 +735,7 @@
             <End Role="Order" EntitySet="Order" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="EShoppingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -849,6 +850,7 @@
           <Property Name="ModifiedBy" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Active" Type="Boolean" />
           <NavigationProperty Name="Products" Relationship="Self.FK__Product__Categor__1FCDBCEB" FromRole="Category" ToRole="Product" />
+          <Property Name="IsFeatured" Type="Boolean" />
         </EntityType>
         <EntityType Name="Customer">
           <Key>
@@ -979,6 +981,7 @@
           <NavigationProperty Name="ProductAttributes" Relationship="Self.FK__ProductAt__Produ__32E0915F" FromRole="Product" ToRole="ProductAttribute" />
           <NavigationProperty Name="ShoppingCarts" Relationship="Self.FK__ShoppingC__produ__2D27B809" FromRole="Product" ToRole="ShoppingCart" />
           <NavigationProperty Name="Wishlists" Relationship="Self.FK__Wishlist__produc__2A4B4B5E" FromRole="Product" ToRole="Wishlist" />
+          <Property Name="IsFeatured" Type="Boolean" />
         </EntityType>
         <EntityType Name="ProductAttribute">
           <Key>
@@ -1576,6 +1579,7 @@
           <EntitySetMapping Name="Categories">
             <EntityTypeMapping TypeName="EShoppingModel.Category">
               <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="IsFeatured" ColumnName="IsFeatured" />
                 <ScalarProperty Name="Category_Id" ColumnName="Category_Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -1678,6 +1682,7 @@
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="EShoppingModel.Product">
               <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="IsFeatured" ColumnName="IsFeatured" />
                 <ScalarProperty Name="Product_Id" ColumnName="Product_Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="PurchasePrice" ColumnName="PurchasePrice" />

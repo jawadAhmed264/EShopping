@@ -1,0 +1,61 @@
+﻿@model EShopping.Areas.Admin.Models.CategoryViewModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+    <div class="main">
+        <div class="col-lg-12">
+            <div class="inline">
+                <div class="col-lg-6">
+                    <h1>Add New Catgeory</h1>
+                </div>
+                <div class="col-lg-6">
+                    <div class="float-right">
+                        <a class="btn btn-outline-dark" href="@Url.Action("Index")">Check List</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Form-->
+        <br>
+        <div class="col-lg-12">
+            @using (Html.BeginForm("Create", "Categories", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                <div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Add Category</label>
+                        @Html.TextBoxFor(m => m.Name, null, new { @class = "form-control form-mr", placeholder = "Enter category name" })
+                        @Html.ValidationMessageFor(m => m.Name,null, new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.TextAreaFor(m => m.Description, new { @class = "form-control form-mr", placeholder = "Description",rows="10" })
+                        @Html.ValidationMessageFor(m => m.Description, null, new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.DisplayNameFor(m=>m.Active)
+                        @Html.DropDownListFor(m => m.Active,ViewBag.Active as SelectList,new { @class= "form-control form-mr" })
+                    </div>
+                    <div class="form-group">
+                        <div class="form-check">
+                            @Html.CheckBoxFor(m => m.IsFeatured,new {@class="form-check-input"})
+                            @Html.DisplayNameFor(m=>m.IsFeatured)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlFile1">Upload Image</label>
+                        <input type="file" class="form-control-file" name="CategoryImage">
+                    </div>
+
+                    <div class="col-lg-12">
+                        <input type="submit" value="Add" class="add-btn" />
+                    </div>
+                </div>
+            }
+            
+        </div>
+    </div>
+</main>
