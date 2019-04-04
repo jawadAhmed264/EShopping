@@ -22,6 +22,7 @@ namespace EShopping
             container.RegisterType<ICategoryService,CategoryService>();
             container.RegisterType<ISupplierService, SupplierService>();
             container.RegisterType<ICountryService, CountryService>();
+
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }
     }
