@@ -1,0 +1,74 @@
+﻿@model IEnumerable<EShopping.Areas.Admin.Models.OrderViewModel>
+
+@{
+    ViewBag.Title = "Order List";
+}
+<!--Main Dashboard-->
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+    <div class="main">
+        <div class="col-lg-12">
+            <div class="inline">
+                <h1>Order List</h1>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <!--Table-->
+            <div class="tbl table-responsive" id="table">
+                <table id="myTable" class="table table-bordered table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Customer Name</th>
+                            <th scope="col">Order Date</th>
+                            <th scope="col">Ship Date</th>
+                            <th scope="col">Order Amount</th>
+                            <th scope="col">Discount</th>
+                            <th scope="col">Shipping Amount</th>
+                            <th scope="col">Tax Amount</th>
+                            <th scope="col">Net Amont</th>
+                            <th scope="col">Shipping Date</th>
+                            <th scope="col">Shipping Address</th>
+                            <th scope="col">Billing Address</th>
+                            <th scope="col">Order Statuses</th>
+                            <th scope="col">Payment</th>
+                            <th scope="col">Shipper</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <th scope="row">@item.Customer_Id</th>
+                                <td>@item.OrderDate</td>
+                                <td>@item.ShipDate</td>
+                                <td>@item.OrderAmount</td>
+                                <td>@item.Discount</td>
+                                <td>@item.ShippingAmount</td>
+                                <td>@item.TaxAmount</td>
+                                <td>@item.NetAmount</td>
+                                <td>@item.ShippingDate</td>
+                                <td>@item.ShippingAddress_Id</td>
+                                <td>@item.BillingAddress_Id</td>
+                                <td>@item.OrderStatus_Id</td>
+                                <td>@item.Payment_Id</td>
+                                <td>@item.Shipper_Id</td>
+                                <td>
+                                    <a class="edt-btn" href="EditOrder.html"><i class="fas fa-pencil-alt"></i></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+@section scriptsAdmin{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#myTable').DataTable();
+        });
+
+    </script>
+}

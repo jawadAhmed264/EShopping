@@ -1,0 +1,61 @@
+﻿@model IEnumerable<EShopping.Areas.Admin.Models.CustomerViewModel>
+
+@{
+    ViewBag.Title = "Customer List";
+}
+<!--Main Dashboard-->
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+    <div class="main">
+        <div class="col-lg-12">
+            <div class="inline">
+                <h1>Customer List</h1>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <!--Table-->
+            <div class="tbl table-responsive" id="table">
+                <table id="myTable" class="table table-bordered table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">First Name</th>
+                            <th scope="col">Last Name</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Contact</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Date of Birth</th>
+                            <th scope="col">Gender</th>
+                            <th scope="col">Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <th scope="row">@item.FName</th>
+                                <th scope="row">@item.LName</th>
+                                <th scope="row">@item.Active</th>
+                                <th scope="row">@item.ContactNo</th>
+                                <th scope="row">@item.Description</th>
+                                <th scope="row">@item.DOB</th>
+                                <th scope="row">@item.Gender</th>
+                                <th scope="row">@item.Email</th>
+                                <th>
+                                    <select name="myTable_length" aria-controls="myTable" class=""><option>Select...</option><option value="active">Active</option><option value="Inactive">Inactive</option></select>
+                                </th>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+@section scriptsAdmin{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#myTable').DataTable();
+        });
+
+    </script>
+}
