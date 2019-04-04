@@ -1,0 +1,95 @@
+﻿@model EShopping.Areas.Admin.Models.SupplierViewModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <div class="main">
+        <div class="col-lg-12">
+            <div class="inline">
+                <div class="col-lg-6">
+                    <h1>Update Supplier</h1>
+                </div>
+                <div class="col-lg-6">
+                    <div class="float-right">
+                        <a class="btn btn-outline-dark" href="@Url.Action("Index","Supplier")">Check List</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Form-->
+        <br>
+        <div class="col-lg-12">
+            <div>
+                @using (@Html.BeginForm("Edit", "Supplier", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken();
+                    @Html.HiddenFor(m => m.Supplier_Id);
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Company Name</label>
+                        @Html.TextBoxFor(m => m.CompanyName, new { @class = "form-control form-mr", placeholder = "i.e Tcs, Leaopard, or any other courier company" })
+                        @Html.ValidationMessageFor(m => m.CompanyName, null, new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Website</label>
+                        @Html.TextBoxFor(m => m.URL, new { @class = "form-control form-mr", placeholder = "Company Website url" })
+                        @Html.ValidationMessageFor(m => m.URL, null, new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Supplier First Name</label>
+                        @Html.TextBoxFor(m => m.ContactFName, new { @class = "form-control form-mr", placeholder = "Supplier firstname" })
+                        @Html.ValidationMessageFor(m => m.ContactFName, null, new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Supplier Last Name</label>
+                        @Html.TextBoxFor(m => m.ContactLName, new { @class = "form-control form-mr", placeholder = "Supplier lastname" })
+                        @Html.ValidationMessageFor(m => m.ContactLName, null, new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Contact</label>
+                        @Html.TextBoxFor(m => m.Phone, new { @class = "form-control form-mr", placeholder = "Contact Number" })
+                        @Html.ValidationMessageFor(m => m.Phone, null, new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email</label>
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control form-mr", placeholder = "Email" })
+                        @Html.ValidationMessageFor(m => m.Email, null, new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Address 1</label>
+                        @Html.TextAreaFor(m => m.Address1, new { @class = "form-control form-mr", rows = "4", placeholder = "Address 1" })
+                        @Html.ValidationMessageFor(m => m.Address1, null, new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Address 2</label>
+                        @Html.TextAreaFor(m => m.Address2, new { @class = "form-control form-mr", rows = "4", placeholder = "Address 2" })
+                        @Html.ValidationMessageFor(m => m.Address2, null, new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlFile1">Country</label>
+                        @Html.DropDownListFor(m => m.Country, ViewBag.Country as SelectList, "Select Country", new { @class = "form-control form-mr" })
+                        @Html.ValidationMessageFor(m => m.Country, null, new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlFile1">State</label>
+                        @Html.TextBoxFor(m => m.State, new { @class = "form-control form-mr", placeholder = "State" })
+                        @Html.ValidationMessageFor(m => m.State, null, new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlFile1">City</label>
+                        @Html.TextBoxFor(m => m.City, new { @class = "form-control form-mr", placeholder = "City" })
+                        @Html.ValidationMessageFor(m => m.City, null, new { @class = "text-danger" })
+                    </div>
+
+                    <div class="col-lg-12">
+                        <input type="submit" class="add-btn" value="Update" />
+                    </div>
+                }
+            </div>
+
+        </div>
+    </div>
+</main>
+

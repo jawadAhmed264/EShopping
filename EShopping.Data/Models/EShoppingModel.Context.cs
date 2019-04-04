@@ -50,5 +50,6 @@ namespace EShopping.Data.Models
         public virtual DbSet<Supplier> Suppliers { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Wishlist> Wishlists { get; set; }
+        public virtual DbSet<Country> Countries { get; set; }
     }
 }

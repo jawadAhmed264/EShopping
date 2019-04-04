@@ -69,7 +69,9 @@ namespace EShopping.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Edit(int Id)
         {
+           
             var category = _CatService.GetCategoryById(Id);
+
             var categoryVM = new CategoryViewModel()
             {
                 Id = category.Category_Id,
@@ -133,6 +135,7 @@ namespace EShopping.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Delete(CategoryViewModel model) {
             var category = _CatService.GetCategoryById(model.Id);
             var res =await _CatService.Remove(category);

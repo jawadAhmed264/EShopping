@@ -50,6 +50,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CategoryServices\ICategoryService.cs" />
+    <Compile Include="CountryService\CountryService.cs" />
+    <Compile Include="CountryService\ICountryService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CategoryServices\CategoryService.cs" />
     <Compile Include="SupplierServices\ISupplierService.cs" />

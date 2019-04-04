@@ -84,6 +84,9 @@
     <Compile Include="Models\Category.cs">
       <DependentUpon>EShoppingModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Country.cs">
+      <DependentUpon>EShoppingModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Customer.cs">
       <DependentUpon>EShoppingModel.tt</DependentUpon>
     </Compile>

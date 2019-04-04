@@ -1,6 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.Web;
+﻿using System.Web.Mvc;
 
 namespace EShopping.Areas.Admin.Models
 {
@@ -18,5 +16,7 @@ namespace EShopping.Areas.Admin.Models
         public string Country { get; set; }
         public string Email { get; set; }
         public string URL { get; set; }
+        public SelectList CountryList { get; set; }
+        public int CountryId { get; set; }
     }
 }
