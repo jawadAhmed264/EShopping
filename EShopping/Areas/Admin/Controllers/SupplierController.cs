@@ -48,39 +48,43 @@ namespace EShopping.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public ActionResult Create() {
+        public ActionResult Create()
+        {
             ViewBag.Country = new SelectList(PopulateCountry(), "CountryName", "CountryName");
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async  Task<ActionResult> Create(SupplierViewModel svm)
+        public async Task<ActionResult> Create(SupplierViewModel svm)
         {
-            if (ModelState.IsValid) {
-                Supplier supplier = new Supplier {
-                    CompanyName=svm.CompanyName,
-                    ContactFName=svm.ContactFName,
-                    ContactLName=svm.ContactLName,
-                    Address1=svm.Address1,
-                    Address2=svm.Address2,
-                    Phone=svm.Phone,
-                    Email=svm.Email,
-                    URL=svm.URL,
-                    Country=svm.Country,
-                    City=svm.City,
-                    State=svm.State,
+            if (ModelState.IsValid)
+            {
+                Supplier supplier = new Supplier
+                {
+                    CompanyName = svm.CompanyName,
+                    ContactFName = svm.ContactFName,
+                    ContactLName = svm.ContactLName,
+                    Address1 = svm.Address1,
+                    Address2 = svm.Address2,
+                    Phone = svm.Phone,
+                    Email = svm.Email,
+                    URL = svm.URL,
+                    Country = svm.Country,
+                    City = svm.City,
+                    State = svm.State,
                 };
-               bool res= await _SuppService.AddSupplier(supplier);
-               ModelState.Clear();
-               return RedirectToAction("Index");
+                bool res = await _SuppService.AddSupplier(supplier);
+                ModelState.Clear();
+                return RedirectToAction("Index");
             }
             ViewBag.Country = new SelectList(PopulateCountry(), "CountryName", "CountryName");
             return View(svm);
         }
 
         [HttpGet]
-        public ActionResult Edit(int Id) {
+        public ActionResult Edit(int Id)
+        {
             var domainModel = _SuppService.GetSupplierById(Id);
 
             var svm = new SupplierViewModel
@@ -99,13 +103,42 @@ namespace EShopping.Areas.Admin.Controllers
                 State = domainModel.State,
             };
 
-            ViewBag.Country = new SelectList(PopulateCountry(), "CountryName", "CountryName");
+            svm.CountryList = new SelectList(PopulateCountry(), "CountryName", "CountryName");
 
             return View(svm);
         }
 
-        public IEnumerable<CountryViewModel> PopulateCountry() {
-            var List = _CountryService.getAll().Select(c=>new CountryViewModel {CountryId=c.Id,CountryName=c.Name });
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async ActionResult Edit(SupplierViewModel svm)
+        {
+            if (ModelState.IsValid)
+            {
+                Supplier supplier = new Supplier
+                {
+                    Supplier_Id = svm.Supplier_Id,
+                    CompanyName = svm.CompanyName,
+                    ContactFName = svm.ContactFName,
+                    ContactLName = svm.ContactLName,
+                    Address1 = svm.Address1,
+                    Address2 = svm.Address2,
+                    Phone = svm.Phone,
+                    Email = svm.Email,
+                    URL = svm.URL,
+                    Country = svm.Country,
+                    City = svm.City,
+                    State = svm.State,
+
+                };
+                bool res= await _SuppService.UpdateSupplier(supplier);
+                return RedirectToAction("Index");
+            }
+            svm.CountryList = new SelectList(PopulateCountry(), "CountryName", "CountryName");
+            return View(svm);
+        }
+        public IEnumerable<CountryViewModel> PopulateCountry()
+        {
+            var List = _CountryService.getAll().Select(c => new CountryViewModel { CountryId = c.Id, CountryName = c.Name });
             return List;
         }
     }

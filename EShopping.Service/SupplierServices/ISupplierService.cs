@@ -11,5 +11,8 @@ namespace EShopping.Service.SupplierServices
         Supplier GetSupplierById(int Id);
 
         Task<bool> AddSupplier(Supplier supp);
+        Task<bool> UpdateSupplier(Supplier supp);
+        Task<bool> RemoveSupplier(Supplier supp);
+
     }
 }

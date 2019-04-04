@@ -69,7 +69,7 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlFile1">Country</label>
-                        @Html.DropDownListFor(m => m.Country, ViewBag.Country as SelectList, "Select Country", new { @class = "form-control form-mr" })
+                        @Html.DropDownListFor(m => m.Country, Model.CountryList, "Select Country", new { @class = "form-control form-mr" })
                         @Html.ValidationMessageFor(m => m.Country, null, new { @class = "text-danger" })
                     </div>
                     <div class="form-group">

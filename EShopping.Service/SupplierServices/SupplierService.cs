@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using EShopping.Data.Models;
 using EShopping.Data;
+using System;
 
 namespace EShopping.Service.SupplierServices
 {
@@ -28,6 +29,18 @@ namespace EShopping.Service.SupplierServices
         public Supplier GetSupplierById(int Id)
         {
             return _SuppRepo.GetById(Id);
+        }
+
+        public async Task<bool> RemoveSupplier(Supplier supp)
+        {
+            _SuppRepo.Update(supp);
+            return await _SuppRepo.SaveChangesAsync();
+        }
+
+        public async Task<bool> UpdateSupplier(Supplier supp)
+        {
+            _SuppRepo.Delete(supp);
+            return await _SuppRepo.SaveChangesAsync();
         }
     }
 }
