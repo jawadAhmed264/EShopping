@@ -14,7 +14,7 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="float-right">
-                        <a class="btn btn-outline-dark" href="AddShipper.html">Add new</a>
+                        <a class="btn btn-outline-dark" href="@Url.Action("Create","Shipper")">Add new</a>
                     </div>
                 </div>
             </div>
@@ -37,8 +37,8 @@
                                 <th scope="row">@item.CompanyName</th>
                                 <td>@item.Phone</td>
                                 <th>
-                                    <a class="edt-btn" href=""><i class="fas fa-pencil-alt"></i></a>
-                                    <a class="del-btn" href=""><i class="fas fa-trash"></i></a>
+                                    <a class="edt-btn" href="@Url.Action("Edit","Shipper",new { Id=item.Shipper_Id})"><i class="fas fa-pencil-alt"></i></a>
+                                    <a class="del-btn" href=@Url.Action("Delete","Shipper",new { Id=item.Shipper_Id})><i class="fas fa-trash"></i></a>
                                 </th>
                             </tr>
                         }

@@ -24,6 +24,7 @@
             @using (Html.BeginForm("Edit", "Attribute", FormMethod.Post))
             {
                 @Html.AntiForgeryToken()
+                @Html.HiddenFor(m=>m.Attribute_Id)
                 <div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Attribute Name</label>
