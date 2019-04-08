@@ -1,0 +1,56 @@
+﻿@model EShopping.Areas.Admin.Models.AttributeViewModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <div class="main">
+        <div class="col-lg-12">
+            <div class="inline">
+                <div class="col-lg-6">
+                    <h1>Edit Attribute</h1>
+                </div>
+                <div class="col-lg-6">
+                    <div class="float-right">
+                        <a class="btn btn-outline-dark" href="@Url.Action("Index")">Check List</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Form-->
+        <br>
+        <div class="col-lg-12">
+            @using (Html.BeginForm("Edit", "Attribute", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Attribute Name</label>
+                        @Html.TextBoxFor(m => m.AttributeName, null, new { @class = "form-control form-mr", placeholder = "Enter Attribute Name" })
+                        @Html.ValidationMessageFor(m => m.AttributeName, null, new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Attribute Value</label>
+                        @Html.TextBoxFor(m => m.AttributeValue, new { @class = "form-control form-mr", placeholder = "Enter Attribute Value", rows = "10" })
+                        @Html.ValidationMessageFor(m => m.AttributeValue, null, new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Attribute Value</label>
+                        @Html.TextAreaFor(m => m.Description, new { @class = "form-control form-mr", placeholder = "Enter Description", rows = "10" })
+                        @Html.ValidationMessageFor(m => m.Description, null, new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.DisplayNameFor(m => m.Active)
+                        @Html.DropDownListFor(m => m.Active, ViewBag.Active as SelectList, new { @class = "form-control form-mr" })
+                    </div>
+                    <div class="col-lg-12">
+                        <input type="submit" value="Update" class="add-btn" />
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+</main>
+

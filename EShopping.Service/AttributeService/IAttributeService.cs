@@ -13,5 +13,8 @@ namespace EShopping.Service.AttributeService
         EShopping.Data.Models.Attribute GetAttributeById(int Id);
 
         Task<bool> AddAttribute(EShopping.Data.Models.Attribute att);
+        Task<bool> UpdateAttribute(EShopping.Data.Models.Attribute att);
+        Task<bool> RemoveAttribute(EShopping.Data.Models.Attribute att);
+
     }
 }

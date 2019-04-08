@@ -299,6 +299,16 @@
     <Content Include="Areas\Admin\Views\Order\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Product\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Shipper\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Supplier\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Brand\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Brand\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Brand\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Shipper\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Shipper\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Shipper\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Attribute\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Attribute\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Attribute\Delete.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -355,6 +365,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\AdminContent\fonts\" />
+    <Folder Include="Images\BrandLogo\" />
     <Folder Include="Images\Category\" />
   </ItemGroup>
   <ItemGroup>
