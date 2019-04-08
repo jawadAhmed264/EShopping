@@ -1,0 +1,52 @@
+﻿@model EShopping.Areas.Admin.Models.ProductTypeViewModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <div class="main">
+        <div class="col-lg-12">
+            <div class="inline">
+                <div class="col-lg-6">
+                    <h1>Edit Product Type</h1>
+                </div>
+                <div class="col-lg-6">
+                    <div class="float-right">
+                        <a class="btn btn-outline-dark" href="@Url.Action("Index")">Check List</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Form-->
+        <br>
+        <div class="col-lg-12">
+            @using (Html.BeginForm("Edit", "ProductType", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(m=>m.ProductType_Id)
+                <div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Product Type</label>
+                        @Html.TextBoxFor(m => m.Name, null, new { @class = "form-control form-mr", placeholder = "Enter Product Type eg: Shirts, Paints, Shoes" })
+                        @Html.ValidationMessageFor(m => m.Name, null, new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Description</label>
+                        @Html.TextAreaFor(m => m.Description, new { @class = "form-control form-mr", placeholder = "Enter Description", rows = "10" })
+                        @Html.ValidationMessageFor(m => m.Description, null, new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.DisplayNameFor(m => m.Active)
+                        @Html.DropDownListFor(m => m.Active, ViewBag.Active as SelectList, new { @class = "form-control form-mr" })
+                    </div>
+                    <div class="col-lg-12">
+                        <input type="submit" value="Update" class="add-btn" />
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+</main>
+

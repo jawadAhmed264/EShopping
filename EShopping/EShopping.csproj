@@ -313,6 +313,12 @@
     <Content Include="Areas\Admin\Views\Attribute\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Attribute\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\ProductType\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\FAQ\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\FAQ\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\FAQ\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductType\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductType\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductType\Delete.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

@@ -4,6 +4,14 @@
 @{
     ViewBag.Title = "FAQ List";
 }
+@section stylesAdmin{
+ <style>
+     .FAQ-Acton {
+         width:24%;
+        float: right;
+     }
+ </style>   
+}
 <!--Main Dashboard-->
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
     <div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
@@ -15,7 +23,7 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="float-right">
-                        <a class="btn btn-outline-dark" href="AddFAQ.html">Add new</a>
+                        <a class="btn btn-outline-dark" href="@Url.Action("Create","FAQ")">Add new</a>
                     </div>
                 </div>
             </div>
@@ -27,16 +35,26 @@
                 @foreach (var item in Model)
                 {
                 <div class="card">
-                    <div class="card-header" id="headingTwo">
+                    <div class="card-header" id="@("heading"+item.FAQ_Id)">
                         <h2 class="mb-0">
-                            <button class="btn collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            <button class="btn collapsed" type="button" data-toggle="collapse" data-target="@("#collapse"+item.FAQ_Id)" aria-expanded="false" aria-controls="@("collapse"+item.FAQ_Id)">
                                 @item.Question <i class="fas fa-caret-down"></i>
                             </button>
                         </h2>
                     </div>
-                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                    <div id="@("collapse"+item.FAQ_Id)" class="collapse" aria-labelledby="@("heading"+item.FAQ_Id)" data-parent="#accordionExample">
                         <div class="card-body">
-                                @item.Answer
+                            <div class="col-lg-12">
+                                <div class="inline">
+                                    <div class="col-lg-6">@item.Answer</div>
+                                    <div class="col-lg-6">
+                                        <div class="FAQ-Acton">
+                                            <a class="edt-btn" href="@Url.Action("Edit","FAQ",new { Id=item.FAQ_Id})"><i class="fas fa-pencil-alt"></i></a>
+                                            <a class="del-btn" href="@Url.Action("Delete","FAQ",new { Id=item.FAQ_Id})"><i class="fas fa-trash"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                             </div>
                         </div>
                     </div>
                 </div>
@@ -45,6 +63,7 @@
         </div>
     </div>
 </main>
+
 @section scriptsAdmin{
     <script type="text/javascript">
         $(document).ready(function () {
