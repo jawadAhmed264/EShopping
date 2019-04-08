@@ -46,12 +46,16 @@ namespace EShopping.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 Brand brand = new Brand();
-                string filename = Path.GetFileNameWithoutExtension(model.BrandLogo.FileName);
-                string extension = Path.GetExtension(model.BrandLogo.FileName);
-                filename = filename + DateTime.Now.ToString("yymmssfff") + extension;
-                brand.Logo = "~/Images/BrandLogo/" + filename;
-                filename = Path.Combine(Server.MapPath("~/Images/BrandLogo/"), filename);
-                model.BrandLogo.SaveAs(filename);
+                if (model.BrandLogo != null && model.BrandLogo.ContentLength != 0)
+                {
+                    string filename = Path.GetFileNameWithoutExtension(model.BrandLogo.FileName);
+                    string extension = Path.GetExtension(model.BrandLogo.FileName);
+                    filename = filename + DateTime.Now.ToString("yymmssfff") + extension;
+                    brand.Logo = "~/Images/BrandLogo/" + filename;
+                    filename = Path.Combine(Server.MapPath("~/Images/BrandLogo/"), filename);
+                    model.BrandLogo.SaveAs(filename);
+                }
+                brand.Logo = model.LogoUrl;
                 brand.BrandName = model.BrandName;
                 brand.Description = model.Description;
                 brand.Active = model.Active;

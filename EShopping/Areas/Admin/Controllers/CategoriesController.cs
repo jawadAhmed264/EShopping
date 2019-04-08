@@ -46,12 +46,16 @@ namespace EShopping.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 Category newCat = new Category();
-                string filename = Path.GetFileNameWithoutExtension(model.CategoryImage.FileName);
-                string extension = Path.GetExtension(model.CategoryImage.FileName);
-                filename = filename + DateTime.Now.ToString("yymmssfff") + extension;
-                newCat.ImageUrl = "~/Images/Category/" + filename;
-                filename = Path.Combine(Server.MapPath("~/Images/Category/"), filename);
-                model.CategoryImage.SaveAs(filename);
+                if (model.CategoryImage != null && model.CategoryImage.ContentLength != 0)
+                {
+                    string filename = Path.GetFileNameWithoutExtension(model.CategoryImage.FileName);
+                    string extension = Path.GetExtension(model.CategoryImage.FileName);
+                    filename = filename + DateTime.Now.ToString("yymmssfff") + extension;
+                    newCat.ImageUrl = "~/Images/Category/" + filename;
+                    filename = Path.Combine(Server.MapPath("~/Images/Category/"), filename);
+                    model.CategoryImage.SaveAs(filename);
+                }
+                newCat.ImageUrl = model.ImageUrl;
                 newCat.Name = model.Name;
                 newCat.Description = model.Description;
                 newCat.Active = model.Active;

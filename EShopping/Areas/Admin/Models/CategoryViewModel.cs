@@ -6,6 +6,10 @@ namespace EShopping.Areas.Admin.Models
 {
     public class CategoryViewModel
     {
+        public CategoryViewModel()
+        {
+            ImageUrl = "~/Images/default.png";
+        }
         public int Id { get; set; }
         [Required]
         public string Name { get; set; }
