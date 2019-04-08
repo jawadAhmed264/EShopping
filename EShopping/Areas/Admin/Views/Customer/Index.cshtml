@@ -32,17 +32,17 @@
                         @foreach (var item in Model)
                         {
                             <tr>
-                                <th scope="row">@item.FName</th>
-                                <th scope="row">@item.LName</th>
-                                <th scope="row">@item.Active</th>
-                                <th scope="row">@item.ContactNo</th>
-                                <th scope="row">@item.Description</th>
-                                <th scope="row">@item.DOB</th>
-                                <th scope="row">@item.Gender</th>
-                                <th scope="row">@item.Email</th>
-                                <th>
+                                <td scope="row">@item.FName</td>
+                                <td scope="row">@item.LName</td>
+                                <td scope="row">@item.Active</td>
+                                <td scope="row">@item.ContactNo</td>
+                                <td scope="row">@item.Description</td>
+                                <td scope="row">@item.DOB</td>
+                                <td scope="row">@item.Gender</td>
+                                <td scope="row">@item.Email</td>
+                                <td>
                                     <select name="myTable_length" aria-controls="myTable" class=""><option>Select...</option><option value="active">Active</option><option value="Inactive">Inactive</option></select>
-                                </th>
+                                </td>
                             </tr>
                         }
                     </tbody>
