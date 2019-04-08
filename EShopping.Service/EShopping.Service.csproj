@@ -64,6 +64,8 @@
     <Compile Include="OrderService\OrderService.cs" />
     <Compile Include="ProductService\IProductService.cs" />
     <Compile Include="ProductService\ProductService.cs" />
+    <Compile Include="ProductTypeServices\IProductTypeService.cs" />
+    <Compile Include="ProductTypeServices\ProductTypeService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CategoryServices\CategoryService.cs" />
     <Compile Include="ShipperServices\IShipperService.cs" />
