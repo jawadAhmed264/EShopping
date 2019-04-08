@@ -35,16 +35,16 @@
                         @foreach (var item in Model)
                         {
                             <tr>
-                                <th scope="row">@item.BrandName</th>
-                                <th scope="row">@item.Description</th>
-                                <th scope="row">
+                                <td scope="row">@item.BrandName</td>
+                                <td scope="row">@item.Description</td>
+                                <td scope="row">
                                     <img src="@Url.Content(item.LogoUrl)" width="80" height="80" alt="@item.BrandName">
-                                </th>
+                                </td>
                                 <td>@(Convert.ToBoolean(item.Active) ? "Active" : "Inactive")</td>
-                                <th>
+                                <td>
                                     <a class="edt-btn" href="@Url.Action("Edit","Brand",new { Id=item.Brand_Id})"><i class="fas fa-pencil-alt"></i></a>
                                     <a class="del-btn" href="@Url.Action("Delete","Brand",new { Id=item.Brand_Id})"><i class="fas fa-trash"></i></a>
-                                </th>
+                                </td>
                             </tr>
                         }
                     </tbody>

@@ -38,14 +38,14 @@
                         @foreach(var item in Model)
                         {
                             <tr>
-                                <th scope="row">@item.AttributeName</th>
-                                <th scope="row">@item.AttributeValue</th>
-                                <th scope="row">@item.Description</th>
-                                <th>@(Convert.ToBoolean(item.Active) ? "Active" : "Inactive")</th>
-                                <th>
+                                <td scope="row">@item.AttributeName</td>
+                                <td scope="row">@item.AttributeValue</td>
+                                <td scope="row">@item.Description</td>
+                                <td>@(Convert.ToBoolean(item.Active) ? "Active" : "Inactive")</td>
+                                <td>
                                     <a class="edt-btn" href="@Url.Action("Edit","Attribute",new { Id=item.Attribute_Id})"><i class="fas fa-pencil-alt"></i></a>
                                     <a class="del-btn" href="@Url.Action("Delete","Attribute",new { Id=item.Attribute_Id})"><i class="fas fa-trash"></i></a>
-                                </th>
+                                </td>
                             </tr>
                         }
                     </tbody>

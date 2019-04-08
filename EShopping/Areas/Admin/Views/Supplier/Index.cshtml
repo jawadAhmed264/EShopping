@@ -50,21 +50,21 @@
                         @foreach(var item in Model)
                         {
                             <tr>
-                                <th>@item.CompanyName</th>
-                                <th>@item.ContactFName</th>
-                                <th>@item.ContactLName</th>
-                                <th>@item.Email</th>
-                                <th>@item.Country</th>
-                                <th>@item.State</th>
-                                <th>@item.City</th>
-                                <th>@item.Address1</th>
-                                <th>@item.Address2</th>
-                                <th>@item.Phone</th>
+                                <td>@item.CompanyName</td>
+                                <td>@item.ContactFName</td>
+                                <td>@item.ContactLName</td>
+                                <td>@item.Email</td>
+                                <td>@item.Country</td>
+                                <td>@item.State</td>
+                                <td>@item.City</td>
+                                <td>@item.Address1</td>
+                                <td>@item.Address2</td>
+                                <td>@item.Phone</td>
                    
-                                <th>
+                                <td>
                                     <a class="edt-btn" href="@Url.Action("Edit","Supplier",new { Id=item.Supplier_Id})"><i class="fas fa-pencil-alt"></i></a>
                                     <a class="del-btn" href="@Url.Action("Delete","Supplier",new { Id=item.Supplier_Id})"><i class="fas fa-trash"></i></a>
-                                </th>
+                                </td>
                             </tr>
                         }
                     </tbody>

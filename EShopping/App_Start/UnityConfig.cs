@@ -14,6 +14,7 @@ using EShopping.Service.OrderService;
 using EShopping.Service.Order;
 using EShopping.Service.ProductService;
 using EShopping.Service.ShipperServices;
+using EShopping.Service.ProductTypeServices;
 
 namespace EShopping
 {
@@ -37,6 +38,7 @@ namespace EShopping
             container.RegisterType<IOrderService, OrderService>();
             container.RegisterType<IProductService, ProductService>();
             container.RegisterType<IShipperService, ShipperService>();
+            container.RegisterType<IProductTypeService, ProductTypeService>();
 
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }
