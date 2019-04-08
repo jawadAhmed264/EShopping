@@ -30,6 +30,14 @@ namespace EShopping
             container.RegisterType<ICategoryService,CategoryService>();
             container.RegisterType<ISupplierService, SupplierService>();
             container.RegisterType<ICountryService, CountryService>();
+            container.RegisterType<IAttributeService, AttributeService>();
+            container.RegisterType<IBrandService, BrandService>();
+            container.RegisterType<ICustomerService, CustomerService>();
+            container.RegisterType<IFAQService, FAQService>();
+            container.RegisterType<IOrderService, OrderService>();
+            container.RegisterType<IProductService, ProductService>();
+            container.RegisterType<IShipperService, ShipperServiceService>();
+
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }
     }
