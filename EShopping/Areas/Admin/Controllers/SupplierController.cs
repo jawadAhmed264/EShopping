@@ -110,7 +110,7 @@ namespace EShopping.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async ActionResult Edit(SupplierViewModel svm)
+        public async Task<ActionResult> Edit(SupplierViewModel svm)
         {
             if (ModelState.IsValid)
             {
