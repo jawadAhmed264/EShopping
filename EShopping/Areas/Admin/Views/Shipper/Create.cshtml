@@ -1,0 +1,46 @@
+﻿@model EShopping.Areas.Admin.Models.ShipperViewModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <div class="main">
+        <div class="col-lg-12">
+            <div class="inline">
+                <div class="col-lg-6">
+                    <h1>Add New Shipper</h1>
+                </div>
+                <div class="col-lg-6">
+                    <div class="float-right">
+                        <a class="btn btn-outline-dark" href="@Url.Action("Index")">Check List</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Form-->
+        <br>
+        <div class="col-lg-12">
+            @using (Html.BeginForm("Create", "Shipper", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Add Category</label>
+                        @Html.TextBoxFor(m => m.CompanyName, null, new { @class = "form-control form-mr", placeholder = "Enter Shipper Company" })
+                        @Html.ValidationMessageFor(m => m.CompanyName, null, new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.TextAreaFor(m => m.Phone, new { @class = "form-control form-mr", placeholder = "Enter Phone", rows = "10" })
+                        @Html.ValidationMessageFor(m => m.Phone, null, new { @class = "text-danger" })
+                    </div>
+                    <div class="col-lg-12">
+                        <input type="submit" value="Add" class="add-btn" />
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+</main>
+

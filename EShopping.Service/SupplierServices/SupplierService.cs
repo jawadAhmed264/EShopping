@@ -33,13 +33,13 @@ namespace EShopping.Service.SupplierServices
 
         public async Task<bool> RemoveSupplier(Supplier supp)
         {
-            _SuppRepo.Update(supp);
+            _SuppRepo.Delete(supp);
             return await _SuppRepo.SaveChangesAsync();
         }
 
         public async Task<bool> UpdateSupplier(Supplier supp)
         {
-            _SuppRepo.Delete(supp);
+            _SuppRepo.Update(supp);
             return await _SuppRepo.SaveChangesAsync();
         }
     }

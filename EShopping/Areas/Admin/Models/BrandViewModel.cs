@@ -16,7 +16,8 @@ namespace EShopping.Areas.Admin.Models
 
         [Required]
         [Display(Name = "Brand Image")]
-        public string Logo { get; set; }
+        public string LogoUrl { get; set; }
+        public HttpPostedFileBase BrandLogo { get; set; }
 
         [Required]
         [Display(Name = "Brand Description")]

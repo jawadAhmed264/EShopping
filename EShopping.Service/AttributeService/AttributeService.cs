@@ -32,5 +32,17 @@ namespace EShopping.Service.AttributeService
         {
             return _AttRepo.GetById(Id);
         }
+
+        public async Task<bool> RemoveAttribute(Data.Models.Attribute att)
+        {
+            _AttRepo.Delete(att);
+            return await _AttRepo.SaveChangesAsync();
+        }
+
+        public async Task<bool> UpdateAttribute(Data.Models.Attribute att)
+        {
+            _AttRepo.Update(att);
+            return await _AttRepo.SaveChangesAsync();
+        }
     }
 }

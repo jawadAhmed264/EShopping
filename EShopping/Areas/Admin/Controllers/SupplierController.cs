@@ -2,10 +2,7 @@
 using EShopping.Data.Models;
 using EShopping.Service.CountryService;
 using EShopping.Service.SupplierServices;
-using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -136,6 +133,32 @@ namespace EShopping.Areas.Admin.Controllers
             svm.CountryList = new SelectList(PopulateCountry(), "CountryName", "CountryName");
             return View(svm);
         }
+
+        [HttpGet]
+        public ActionResult Delete(int Id) {
+            var supplier = _SuppService.GetSupplierById(Id);
+            var svm = new SupplierViewModel
+            {
+                Supplier_Id=supplier.Supplier_Id,
+                CompanyName=supplier.CompanyName
+            };
+            return View(svm);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async  Task<ActionResult> Delete(SupplierViewModel svm)
+        {
+            if (ModelState.IsValid) {
+                Supplier sup = _SuppService.GetSupplierById(svm.Supplier_Id);
+                bool res=await _SuppService.RemoveSupplier(sup);
+                if (res) {
+                    return RedirectToAction("Index");
+                }
+            }
+            return View(svm);
+        }
+
         public IEnumerable<CountryViewModel> PopulateCountry()
         {
             var List = _CountryService.getAll().Select(c => new CountryViewModel { CountryId = c.Id, CountryName = c.Name });

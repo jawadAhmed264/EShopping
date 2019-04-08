@@ -1,0 +1,57 @@
+﻿@model EShopping.Areas.Admin.Models.BrandViewModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <div class="main">
+        <div class="col-lg-12">
+            <div class="inline">
+                <div class="col-lg-6">
+                    <h1>Edit Brand</h1>
+                </div>
+                <div class="col-lg-6">
+                    <div class="float-right">
+                        <a class="btn btn-outline-dark" href="@Url.Action("Index")">Back to List</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Form-->
+        <br>
+        <div class="col-lg-12">
+            @using (Html.BeginForm("Edit", "Brand", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.HiddenFor(m => m.Brand_Id)
+                @Html.HiddenFor(m => m.LogoUrl)
+                @Html.AntiForgeryToken()
+                <div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Edit Category</label>
+                        @Html.TextBoxFor(m => m.BrandName, null, new { @class = "form-control form-mr", placeholder = "Enter Brand Name" })
+                        @Html.ValidationMessageFor(m => m.BrandName, null, new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.TextAreaFor(m => m.Description, new { @class = "form-control form-mr", placeholder = "Enter Description", rows = "10" })
+                        @Html.ValidationMessageFor(m => m.Description, null, new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.DisplayNameFor(m => m.Active)
+                        @Html.DropDownListFor(m => m.Active, ViewBag.Active as SelectList, new { @class = "form-control form-mr" })
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlFile1">Upload Image</label>
+                        <input type="file" class="form-control-file" name="BrandLogo">
+                    </div>
+
+                    <div class="col-lg-12">
+                        <input type="submit" value="Update" class="add-btn" />
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+</main>
+
