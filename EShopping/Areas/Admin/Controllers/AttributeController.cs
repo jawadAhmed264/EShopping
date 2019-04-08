@@ -70,6 +70,7 @@ namespace EShopping.Areas.Admin.Controllers
                 Description=attribute.Description,
                 Active=attribute.Active
             };
+            ViewBag.Active = populateStatusCombo();
             return View(attributeVm);
         }
 
@@ -91,7 +92,7 @@ namespace EShopping.Areas.Admin.Controllers
                     return RedirectToAction("Index");
                 }
             }
-
+            ViewBag.Active = populateStatusCombo();
             return View(model);
         }
 

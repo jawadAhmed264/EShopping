@@ -23,6 +23,7 @@ namespace EShopping.Areas.Admin.Controllers
             var model = _BrandService.AllBrands().
                 Select(b => new BrandViewModel
                 {
+                    Brand_Id=b.Brand_Id,
                     BrandName = b.BrandName,
                     Description = b.Description,
                     LogoUrl = b.Logo,
@@ -133,13 +134,13 @@ namespace EShopping.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Delete(CategoryViewModel model)
+        public async Task<ActionResult> Delete(BrandViewModel model)
         {
-            var category = _BrandService.GetBrandById(model.Id);
+            var category = _BrandService.GetBrandById(model.Brand_Id );
             var res = await _BrandService .Remove(category);
             if (res)
             {
-                System.IO.File.Delete(Server.MapPath(model.ImageUrl));
+                System.IO.File.Delete(Server.MapPath(model.LogoUrl));
                 ModelState.Clear();
             }
             return RedirectToAction("Index");

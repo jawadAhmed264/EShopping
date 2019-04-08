@@ -18,9 +18,6 @@ namespace EShopping.Areas.Admin.Models
 
         [Required]
         public string Description { get; set; }
-
-        [Required]
-        [Display(Name = "Status")]
         public Nullable<bool> Active { get; set; }
     }
 }
