@@ -12,23 +12,22 @@ namespace EShopping.Data.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ProductType
+    public partial class ShoppingCartItem
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ProductType()
+        public ShoppingCartItem()
         {
-            this.Products = new HashSet<Product>();
-            this.Attributes = new HashSet<Attribute>();
+            this.ShoppingCarts = new HashSet<ShoppingCart>();
         }
     
-        public int ProductType_Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public Nullable<bool> Active { get; set; }
+        public int SCItem_Id { get; set; }
+        public Nullable<int> ProductId { get; set; }
+        public Nullable<decimal> ItemPrice { get; set; }
+        public Nullable<int> ItemQuantity { get; set; }
+        public Nullable<decimal> subtotal { get; set; }
     
+        public virtual Product Product { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Product> Products { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Attribute> Attributes { get; set; }
+        public virtual ICollection<ShoppingCart> ShoppingCarts { get; set; }
     }
 }

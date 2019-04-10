@@ -1,4 +1,5 @@
-﻿@model EShopping.Areas.Admin.Models.AttributeViewModel
+﻿@using EShopping.Areas.Admin.Models.AttributeViewModels
+@model AttributeViewModel
 
 @{
     ViewBag.Title = "Edit";
@@ -37,9 +38,13 @@
                         @Html.ValidationMessageFor(m => m.AttributeValue, null, new { @class = "text-danger" })
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Attribute Value</label>
+                        <label for="exampleInputEmail1">Description</label>
                         @Html.TextAreaFor(m => m.Description, new { @class = "form-control form-mr", placeholder = "Enter Description", rows = "10" })
                         @Html.ValidationMessageFor(m => m.Description, null, new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.DisplayNameFor(m => m.ProductType_Id)
+                        @Html.DropDownListFor(m => m.ProductType_Id, new SelectList(Model.ProductTypeList, "ProductType_Id", "Name"), "Select Product Type", new { @class = "form-control form-mr" })
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(m => m.Active)

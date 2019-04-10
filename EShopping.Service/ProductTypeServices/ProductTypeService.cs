@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using EShopping.Data.Models;
 using EShopping.Data;
@@ -24,6 +22,11 @@ namespace EShopping.Service.ProductTypeServices
         public IEnumerable<ProductType> AllProducttype()
         {
             return _PTypeRepo.GetAll();
+        }
+
+        public IEnumerable<ProductType> GetActiveProdictTypes()
+        {
+            return _PTypeRepo.GetAll().Where(m => m.Active == true);
         }
 
         public ProductType GetP_TypeById(int Id)

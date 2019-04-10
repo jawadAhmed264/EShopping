@@ -5,6 +5,7 @@ using EShopping.Areas.Admin.Models;
 using System.Threading.Tasks;
 using EShopping.Data.Models;
 using System.Collections.Generic;
+using EShopping.Areas.Admin.Models.AttributeViewModels;
 
 namespace EShopping.Areas.Admin.Controllers
 {
@@ -105,9 +106,9 @@ namespace EShopping.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Delete(CategoryViewModel model)
+        public async Task<ActionResult> Delete(ProductTypeViewModel model)
         {
-            var attribute = _PTypeService.GetP_TypeById(model.Id);
+            var attribute = _PTypeService.GetP_TypeById(model.ProductType_Id);
             var res = await _PTypeService.Remove(attribute);
             return RedirectToAction("Index");
 

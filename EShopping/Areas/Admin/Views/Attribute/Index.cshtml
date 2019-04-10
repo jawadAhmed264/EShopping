@@ -1,5 +1,5 @@
-﻿@using EShopping.Areas.Admin.Models
-@model IEnumerable<AttributeViewModel>
+﻿@using EShopping.Areas.Admin.Models.AttributeViewModels
+@model IEnumerable<AttributeIndexViewModel>
 
 @{
     ViewBag.Title = "Attribute";
@@ -30,6 +30,7 @@
                             <th scope="col">Attribute Name</th>
                             <th scope="col">Attribute Value</th>
                             <th scope="col">Description</th>
+                            <th scope="col">Product Type</th>
                             <th scope="col">Status</th>
                             <th scope="col">Actions</th>
                         </tr>
@@ -41,6 +42,7 @@
                                 <td scope="row">@item.AttributeName</td>
                                 <td scope="row">@item.AttributeValue</td>
                                 <td scope="row">@item.Description</td>
+                                <td>@item.ProductTypeName</td>
                                 <td>@(Convert.ToBoolean(item.Active) ? "Active" : "Inactive")</td>
                                 <td>
                                     <a class="edt-btn" href="@Url.Action("Edit","Attribute",new { Id=item.Attribute_Id})"><i class="fas fa-pencil-alt"></i></a>

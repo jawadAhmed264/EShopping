@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using EShopping.Data.Models;
 using EShopping.Data;
+using System.Data.Entity;
 
 namespace EShopping.Service.AttributeService
 {
@@ -26,6 +27,16 @@ namespace EShopping.Service.AttributeService
         public IEnumerable<Data.Models.Attribute> AllAttribute()
         {
             return _AttRepo.GetAll();
+        }
+
+        public IQueryable<Data.Models.Attribute> AllAttributeWithInclude(string[] Includes)
+        {
+            return _AttRepo.GetAllWithIncludes(Includes);
+        }
+
+        public IEnumerable<Data.Models.Attribute> GetActiveAttribute()
+        {
+            return _AttRepo.GetAll().Where(m => m.Active == true);
         }
 
         public Data.Models.Attribute GetAttributeById(int Id)

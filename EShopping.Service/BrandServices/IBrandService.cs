@@ -6,6 +6,7 @@ namespace EShopping.Service.BrandServices
     public interface IBrandService
     {
         IEnumerable<EShopping.Data.Models.Brand> AllBrands();
+        IEnumerable<EShopping.Data.Models.Brand> AllActiveBrands();
 
         EShopping.Data.Models.Brand GetBrandById(int id);
 

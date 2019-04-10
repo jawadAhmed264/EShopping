@@ -10,7 +10,7 @@ namespace EShopping.Areas.Admin.Models
         {
             ImageUrl = "~/Images/default.png";
         }
-        public int Id { get; set; }
+        public int Category_Id { get; set; }
         [Required]
         public string Name { get; set; }
         [Required]

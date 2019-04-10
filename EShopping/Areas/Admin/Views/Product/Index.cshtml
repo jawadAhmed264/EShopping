@@ -1,4 +1,5 @@
-﻿@model IEnumerable<EShopping.Areas.Admin.Models.ProductViewModel>
+﻿@using EShopping.Areas.Admin.Models.ProductViewModel
+@model IEnumerable<ProductViewModel>
 
 @{
     ViewBag.Title = "Product List";
@@ -14,7 +15,7 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="float-right">
-                        <a class="btn btn-outline-dark" href="AddProduct.html">Add new</a>
+                        <a class="btn btn-outline-dark" href="@Url.Action("Create","Product")">Add new</a>
                     </div>
                 </div>
             </div>

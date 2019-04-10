@@ -99,9 +99,9 @@ namespace EShopping.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Delete(CategoryViewModel model)
+        public async Task<ActionResult> Delete(ShipperViewModel model)
         {
-            var category = _ShiService.GetShipperById(model.Id);
+            var category = _ShiService.GetShipperById(model.Shipper_Id);
             var res = await _ShiService.Remove(category);
             return RedirectToAction("Index");
 

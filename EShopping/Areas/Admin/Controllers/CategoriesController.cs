@@ -23,7 +23,7 @@ namespace EShopping.Areas.Admin.Controllers
             var model = _CatService.AllCategories().
                 Select(c => new CategoryViewModel
                 {
-                    Id = c.Category_Id,
+                    Category_Id = c.Category_Id,
                     Name = c.Name,
                     Description = c.Description,
                     ImageUrl = c.ImageUrl,
@@ -78,7 +78,7 @@ namespace EShopping.Areas.Admin.Controllers
 
             var categoryVM = new CategoryViewModel()
             {
-                Id = category.Category_Id,
+                Category_Id = category.Category_Id,
                 Name = category.Name,
                 Description = category.Description,
                 ImageUrl = category.ImageUrl,
@@ -94,7 +94,7 @@ namespace EShopping.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                Category newCat = _CatService.GetCategoryById(model.Id);
+                Category newCat = _CatService.GetCategoryById(model.Category_Id);
 
                 if (model.CategoryImage != null && model.CategoryImage.ContentLength != 0)
                 {
@@ -131,7 +131,7 @@ namespace EShopping.Areas.Admin.Controllers
             var category = _CatService.GetCategoryById(Id);
             CategoryViewModel cvm = new CategoryViewModel()
             {
-                Id= category.Category_Id,
+                Category_Id = category.Category_Id,
                 Name = category.Name,
                 ImageUrl=category.ImageUrl
             };
@@ -141,7 +141,7 @@ namespace EShopping.Areas.Admin.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Delete(CategoryViewModel model) {
-            var category = _CatService.GetCategoryById(model.Id);
+            var category = _CatService.GetCategoryById(model.Category_Id);
             var res =await _CatService.Remove(category);
             if (res) {
                 System.IO.File.Delete(Server.MapPath(model.ImageUrl));

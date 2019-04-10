@@ -22,6 +22,11 @@ namespace EShopping.Service.BrandServices
             return await _BrandRepo.SaveChangesAsync();
         }
 
+        public IEnumerable<Brand> AllActiveBrands()
+        {
+            return _BrandRepo.GetAll().Where(m=>m.Active==true);
+        }
+
         public IEnumerable<Data.Models.Brand> AllBrands()
         {
             return _BrandRepo.GetAll();

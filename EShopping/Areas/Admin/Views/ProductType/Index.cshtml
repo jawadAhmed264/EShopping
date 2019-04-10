@@ -37,7 +37,7 @@
                             <tr>
                                 <td scope="row">@item.Name</td>
                                 <td>@item.Description</td>
-                                <td>@item.Description</td>
+                                <td>@(Convert.ToBoolean(item.Active) ? "Active" : "Inactive")</td>
                                 <td>
                                     <a class="edt-btn" href="@Url.Action("Edit","ProductType",new { Id=item.ProductType_Id})"><i class="fas fa-pencil-alt"></i></a>
                                     <a class="del-btn" href="@Url.Action("Delete","ProductType",new { Id=item.ProductType_Id})"><i class="fas fa-trash"></i></a>
