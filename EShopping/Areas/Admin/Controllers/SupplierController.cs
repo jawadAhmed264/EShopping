@@ -2,10 +2,7 @@
 using EShopping.Data.Models;
 using EShopping.Service.CountryService;
 using EShopping.Service.SupplierServices;
-using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -110,7 +107,7 @@ namespace EShopping.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async ActionResult Edit(SupplierViewModel svm)
+        public async Task<ActionResult> Edit(SupplierViewModel svm)
         {
             if (ModelState.IsValid)
             {
