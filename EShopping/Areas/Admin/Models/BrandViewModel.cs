@@ -8,15 +8,17 @@ namespace EShopping.Areas.Admin.Models
 {
     public class BrandViewModel
     {
+        public BrandViewModel() {
+            LogoUrl = "~/Images/default.png";
+        }
         public int Brand_Id { get; set; }
 
         [Required]
         [Display(Name ="Brand Name")]
         public string BrandName { get; set; }
 
-        [Required]
-        [Display(Name = "Brand Image")]
-        public string Logo { get; set; }
+        public string LogoUrl { get; set; }
+        public HttpPostedFileBase BrandLogo { get; set; }
 
         [Required]
         [Display(Name = "Brand Description")]

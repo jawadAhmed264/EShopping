@@ -20,7 +20,7 @@
             @using (Html.BeginForm())
             {
                 @Html.AntiForgeryToken()
-                @Html.HiddenFor(m => m.Id)
+                @Html.HiddenFor(m => m.Category_Id)
                 @Html.HiddenFor(m => m.ImageUrl)
 
                 <div class="form-actions no-color">

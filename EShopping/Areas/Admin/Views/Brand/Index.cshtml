@@ -13,7 +13,7 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="float-right">
-                        <a class="btn btn-outline-dark" href="AddBrand.html">Add new</a>
+                        <a class="btn btn-outline-dark" href="@Url.Action("Create","Brand")">Add new</a>
                     </div>
                 </div>
             </div>
@@ -35,14 +35,16 @@
                         @foreach (var item in Model)
                         {
                             <tr>
-                                <th scope="row">@item.BrandName</th>
-                                <th scope="row">@item.Description</th>
-                                <th scope="row">@item.Logo</th>
-                                <th scope="row">@item.Active</th>
-                                <th>
-                                    <a class="edt-btn" href=""><i class="fas fa-pencil-alt"></i></a>
-                                    <a class="del-btn" href=""><i class="fas fa-trash"></i></a>
-                                </th>
+                                <td scope="row">@item.BrandName</td>
+                                <td scope="row">@item.Description</td>
+                                <td scope="row">
+                                    <img src="@Url.Content(item.LogoUrl)" width="80" height="80" alt="@item.BrandName">
+                                </td>
+                                <td>@(Convert.ToBoolean(item.Active) ? "Active" : "Inactive")</td>
+                                <td>
+                                    <a class="edt-btn" href="@Url.Action("Edit","Brand",new { Id=item.Brand_Id})"><i class="fas fa-pencil-alt"></i></a>
+                                    <a class="del-btn" href="@Url.Action("Delete","Brand",new { Id=item.Brand_Id})"><i class="fas fa-trash"></i></a>
+                                </td>
                             </tr>
                         }
                     </tbody>

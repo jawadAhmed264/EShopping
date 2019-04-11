@@ -28,7 +28,7 @@
                     @Html.AntiForgeryToken();
                     <div class="form-group">
                         <label for="exampleInputEmail1">Company Name</label>
-                        @Html.TextBoxFor(m => m.CompanyName, new { @class = "form-control form-mr", placeholder = "i.e Tcs, Leaopard, or any other courier company" })
+                        @Html.TextBoxFor(m => m.CompanyName, new { @class = "form-control form-mr", placeholder = "Company Name" })
                         @Html.ValidationMessageFor(m => m.CompanyName, null, new { @class = "text-danger" })
                     </div>
                     <div class="form-group">

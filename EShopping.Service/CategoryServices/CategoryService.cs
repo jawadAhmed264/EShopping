@@ -37,5 +37,10 @@ namespace EShopping.Service.CategoryServices
             _CatRepo.Delete(cat);
             return await _CatRepo.SaveChangesAsync(); 
         }
+
+        public IEnumerable<Category> GetActiveCategory()
+        {
+            return _CatRepo.GetAll().Where(m => m.Active == true);
+        }
     }
 }

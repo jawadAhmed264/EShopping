@@ -1,0 +1,135 @@
+﻿@model EShopping.Areas.Admin.Models.ProductViewModel.ProductViewModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <div class="main">
+        <div class="col-lg-12">
+            <div class="inline">
+                <div class="col-lg-6">
+                    <h1>Add New Product</h1>
+                </div>
+                <div class="col-lg-6">
+                    <div class="float-right">
+                        <a class="btn btn-outline-dark" href="@Url.Action("Index")">Check List</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Form-->
+        <br>
+        <div class="col-lg-12">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <div>
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Product Name</label>
+                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control form-mr" } })
+                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Description</label>
+                        @Html.TextAreaFor(model => model.Description, new { @class = "form-control form-mr", rows = "10" })
+                        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Supplier</label>
+                        @Html.DropDownListFor(model => model.Supplier_Id, new SelectList(Model.SupplierList, "Supplier_Id", "CompanyName"), "Select Supplier", new { @class = "form-control form-mr" })
+                        @Html.ValidationMessageFor(model => model.Supplier_Id, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Brand</label>
+                        @Html.DropDownListFor(model => model.Brand_Id, new SelectList(Model.BrandList, "Brand_Id", "BrandName"), "Select Brand", new { @class = "form-control form-mr" })
+                        @Html.ValidationMessageFor(model => model.Brand_Id, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Category</label>
+                        @Html.DropDownListFor(model => model.Category_Id, new SelectList(Model.CategoryList, "Category_Id", "Name"), "Select Category", new { @class = "form-control form-mr" })
+                        @Html.ValidationMessageFor(model => model.Category_Id, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Product Type</label>
+                        @Html.DropDownListFor(model => model.ProductType_Id, new SelectList(Model.ProductTypeList, "ProductType_Id", "Name"), "Select Product Type", new { @class = "form-control form-mr" })
+                        @Html.ValidationMessageFor(model => model.ProductType_Id, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="div_attr"></div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Purchase Price</label>
+                        @Html.EditorFor(model => model.PurchasePrice, new { htmlAttributes = new { @class = "form-control form-mr" } })
+                        @Html.ValidationMessageFor(model => model.PurchasePrice, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Sales Price</label>
+                        @Html.EditorFor(model => model.SalesPrice, new { htmlAttributes = new { @class = "form-control form-mr" } })
+                        @Html.ValidationMessageFor(model => model.SalesPrice, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Discount</label>
+                        @Html.EditorFor(model => model.Discount, new { htmlAttributes = new { @class = "form-control form-mr" } })
+                        @Html.ValidationMessageFor(model => model.Discount, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">SKU</label>
+                        @Html.EditorFor(model => model.SKU, new { htmlAttributes = new { @class = "form-control form-mr" } })
+                        @Html.ValidationMessageFor(model => model.SKU, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Quantity</label>
+                        @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control form-mr" } })
+                        @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Active Status</label>
+                        @Html.DisplayNameFor(m => m.Active)
+                        @Html.DropDownListFor(m => m.Active, ViewBag.Active as SelectList, new { @class = "form-control form-mr" })
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlFile1">Upload Image</label>
+                        <input type="file" class="form-control-file" name="CategoryImage">
+                    </div>
+                    <div class="form-group">
+                        <div class="form-check">
+                            @Html.CheckBoxFor(m => m.IsFeatured, new { @class = "form-check-input" })
+                            @Html.DisplayNameFor(m => m.IsFeatured)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Add" class="add-btn" />
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+</main>
+
+
+@section scriptsAdmin
+{
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $("#ProductType_Id").on("change", function () {
+            var URL = "/admin/Product/Attribute";
+            $.ajax({
+                url: URL,
+                data:{'Id':'3'},
+                type: "post",
+                success: function (data) {
+                    $(".div_attr").html(data);
+                },
+                error: function (xhr) {
+                    alert('error');
+                }
+            });
+        });
+    </script>
+}

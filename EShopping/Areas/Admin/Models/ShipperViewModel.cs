@@ -10,7 +10,6 @@ namespace EShopping.Areas.Admin.Models
     {
         [Required]
         public int Shipper_Id { get; set; }
-
         [Required]
         [Display(Name = "Comapny Name")]
         public string CompanyName { get; set; }

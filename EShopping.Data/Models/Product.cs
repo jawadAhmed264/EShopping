@@ -20,8 +20,8 @@ namespace EShopping.Data.Models
             this.Offers = new HashSet<Offer>();
             this.OrderDetails = new HashSet<OrderDetail>();
             this.ProductAttributes = new HashSet<ProductAttribute>();
-            this.ShoppingCarts = new HashSet<ShoppingCart>();
             this.Wishlists = new HashSet<Wishlist>();
+            this.ShoppingCartItems = new HashSet<ShoppingCartItem>();
         }
     
         public int Product_Id { get; set; }
@@ -36,7 +36,6 @@ namespace EShopping.Data.Models
         public Nullable<int> ProductType_Id { get; set; }
         public Nullable<int> Quantity { get; set; }
         public string Description { get; set; }
-        public Nullable<int> Rating_Id { get; set; }
         public string ImageUrl { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public string CreatedBy { get; set; }
@@ -52,13 +51,12 @@ namespace EShopping.Data.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
         public virtual ProductType ProductType { get; set; }
-        public virtual Rating Rating { get; set; }
         public virtual Supplier Supplier { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductAttribute> ProductAttributes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ShoppingCart> ShoppingCarts { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Wishlist> Wishlists { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ShoppingCartItem> ShoppingCartItems { get; set; }
     }
 }

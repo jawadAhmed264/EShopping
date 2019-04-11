@@ -16,6 +16,11 @@ namespace EShopping.Data.Models
     {
         public int Offer_Id { get; set; }
         public Nullable<int> product_Id { get; set; }
+        public Nullable<decimal> OfferPrice { get; set; }
+        public string Description { get; set; }
+        public Nullable<bool> Active { get; set; }
+        public Nullable<System.DateTime> OfferStartDate { get; set; }
+        public Nullable<System.DateTime> OfferEndDate { get; set; }
     
         public virtual Product Product { get; set; }
     }

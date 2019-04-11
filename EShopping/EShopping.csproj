@@ -241,15 +241,18 @@
     <Compile Include="Areas\Admin\Controllers\FAQController.cs" />
     <Compile Include="Areas\Admin\Controllers\OrderController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProductTypeController.cs" />
     <Compile Include="Areas\Admin\Controllers\ShipperController.cs" />
     <Compile Include="Areas\Admin\Controllers\SupplierController.cs" />
-    <Compile Include="Areas\Admin\Models\AttributeViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\AttributeViewModels\AttributeIndexViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\AttributeViewModels\AttributeViewModel.cs" />
     <Compile Include="Areas\Admin\Models\BrandViewModel.cs" />
     <Compile Include="Areas\Admin\Models\CountryViewModel.cs" />
     <Compile Include="Areas\Admin\Models\CustomerViewModel.cs" />
     <Compile Include="Areas\Admin\Models\FAQViewModel.cs" />
     <Compile Include="Areas\Admin\Models\OrderViewModel.cs" />
-    <Compile Include="Areas\Admin\Models\ProductViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\ProductTypeViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\ProductViewModels\ProductViewModel.cs" />
     <Compile Include="Areas\Admin\Models\ShipperViewModel.cs" />
     <Compile Include="Areas\Admin\Models\SupplierViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -277,6 +280,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\default.png" />
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -299,6 +303,25 @@
     <Content Include="Areas\Admin\Views\Order\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Product\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Shipper\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Supplier\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Brand\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Brand\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Brand\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Shipper\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Shipper\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Shipper\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Attribute\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Attribute\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Attribute\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductType\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\FAQ\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\FAQ\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\FAQ\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductType\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductType\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductType\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Product\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Product\_Attr.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -355,6 +378,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\AdminContent\fonts\" />
+    <Folder Include="Images\BrandLogo\" />
     <Folder Include="Images\Category\" />
   </ItemGroup>
   <ItemGroup>

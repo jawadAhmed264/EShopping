@@ -27,7 +27,7 @@ namespace EShopping.Data
             return dbEntity.ToList();
         }
 
-        public IEnumerable<TEntity> GetAllWithIncludes(string[] includes)
+        public IQueryable<TEntity> GetAllWithIncludes(string[] includes)
         {
             var query = dbEntity.AsQueryable();
             foreach (var include in includes)

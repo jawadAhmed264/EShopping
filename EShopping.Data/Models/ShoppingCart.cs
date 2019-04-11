@@ -15,11 +15,13 @@ namespace EShopping.Data.Models
     public partial class ShoppingCart
     {
         public int ShoppingCart_Id { get; set; }
-        public Nullable<int> product_Id { get; set; }
-        public Nullable<int> Quantity { get; set; }
-        public Nullable<decimal> Price { get; set; }
+        public Nullable<int> Customer_Id { get; set; }
+        public Nullable<int> TotalQuantity { get; set; }
+        public Nullable<decimal> TotalPrice { get; set; }
         public Nullable<bool> Active { get; set; }
+        public Nullable<int> SCItem_Id { get; set; }
     
-        public virtual Product Product { get; set; }
+        public virtual Customer Customer { get; set; }
+        public virtual ShoppingCartItem ShoppingCartItem { get; set; }
     }
 }

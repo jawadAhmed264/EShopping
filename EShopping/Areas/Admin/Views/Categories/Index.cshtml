@@ -36,14 +36,14 @@
                         @foreach (var item in Model)
                         {
                             <tr>
-                                <th scope="row">@item.Name</th>
+                                <td scope="row">@item.Name</td>
                                 <td>@item.Description</td>
                                 <td><img src="@Url.Content(item.ImageUrl)" width="80" height="80" alt="@item.Name"></td>
                                 <td>@(item.Active?"Active":"Inactive")</td>
-                                <th>
-                                    <a class="edt-btn" href="@Url.Action("Edit","Categories",new { Id=item.Id})"><i class="fas fa-pencil-alt"></i></a>
-                                    <a class="del-btn" href="@Url.Action("Delete","Categories",new { Id=item.Id})"><i class="fas fa-trash"></i></a>
-                                </th>
+                                <td>
+                                    <a class="edt-btn" href="@Url.Action("Edit","Categories",new { Id=item.Category_Id})"><i class="fas fa-pencil-alt"></i></a>
+                                    <a class="del-btn" href="@Url.Action("Delete","Categories",new { Id=item.Category_Id})"><i class="fas fa-trash"></i></a>
+                                </td>
                             </tr>
                         }
                     </tbody>

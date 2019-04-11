@@ -1,5 +1,5 @@
-﻿@using EShopping.Areas.Admin.Models
-@model IEnumerable<AttributeViewModel>
+﻿@using EShopping.Areas.Admin.Models.AttributeViewModels
+@model IEnumerable<AttributeIndexViewModel>
 
 @{
     ViewBag.Title = "Attribute";
@@ -16,7 +16,7 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="float-right">
-                        <a class="btn btn-outline-dark" href="AddAttribute.html">Add new</a>
+                        <a class="btn btn-outline-dark" href="@Url.Action("Create","Attribute")">Add new</a>
                     </div>
                 </div>
             </div>
@@ -30,6 +30,7 @@
                             <th scope="col">Attribute Name</th>
                             <th scope="col">Attribute Value</th>
                             <th scope="col">Description</th>
+                            <th scope="col">Product Type</th>
                             <th scope="col">Status</th>
                             <th scope="col">Actions</th>
                         </tr>
@@ -38,14 +39,15 @@
                         @foreach(var item in Model)
                         {
                             <tr>
-                                <th scope="row">@item.AttributeName</th>
-                                <th scope="row">@item.AttributeValue</th>
-                                <th scope="row">@item.Description</th>
-                                <th scope="row">@item.Active</th>
-                                <th>
-                                    <a class="edt-btn" href=""><i class="fas fa-pencil-alt"></i></a>
-                                    <a class="del-btn" href=""><i class="fas fa-trash"></i></a>
-                                </th>
+                                <td scope="row">@item.AttributeName</td>
+                                <td scope="row">@item.AttributeValue</td>
+                                <td scope="row">@item.Description</td>
+                                <td>@item.ProductTypeName</td>
+                                <td>@(Convert.ToBoolean(item.Active) ? "Active" : "Inactive")</td>
+                                <td>
+                                    <a class="edt-btn" href="@Url.Action("Edit","Attribute",new { Id=item.Attribute_Id})"><i class="fas fa-pencil-alt"></i></a>
+                                    <a class="del-btn" href="@Url.Action("Delete","Attribute",new { Id=item.Attribute_Id})"><i class="fas fa-trash"></i></a>
+                                </td>
                             </tr>
                         }
                     </tbody>

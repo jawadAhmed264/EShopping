@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using EShopping.Data.Models;
 
 namespace EShopping.Service.BrandServices
 {
     public interface IBrandService
     {
         IEnumerable<EShopping.Data.Models.Brand> AllBrands();
+        IEnumerable<EShopping.Data.Models.Brand> AllActiveBrands();
 
         EShopping.Data.Models.Brand GetBrandById(int id);
 

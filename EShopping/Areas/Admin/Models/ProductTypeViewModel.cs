@@ -6,21 +6,17 @@ using System.Web;
 
 namespace EShopping.Areas.Admin.Models
 {
-    public class AttributeViewModel
+    public class ProductTypeViewModel
     {
-        public int Attribute_Id { get; set; }
+        public int ProductType_Id { get; set; }
 
         [Required]
-        public string AttributeName { get; set; }
+        [Display(Name = "Product type")]
+        public string Name { get; set; }
 
         [Required]
-        public string AttributeValue { get; set; }
-
-        [Required]
+        [Display(Name = "Product type description")]
         public string Description { get; set; }
-
-        [Required]
-        [Display(Name = "Status")]
         public Nullable<bool> Active { get; set; }
     }
 }
