@@ -78,6 +78,9 @@
     <Compile Include="Models\Attribute.cs">
       <DependentUpon>EShoppingModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\AttributeValue.cs">
+      <DependentUpon>EShoppingModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Brand.cs">
       <DependentUpon>EShoppingModel.tt</DependentUpon>
     </Compile>
@@ -130,10 +133,13 @@
     <Compile Include="Models\Product.cs">
       <DependentUpon>EShoppingModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ProductAttribute.cs">
+    <Compile Include="Models\ProductType.cs">
       <DependentUpon>EShoppingModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ProductType.cs">
+    <Compile Include="Models\ProductVariant.cs">
+      <DependentUpon>EShoppingModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProductVariant_AttributeValue.cs">
       <DependentUpon>EShoppingModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Rating.cs">

@@ -39,10 +39,10 @@ namespace EShopping.Data.Models
         public virtual Address Address { get; set; }
         public virtual Address Address1 { get; set; }
         public virtual Customer Customer { get; set; }
-        public virtual OrderStatu OrderStatu { get; set; }
-        public virtual Shipper Shipper { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+        public virtual OrderStatu OrderStatu { get; set; }
+        public virtual Shipper Shipper { get; set; }
         public virtual Payment Payment { get; set; }
     }
 }

@@ -46,7 +46,6 @@ namespace EShopping.Areas.Admin.Controllers
                     CreatedBy = p.CreatedBy,
                     CreatedDate = p.CreatedDate,
                     Description = p.Description,
-                    Discount = p.Discount,
                     ImageUrl = p.ImageUrl,
                     IsFeatured = Convert.ToBoolean(p.IsFeatured),
                     ModifiedBy = p.ModifiedBy,
@@ -54,10 +53,6 @@ namespace EShopping.Areas.Admin.Controllers
                     Name = p.Name,
                     ProductType_Id = p.ProductType_Id,
                     Product_Id = p.Product_Id,
-                    PurchasePrice = p.PurchasePrice,
-                    Quantity = p.Quantity,
-                    SalesPrice = p.SalesPrice,
-                    SKU = p.SKU,
                     Supplier_Id = p.Supplier_Id
                 });
             return View(model);
@@ -69,10 +64,7 @@ namespace EShopping.Areas.Admin.Controllers
             return View(model);
         }
 
-        [HttpPost]
         public ActionResult Attribute(int Id) {
-            var model = _BrandService.GetBrandById(Id);
-            ViewBag.Name = model.BrandName;
             return PartialView("_Attr");
         }
         private ProductViewModel populateDropdown(ProductViewModel model) {

@@ -12,22 +12,24 @@ namespace EShopping.Data.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Attribute
+    public partial class ProductVariant
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Attribute()
+        public ProductVariant()
         {
-            this.AttributeValues = new HashSet<AttributeValue>();
+            this.ProductVariant_AttributeValue = new HashSet<ProductVariant_AttributeValue>();
         }
     
-        public int Attribute_Id { get; set; }
-        public string AttributeName { get; set; }
-        public string Description { get; set; }
-        public Nullable<bool> Active { get; set; }
-        public Nullable<int> ProductType_Id { get; set; }
+        public int ProductVariant_Id { get; set; }
+        public Nullable<int> Product_Id { get; set; }
+        public Nullable<int> Quantity { get; set; }
+        public Nullable<decimal> PurchasePrice { get; set; }
+        public Nullable<decimal> SalesPurchase { get; set; }
+        public Nullable<decimal> Discount { get; set; }
+        public string SKU { get; set; }
     
-        public virtual ProductType ProductType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AttributeValue> AttributeValues { get; set; }
+        public virtual ICollection<ProductVariant_AttributeValue> ProductVariant_AttributeValue { get; set; }
+        public virtual Product Product { get; set; }
     }
 }

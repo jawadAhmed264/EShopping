@@ -235,6 +235,7 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AttributeController.cs" />
+    <Compile Include="Areas\Admin\Models\AttributeViewModels\AttributeIndexViewModel.cs" />
     <Compile Include="Areas\Admin\Controllers\BrandController.cs" />
     <Compile Include="Areas\Admin\Controllers\CustomerController.cs" />
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
@@ -244,7 +245,7 @@
     <Compile Include="Areas\Admin\Controllers\ProductTypeController.cs" />
     <Compile Include="Areas\Admin\Controllers\ShipperController.cs" />
     <Compile Include="Areas\Admin\Controllers\SupplierController.cs" />
-    <Compile Include="Areas\Admin\Models\AttributeViewModels\AttributeIndexViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\AttributeViewModels\AttributeValueViewModel.cs" />
     <Compile Include="Areas\Admin\Models\AttributeViewModels\AttributeViewModel.cs" />
     <Compile Include="Areas\Admin\Models\BrandViewModel.cs" />
     <Compile Include="Areas\Admin\Models\CountryViewModel.cs" />
@@ -296,7 +297,6 @@
     <Content Include="Areas\Admin\Views\Supplier\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Supplier\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Supplier\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\Attribute\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Brand\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Customer\Index.cshtml" />
     <Content Include="Areas\Admin\Views\FAQ\Index.cshtml" />
@@ -310,9 +310,6 @@
     <Content Include="Areas\Admin\Views\Shipper\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Shipper\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Shipper\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\Attribute\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\Attribute\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\Attribute\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\ProductType\Index.cshtml" />
     <Content Include="Areas\Admin\Views\FAQ\Create.cshtml" />
     <Content Include="Areas\Admin\Views\FAQ\Edit.cshtml" />
@@ -322,6 +319,12 @@
     <Content Include="Areas\Admin\Views\ProductType\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\Product\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Product\_Attr.cshtml" />
+    <Content Include="Areas\Admin\Views\Attribute\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Attribute\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Attribute\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Attribute\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Attribute\AddAttributeValues.cshtml" />
+    <Content Include="Areas\Admin\Views\Attribute\_AttributeValueList.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

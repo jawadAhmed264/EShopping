@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace EShopping.Areas.Admin.Models.AttributeViewModels
 {
@@ -14,13 +12,10 @@ namespace EShopping.Areas.Admin.Models.AttributeViewModels
         public string AttributeName { get; set; }
 
         [Required]
-        public string AttributeValue { get; set; }
-
-        [Required]
         public string Description { get; set; }
         public Nullable<bool> Active { get; set; }
 
         public Nullable<int> ProductType_Id { get; set; }
-        public IList<ProductTypeViewModel> ProductTypeList{ get; set; }
+        public IList<ProductTypeViewModel> ProductTypeList { get; set; }
     }
 }

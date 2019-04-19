@@ -5,59 +5,64 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="12658ea3b4ab42d4a90f726d3af7a01e" Name="Diagram1">
-        <EntityTypeShape EntityType="EShoppingModel.C__MigrationHistory" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="EShoppingModel.Address" Width="1.5" PointX="3.75" PointY="20.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="EShoppingModel.AspNetRole" Width="1.5" PointX="1.5" PointY="25.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="EShoppingModel.AspNetUserClaim" Width="1.5" PointX="6" PointY="28" IsExpanded="true" />
-        <EntityTypeShape EntityType="EShoppingModel.AspNetUserLogin" Width="1.5" PointX="6" PointY="30.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="EShoppingModel.AspNetUser" Width="1.5" PointX="3.75" PointY="24.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="EShoppingModel.Attribute" Width="1.5" PointX="6" PointY="2.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="EShoppingModel.Brand" Width="1.5" PointX="0.75" PointY="7.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="EShoppingModel.Category" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="EShoppingModel.Customer" Width="1.5" PointX="6" PointY="22.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="EShoppingModel.FAQ" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="EShoppingModel.Offer" Width="1.5" PointX="5.25" PointY="6.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="EShoppingModel.Order" Width="1.5" PointX="3" PointY="30.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="EShoppingModel.OrderDetail" Width="1.5" PointX="5.25" PointY="9.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="EShoppingModel.OrderStatu" Width="1.5" PointX="0.75" PointY="29.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="EShoppingModel.Payment" Width="1.5" PointX="0.75" PointY="32.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="EShoppingModel.ProductAttribute" Width="1.5" PointX="8.25" PointY="7.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="EShoppingModel.ProductType" Width="1.5" PointX="0.75" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="EShoppingModel.Rating" Width="1.5" PointX="0.75" PointY="13.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="EShoppingModel.Shipper" Width="1.5" PointX="0.75" PointY="35.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="EShoppingModel.Supplier" Width="1.5" PointX="0.75" PointY="16.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="EShoppingModel.sysdiagram" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="EShoppingModel.Wishlist" Width="1.5" PointX="8.25" PointY="4.375" IsExpanded="true" />
-        <AssociationConnector Association="EShoppingModel.FK__Customer__Addres__267ABA7A" ManuallyRouted="false" />
-        <AssociationConnector Association="EShoppingModel.FK__Order__BillingAd__3E52440B" ManuallyRouted="false" />
-        <AssociationConnector Association="EShoppingModel.FK__Order__ShippingA__3D5E1FD2" ManuallyRouted="false" />
-        <AssociationConnector Association="EShoppingModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
-        <AssociationConnector Association="EShoppingModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
-        <AssociationConnector Association="EShoppingModel.FK_Customer_AspNetUsers" ManuallyRouted="false" />
-        <AssociationConnector Association="EShoppingModel.FK__ProductAt__Attri__33D4B598" ManuallyRouted="false" />
-        <AssociationConnector Association="EShoppingModel.FK__Order__Customer___3C69FB99" ManuallyRouted="false" />
-        <AssociationConnector Association="EShoppingModel.FK__Wishlist__Custom__29572725" ManuallyRouted="false" />
-        <AssociationConnector Association="EShoppingModel.FK__Order__OrderStat__3F466844" ManuallyRouted="false" />
-        <AssociationConnector Association="EShoppingModel.FK__Order__Shipper_I__403A8C7D" ManuallyRouted="false" />
-        <AssociationConnector Association="EShoppingModel.FK__OrderDeta__Order__4316F928" ManuallyRouted="false" />
-        <AssociationConnector Association="EShoppingModel.FK_Order_Payment" ManuallyRouted="false" />
-        <AssociationConnector Association="EShoppingModel.AspNetUserRoles" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="EShoppingModel.Country" Width="1.5" PointX="10.375" PointY="3.75" />
-        <EntityTypeShape EntityType="EShoppingModel.Product" Width="1.5" PointX="3" PointY="7.75" />
+        <EntityTypeShape EntityType="EShoppingModel.Address" Width="1.5" PointX="3.75" PointY="35" />
+        <EntityTypeShape EntityType="EShoppingModel.AspNetRole" Width="1.5" PointX="1.5" PointY="27.375" />
+        <EntityTypeShape EntityType="EShoppingModel.AspNetUserClaim" Width="1.5" PointX="3.75" PointY="41.375" />
+        <EntityTypeShape EntityType="EShoppingModel.AspNetUserLogin" Width="1.5" PointX="3.75" PointY="38.875" />
+        <EntityTypeShape EntityType="EShoppingModel.AspNetUser" Width="1.5" PointX="1.5" PointY="30.125" />
+        <EntityTypeShape EntityType="EShoppingModel.Attribute" Width="1.5" PointX="3" PointY="14.5" />
+        <EntityTypeShape EntityType="EShoppingModel.Brand" Width="1.5" PointX="0.75" PointY="4.125" />
+        <EntityTypeShape EntityType="EShoppingModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="EShoppingModel.Category" Width="1.5" PointX="0.75" PointY="12" />
+        <EntityTypeShape EntityType="EShoppingModel.Country" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="EShoppingModel.Customer" Width="1.5" PointX="3.75" PointY="30.125" />
+        <EntityTypeShape EntityType="EShoppingModel.FAQ" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="EShoppingModel.Offer" Width="1.5" PointX="5.25" PointY="10.875" />
+        <EntityTypeShape EntityType="EShoppingModel.OrderDetail" Width="1.5" PointX="8.25" PointY="6.875" />
+        <EntityTypeShape EntityType="EShoppingModel.Order" Width="1.5" PointX="6" PointY="27.5" />
+        <EntityTypeShape EntityType="EShoppingModel.OrderStatu" Width="1.5" PointX="3.75" PointY="24.875" />
+        <EntityTypeShape EntityType="EShoppingModel.Payment" Width="1.5" PointX="3.75" PointY="22.25" />
+        <EntityTypeShape EntityType="EShoppingModel.Product" Width="1.5" PointX="3" PointY="6.625" />
+        <EntityTypeShape EntityType="EShoppingModel.ProductType" Width="1.5" PointX="0.75" PointY="8.25" />
+        <EntityTypeShape EntityType="EShoppingModel.ProductVariant_AttributeValue" Width="1.5" PointX="7.5" PointY="10.5" />
+        <EntityTypeShape EntityType="EShoppingModel.ProductVariant" Width="1.5" PointX="5.25" PointY="3.375" />
+        <EntityTypeShape EntityType="EShoppingModel.Rating" Width="1.5" PointX="6.75" PointY="0.75" />
+        <EntityTypeShape EntityType="EShoppingModel.Shipper" Width="1.5" PointX="3.75" PointY="27.625" />
+        <EntityTypeShape EntityType="EShoppingModel.ShoppingCartItem" Width="1.5" PointX="5.25" PointY="18.25" />
+        <EntityTypeShape EntityType="EShoppingModel.ShoppingCart" Width="1.5" PointX="7.5" PointY="18.125" />
+        <EntityTypeShape EntityType="EShoppingModel.Supplier" Width="1.5" PointX="0.75" PointY="16" />
+        <EntityTypeShape EntityType="EShoppingModel.sysdiagram" Width="1.5" PointX="7.75" PointY="3.75" />
+        <EntityTypeShape EntityType="EShoppingModel.Wishlist" Width="1.5" PointX="5.25" PointY="7.25" />
+        <AssociationConnector Association="EShoppingModel.FK__Customer__Addres__267ABA7A" />
+        <AssociationConnector Association="EShoppingModel.FK__Order__BillingAd__3E52440B" />
+        <AssociationConnector Association="EShoppingModel.FK__Order__ShippingA__3D5E1FD2" />
+        <AssociationConnector Association="EShoppingModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="EShoppingModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="EShoppingModel.FK_Customer_AspNetUsers" />
+        <AssociationConnector Association="EShoppingModel.FK__Attribute__Produ__03F0984C" />
         <AssociationConnector Association="EShoppingModel.FK__Product__Brand_I__1ED998B2" />
         <AssociationConnector Association="EShoppingModel.FK__Product__Categor__1FCDBCEB" />
+        <AssociationConnector Association="EShoppingModel.FK__Order__Customer___3C69FB99" />
+        <AssociationConnector Association="EShoppingModel.FK__ShoppingC__Custo__02084FDA" />
+        <AssociationConnector Association="EShoppingModel.FK__Wishlist__Custom__29572725" />
         <AssociationConnector Association="EShoppingModel.FK__Offer__product_I__300424B4" />
+        <AssociationConnector Association="EShoppingModel.FK__OrderDeta__Order__4316F928" />
         <AssociationConnector Association="EShoppingModel.FK__OrderDeta__Produ__440B1D61" />
+        <AssociationConnector Association="EShoppingModel.FK__Order__OrderStat__3F466844" />
+        <AssociationConnector Association="EShoppingModel.FK__Order__Shipper_I__403A8C7D" />
+        <AssociationConnector Association="EShoppingModel.FK_Order_Payment" />
         <AssociationConnector Association="EShoppingModel.FK__Product__Product__20C1E124" />
         <AssociationConnector Association="EShoppingModel.FK__Product__Supplie__1DE57479" />
-        <AssociationConnector Association="EShoppingModel.FK__ProductAt__Produ__32E0915F" />
-        <AssociationConnector Association="EShoppingModel.FK__Wishlist__produc__2A4B4B5E" />
-        <EntityTypeShape EntityType="EShoppingModel.ShoppingCart" Width="1.5" PointX="8.25" PointY="18.375" />
-        <EntityTypeShape EntityType="EShoppingModel.ShoppingCartItem" Width="1.5" PointX="5.25" PointY="12.75" />
-        <AssociationConnector Association="EShoppingModel.FK__ShoppingC__Custo__02084FDA" />
+        <AssociationConnector Association="EShoppingModel.FK__ProductVa__Produ__6754599E" />
         <AssociationConnector Association="EShoppingModel.FK__ShoppingC__Produ__7F2BE32F" />
+        <AssociationConnector Association="EShoppingModel.FK__Wishlist__produc__2A4B4B5E" />
+        <AssociationConnector Association="EShoppingModel.FK__ProductVa__Produ__68487DD7" />
         <AssociationConnector Association="EShoppingModel.FK__ShoppingC__SCIte__02FC7413" />
-        <AssociationConnector Association="EShoppingModel.FK__Attribute__Produ__03F0984C" />
+        <AssociationConnector Association="EShoppingModel.AspNetUserRoles" />
+        <AssociationConnector Association="EShoppingModel.FK__ProductVa__Produ__6A30C649" />
+        <EntityTypeShape EntityType="EShoppingModel.AttributeValue" Width="1.5" PointX="5.25" PointY="14.75" />
+        <AssociationConnector Association="EShoppingModel.FK__Attribute__Attri__628FA481" />
+        <AssociationConnector Association="EShoppingModel.FK__ProductVa__Attri__693CA210" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
