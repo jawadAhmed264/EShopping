@@ -55,7 +55,11 @@ namespace EShopping.Areas.Admin.Controllers
                     filename = Path.Combine(Server.MapPath("~/Images/BrandLogo/"), filename);
                     model.BrandLogo.SaveAs(filename);
                 }
-                brand.Logo = model.LogoUrl;
+                else
+                {
+                    brand.Logo = model.LogoUrl;
+                }
+              
                 brand.BrandName = model.BrandName;
                 brand.Description = model.Description;
                 brand.Active = model.Active;
@@ -142,7 +146,7 @@ namespace EShopping.Areas.Admin.Controllers
         {
             var category = _BrandService.GetBrandById(model.Brand_Id );
             var res = await _BrandService .Remove(category);
-            if (res)
+            if (res && model.LogoUrl != "~/Images/default.png")
             {
                 System.IO.File.Delete(Server.MapPath(model.LogoUrl));
                 ModelState.Clear();

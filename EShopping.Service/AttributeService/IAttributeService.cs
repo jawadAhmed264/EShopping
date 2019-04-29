@@ -12,6 +12,7 @@ namespace EShopping.Service.AttributeService
         IEnumerable<EShopping.Data.Models.Attribute> AllAttribute();
         IEnumerable<EShopping.Data.Models.Attribute> GetActiveAttribute();
         IQueryable<EShopping.Data.Models.Attribute> AllAttributeWithInclude(string[] Includes);
+        IEnumerable<Data.Models.AttributeValue> AttributeValuesByProductType(int ProductTypeId);
         EShopping.Data.Models.Attribute GetAttributeById(int Id);
         Task<bool> AddAttribute(EShopping.Data.Models.Attribute att);
         Task<bool> AddAttributeValue(AttributeValue attValue);

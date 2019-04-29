@@ -1,4 +1,30 @@
-﻿
-<div class="attr_div">
-    <h1>Attribute Selection</h1>
+﻿@using EShopping.Areas.Admin.Models.ProductViewModels
+@model AttributeSelectListViewModel
+
+<div class="jumbotron">
+    <h2>Select Attributes for Product</h2>
+            <table>
+
+                @for (int i = 0; i < Model.AttributeValueList.Count; i++)
+                {
+                    <tr>
+                        <td>
+                            @Html.HiddenFor(m => m.AttributeValueList[i].AttributeId)
+                            @Html.HiddenFor(m => m.AttributeValueList[i].AttributeValueId)
+                            <div class="form-group">
+                                @Html.CheckBoxFor(m => m.AttributeValueList[i].IsChecked)
+                                <label class="control-label">@Model.AttributeValueList[i].Value</label>
+                            </div>
+                        </td>
+                    </tr>
+                }
+
+            </table>
+            @if (Model.AttributeValueList.Count() == 0)
+            {
+                <p>No Attributes was found</p>
+            }
+            else {
+                <input type="button" class="btn btn-primary" onclick="variation()" value="Add Variations" />
+            }
 </div>

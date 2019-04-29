@@ -1,5 +1,8 @@
 ﻿using EShopping.Areas.Admin.Models;
 using EShopping.Areas.Admin.Models.ProductViewModel;
+using EShopping.Areas.Admin.Models.ProductViewModels;
+using EShopping.Data.Models;
+using EShopping.Service.AttributeService;
 using EShopping.Service.BrandServices;
 using EShopping.Service.CategoryServices;
 using EShopping.Service.ProductService;
@@ -19,6 +22,7 @@ namespace EShopping.Areas.Admin.Controllers
         private IBrandService _BrandService;
         private ICategoryService _CatService;
         private IProductTypeService _PtService;
+        private IAttributeService _attService;
 
         public ProductController
             (
@@ -26,7 +30,8 @@ namespace EShopping.Areas.Admin.Controllers
                 ISupplierService SuppService,
                 IBrandService BrandService,
                 ICategoryService CatService,
-                IProductTypeService PtService
+                IProductTypeService PtService,
+                IAttributeService attService
              )
         {
             _ProService = ProService;
@@ -34,6 +39,7 @@ namespace EShopping.Areas.Admin.Controllers
             _BrandService = BrandService;
             _CatService = CatService;
             _PtService = PtService;
+            _attService = attService;
         }
         public ActionResult Index()
         {
@@ -65,7 +71,21 @@ namespace EShopping.Areas.Admin.Controllers
         }
 
         public ActionResult Attribute(int Id) {
-            return PartialView("_Attr");
+            IEnumerable<AttributeValue> attributeValues = _attService.AttributeValuesByProductType(Id);
+            IEnumerable<AttributeSelectViewModel> attributeSelectValues=attributeValues.Select(m => new AttributeSelectViewModel
+            {
+                AttributeId = m.Attribute_Id,
+                AttributeValueId = m.AttributeValue_Id,
+                Value = m.Attribute.AttributeName + "-" + m.Value,
+                IsChecked = false
+            });
+            AttributeSelectListViewModel attributeListModel = new AttributeSelectListViewModel();
+            attributeListModel.AttributeValueList = attributeSelectValues.ToList();
+            return PartialView("_Attr", attributeListModel);
+        }
+
+        public ActionResult AddProductVariation() {
+            return PartialView("AddProductVariation");
         }
         private ProductViewModel populateDropdown(ProductViewModel model) {
             model.BrandList = _BrandService.AllActiveBrands().Select(b=>new BrandViewModel

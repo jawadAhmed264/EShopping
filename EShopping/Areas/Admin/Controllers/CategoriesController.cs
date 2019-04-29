@@ -55,7 +55,10 @@ namespace EShopping.Areas.Admin.Controllers
                     filename = Path.Combine(Server.MapPath("~/Images/Category/"), filename);
                     model.CategoryImage.SaveAs(filename);
                 }
-                newCat.ImageUrl = model.ImageUrl;
+                else
+                {
+                    newCat.ImageUrl = model.ImageUrl;
+                }
                 newCat.Name = model.Name;
                 newCat.Description = model.Description;
                 newCat.Active = model.Active;
@@ -143,7 +146,7 @@ namespace EShopping.Areas.Admin.Controllers
         public async Task<ActionResult> Delete(CategoryViewModel model) {
             var category = _CatService.GetCategoryById(model.Category_Id);
             var res =await _CatService.Remove(category);
-            if (res) {
+            if (res && model.ImageUrl!= "~/Images/default.png") {
                 System.IO.File.Delete(Server.MapPath(model.ImageUrl));
             }
             return RedirectToAction("Index");
