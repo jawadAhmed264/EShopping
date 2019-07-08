@@ -1,30 +1,37 @@
-﻿@using EShopping.Areas.Admin.Models.ProductViewModels
-@model AttributeSelectListViewModel
+﻿@using EShopping.Areas.Admin.Models.ProductViewModel
+@model ProductCreateViewModel
 
 <div class="jumbotron">
     <h2>Select Attributes for Product</h2>
-            <table>
 
-                @for (int i = 0; i < Model.AttributeValueList.Count; i++)
-                {
-                    <tr>
-                        <td>
-                            @Html.HiddenFor(m => m.AttributeValueList[i].AttributeId)
-                            @Html.HiddenFor(m => m.AttributeValueList[i].AttributeValueId)
-                            <div class="form-group">
-                                @Html.CheckBoxFor(m => m.AttributeValueList[i].IsChecked)
-                                <label class="control-label">@Model.AttributeValueList[i].Value</label>
-                            </div>
-                        </td>
-                    </tr>
-                }
 
-            </table>
-            @if (Model.AttributeValueList.Count() == 0)
+    @for (int i = 0; i < Model.AttributeValueList.Count; i++)
+    {
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Attribute Type</label>
+                    @Html.DropDownListFor(model => model.AttributeValueList[i].AttributeId, new SelectList(ViewBag.AttributeDropDown, "Attribute_Id", "AttributeName"), "Select Attribute", new { @class = "form-control form-mr" })
+                    @Html.ValidationMessageFor(model => model.AttributeValueList[i].AttributeId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Attribute Values</label>
+                    @Html.TextBoxFor(model => model.AttributeValueList[i].AttributeValue, new { @class = "typeahead form-control form-mr", data_role = "typeahead",autocomplete = "off" })
+                    @Html.ValidationMessageFor(model => model.AttributeValueList[i].AttributeValue, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    }
+
+
+    @if (Model.AttributeValueList.Count() == 0)
             {
-                <p>No Attributes was found</p>
-            }
-            else {
-                <input type="button" class="btn btn-primary" onclick="variation()" value="Add Variations" />
-            }
+        <p>No Attributes was found</p>
+    }
+    else
+    {
+        <input type="button" class="btn btn-primary" onclick="variation()" value="Add Variations" />
+    }
 </div>

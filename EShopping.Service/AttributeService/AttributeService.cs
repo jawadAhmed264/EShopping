@@ -93,5 +93,10 @@ namespace EShopping.Service.AttributeService
             return _AttValueRepo.GetAllWithIncludes(new string[] { "Attribute" }).
                 Where(m => m.Attribute.ProductType_Id == productTypeId).ToList();
         }
+
+        public IEnumerable<Data.Models.Attribute> AttributeByProductType(int ProductTypeId)
+        {
+            return _AttRepo.GetAllWithIncludes(new string[] { "ProductType" }).Where(m => m.ProductType.ProductType_Id == ProductTypeId).ToList();
+        }
     }
 }

@@ -1,11 +1,14 @@
-﻿@model EShopping.Areas.Admin.Models.ProductViewModel.ProductViewModel
+﻿@model EShopping.Areas.Admin.Models.ProductViewModel.ProductCreateViewModel
 
 @{
     ViewBag.Title = "Create";
 }
+
 @section stylesAdmin{
-  
- }
+   
+<link href="~/Areas/Admin/AdminContent/css/typeahead.css" rel="stylesheet" />
+}
+
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
     <div class="main">
         <div class="col-lg-12">
@@ -58,33 +61,11 @@
                         @Html.DropDownListFor(model => model.ProductType_Id, new SelectList(Model.ProductTypeList, "ProductType_Id", "Name"), "Select Product Type", new { @class = "form-control form-mr" })
                         @Html.ValidationMessageFor(model => model.ProductType_Id, "", new { @class = "text-danger" })
                     </div>
+
                     <div class="div_attr"></div>
+
                     <div class="div_productVar"></div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Purchase Price</label>
-                        @Html.EditorFor(model => model.PurchasePrice, new { htmlAttributes = new { @class = "form-control form-mr" } })
-                        @Html.ValidationMessageFor(model => model.PurchasePrice, "", new { @class = "text-danger" })
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Sales Price</label>
-                        @Html.EditorFor(model => model.SalesPrice, new { htmlAttributes = new { @class = "form-control form-mr" } })
-                        @Html.ValidationMessageFor(model => model.SalesPrice, "", new { @class = "text-danger" })
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Discount</label>
-                        @Html.EditorFor(model => model.Discount, new { htmlAttributes = new { @class = "form-control form-mr" } })
-                        @Html.ValidationMessageFor(model => model.Discount, "", new { @class = "text-danger" })
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">SKU</label>
-                        @Html.EditorFor(model => model.SKU, new { htmlAttributes = new { @class = "form-control form-mr" } })
-                        @Html.ValidationMessageFor(model => model.SKU, "", new { @class = "text-danger" })
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Quantity</label>
-                        @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control form-mr" } })
-                        @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
-                    </div>
+
                     <div class="form-group">
                         <label for="exampleInputEmail1">Active Status</label>
                         @Html.DisplayNameFor(m => m.Active)
@@ -116,47 +97,69 @@
 
 @section scriptsAdmin
 {
-    @Scripts.Render("~/bundles/jqueryval")
 
+    <script src="~/Areas/Admin/AdminContent/js/bootstrap-tagsinput.min.js"></script>
+    <script src="~/Areas/Admin/AdminContent/js/typeahead.bundle.min.js"></script>
     <script>
-        $(document).ready(function () {
-            $("#ProductType_Id").on("change", function () {
-                var URL = "/admin/Product/Attribute/" + $("#ProductType_Id option:selected").val();
-                $.ajax({
-                    url: URL,
-                    type: "GET",
-                    success: function (data) {
-                        $(".div_attr").html(data);
-                    },
-                    error: function (xhr) {
-                        alert('error');
-                    }
-                });
-            });
-           
-        });
-        
-        function variation() {
-            var URL = "/admin/Product/AddProductVariation";
-            var arr = [];
-            debugger;
-            $('input[type="checkbox"]:checked').each(function (index,val) {
-                var checkId = $(val).attr("Id");
-                arr.push(checkId);
-            });
-            alert(arr);
-                $.ajax({
-                    url: URL,
-                    type: "GET",
-                    success: function (data) {
-                        $(".div_productVar").html(data);
-                    },
-                    error: function (xhr) {
-                        alert('error');
-                    }
-                });
-        }
-       
-    </script>
 
+        $("#ProductType_Id").on("change", function () {
+            var URL = "/admin/Product/Attribute/" + $("#ProductType_Id option:selected").val();
+            $.ajax({
+                url: URL,
+                type: "GET",
+                success: function (data) {
+                    $(".div_attr").html(data);
+                },
+                error: function (xhr) {
+                    alert('error');
+                }
+            });
+        });
+
+        function variation() {
+
+            $.ajax({
+                type: 'GET',
+                url: '@Url.Action("AddProductVariation", "Product",new { Area="Admin"})',
+                dataType: 'html',
+                data: $('form').serialize(),
+                processType: false,
+                contentType: 'application/json',
+                success: function (data) {
+                    $(".div_productVar").html(data);
+                },
+                error: function (xhr) {
+                    alert("error");
+                }
+            });
+        }
+        $(function () {
+            var countries = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.whitespace,
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                // url points to a json file that contains an array of country names, see
+                //
+                prefetch: {
+                    url: '@Url.Action("getAttributeValues","Product",new {Area="Admin", attributeId = 4})',
+                    filter: function (list) {
+                        return $.map(list, function (Value) {
+                            return { Value: Value };
+                        });
+                    }
+                }
+            });
+
+            countries.initialize();
+
+            $('#AttributeValueList_0__AttributeValue').tagsinput({
+                typeaheadjs: {
+                    name: 'countries',
+                    displayKey: 'Value',
+                    valueKey: 'Value',
+                    source: countries.ttAdapter()
+                }
+            });
+        });
+
+    </script>
 }

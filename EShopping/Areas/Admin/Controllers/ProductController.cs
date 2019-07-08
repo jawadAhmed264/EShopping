@@ -1,4 +1,5 @@
 ﻿using EShopping.Areas.Admin.Models;
+using EShopping.Areas.Admin.Models.AttributeViewModels;
 using EShopping.Areas.Admin.Models.ProductViewModel;
 using EShopping.Areas.Admin.Models.ProductViewModels;
 using EShopping.Data.Models;
@@ -44,50 +45,43 @@ namespace EShopping.Areas.Admin.Controllers
         public ActionResult Index()
         {
             var model = _ProService.AllProducts().
-                Select(p => new ProductViewModel
+                Select(p => new ProductIndexViewModel
                 {
                     Active = p.Active,
-                    Brand_Id = p.Brand_Id,
-                    Category_Id = p.Category_Id,
-                    CreatedBy = p.CreatedBy,
-                    CreatedDate = p.CreatedDate,
                     Description = p.Description,
                     ImageUrl = p.ImageUrl,
                     IsFeatured = Convert.ToBoolean(p.IsFeatured),
-                    ModifiedBy = p.ModifiedBy,
-                    ModifiedDate = p.ModifiedDate,
                     Name = p.Name,
-                    ProductType_Id = p.ProductType_Id,
                     Product_Id = p.Product_Id,
-                    Supplier_Id = p.Supplier_Id
+
                 });
             return View(model);
         }
+
         public ActionResult Create() {
-            ProductViewModel model = new ProductViewModel();
+            ProductCreateViewModel model = new ProductCreateViewModel();
             model = populateDropdown(model);
             ViewBag.Active = populateStatusCombo();
             return View(model);
         }
-
         public ActionResult Attribute(int Id) {
-            IEnumerable<AttributeValue> attributeValues = _attService.AttributeValuesByProductType(Id);
-            IEnumerable<AttributeSelectViewModel> attributeSelectValues=attributeValues.Select(m => new AttributeSelectViewModel
-            {
-                AttributeId = m.Attribute_Id,
-                AttributeValueId = m.AttributeValue_Id,
-                Value = m.Attribute.AttributeName + "-" + m.Value,
-                IsChecked = false
-            });
-            AttributeSelectListViewModel attributeListModel = new AttributeSelectListViewModel();
-            attributeListModel.AttributeValueList = attributeSelectValues.ToList();
+            IList<AttributeSelectViewModel> attributeSelectList = _attService.AttributeByProductType(Id).
+                Select(m=>new AttributeSelectViewModel {
+                    AttributeId=m.Attribute_Id,
+                    AttributeValue="",
+                }).ToList();
+            ViewBag.AttributeDropDown = _attService.AttributeByProductType(Id).ToList();
+            ProductCreateViewModel attributeListModel = new ProductCreateViewModel();
+            attributeListModel.AttributeValueList = attributeSelectList;
             return PartialView("_Attr", attributeListModel);
         }
 
-        public ActionResult AddProductVariation() {
-            return PartialView("AddProductVariation");
+        public ActionResult AddProductVariation(ProductCreateViewModel model) {
+            ViewBag.SelectedAttr = model.AttributeValueList.Count;
+            return PartialView("AddProductVariation", model);
         }
-        private ProductViewModel populateDropdown(ProductViewModel model) {
+       
+        private ProductCreateViewModel populateDropdown(ProductCreateViewModel model) {
             model.BrandList = _BrandService.AllActiveBrands().Select(b=>new BrandViewModel
             {
                 Brand_Id=b.Brand_Id,
@@ -114,7 +108,6 @@ namespace EShopping.Areas.Admin.Controllers
 
             return model;
         }
-
         public IList<SelectListItem> populateStatusCombo()
         {
             IList<SelectListItem> StatusSelection = new List<SelectListItem>{
@@ -123,6 +116,16 @@ namespace EShopping.Areas.Admin.Controllers
             };
 
             return StatusSelection;
+        }
+
+        public JsonResult getAttributeValues(int attributeId) {
+            var attributevalueList = _attService.getValuesByAttributeId(attributeId)
+                .Select(m=>new AttributeValueViewModel {
+                    AttributeValue_Id=m.AttributeValue_Id,
+                    Attribute_Id=m.Attribute_Id,
+                    Value=m.Value
+                }).ToList();
+            return Json(attributevalueList,JsonRequestBehavior.AllowGet);
         }
     }
 }
