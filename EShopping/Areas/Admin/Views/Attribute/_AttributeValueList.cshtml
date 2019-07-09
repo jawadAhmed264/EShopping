@@ -1,0 +1,28 @@
+﻿@model IEnumerable<EShopping.Areas.Admin.Models.AttributeViewModels.AttributeValueListViewModel>
+
+<table class="table">
+    <tr>
+        <th>
+            Value
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Value)
+            </td>
+            <td>
+                @using (Html.BeginForm("DeleteAttributeValue", "Attribute", FormMethod.Post))
+                {
+                    <input type="hidden" name="AttributeId" value="@item.Attribute_Id" />
+                    <input type="hidden" name="AttributeValueId" value="@item.AttributeValue_Id" />
+                    <input type="submit" value="Delete" class="btn btn-danger" />
+                }
+            </td>
+        </tr>
+    }
+
+</table>

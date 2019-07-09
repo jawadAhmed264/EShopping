@@ -15,23 +15,22 @@ namespace EShopping.Areas.Admin.Controllers
         private IAttributeService _AttService;
         private IProductTypeService _PTService;
 
-        public AttributeController(IAttributeService AttService,IProductTypeService PTService)
+        public AttributeController(IAttributeService AttService, IProductTypeService PTService)
         {
             _PTService = PTService;
             _AttService = AttService;
         }
         public ActionResult Index()
         {
-            var model = _AttService.AllAttributeWithInclude(new string[]{"ProductType"}).
+            var model = _AttService.AllAttributeWithInclude(new string[] { "ProductType" }).
                 Select(a => new AttributeIndexViewModel
                 {
                     Attribute_Id = a.Attribute_Id,
                     AttributeName = a.AttributeName,
-                    AttributeValue = a.AttributeValue,
                     Description = a.Description,
                     Active = a.Active,
-                    ProductTypeName=a.ProductType.Name
-            });
+                    ProductTypeName = a.ProductType.Name
+                });
             return View(model);
         }
 
@@ -40,9 +39,10 @@ namespace EShopping.Areas.Admin.Controllers
         {
             ViewBag.Active = populateStatusCombo();
             AttributeViewModel model = new AttributeViewModel();
-            model.ProductTypeList = _PTService.GetActiveProdictTypes().Select(m=>new ProductTypeViewModel {
-                ProductType_Id=m.ProductType_Id,
-                Name=m.Name
+            model.ProductTypeList = _PTService.GetActiveProdictTypes().Select(m => new ProductTypeViewModel
+            {
+                ProductType_Id = m.ProductType_Id,
+                Name = m.Name
             }).ToList();
 
             return View(model);
@@ -54,9 +54,8 @@ namespace EShopping.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                Attribute attribute= new Attribute();
+                Attribute attribute = new Attribute();
                 attribute.AttributeName = model.AttributeName;
-                attribute.AttributeValue = model.AttributeValue;
                 attribute.Description = model.Description;
                 attribute.Active = model.Active;
                 attribute.ProductType_Id = model.ProductType_Id;
@@ -81,12 +80,11 @@ namespace EShopping.Areas.Admin.Controllers
 
             var attributeVm = new AttributeViewModel()
             {
-                Attribute_Id=attribute.Attribute_Id,
-                AttributeName=attribute.AttributeName,
-                AttributeValue=attribute.AttributeValue,
-                Description=attribute.Description,
-                Active=attribute.Active,
-                ProductType_Id=attribute.ProductType_Id
+                Attribute_Id = attribute.Attribute_Id,
+                AttributeName = attribute.AttributeName,
+                Description = attribute.Description,
+                Active = attribute.Active,
+                ProductType_Id = attribute.ProductType_Id
             };
             ViewBag.Active = populateStatusCombo();
             attributeVm.ProductTypeList = _PTService.GetActiveProdictTypes().Select(m => new ProductTypeViewModel
@@ -105,7 +103,6 @@ namespace EShopping.Areas.Admin.Controllers
             {
                 Attribute attribute = _AttService.GetAttributeById(model.Attribute_Id);
                 attribute.AttributeName = model.AttributeName;
-                attribute.AttributeValue= model.AttributeValue;
                 attribute.Description = model.Description;
                 attribute.ProductType_Id = model.ProductType_Id;
                 attribute.Active = model.Active;
@@ -131,8 +128,8 @@ namespace EShopping.Areas.Admin.Controllers
             var attribute = _AttService.GetAttributeById(Id);
             AttributeViewModel avm = new AttributeViewModel()
             {
-               Attribute_Id= attribute.Attribute_Id,
-               AttributeName = attribute.AttributeName
+                Attribute_Id = attribute.Attribute_Id,
+                AttributeName = attribute.AttributeName
             };
             return View(avm);
         }
@@ -142,7 +139,12 @@ namespace EShopping.Areas.Admin.Controllers
         public async Task<ActionResult> Delete(AttributeViewModel model)
         {
             var attribute = _AttService.GetAttributeById(model.Attribute_Id);
-            var res = await _AttService.RemoveAttribute(attribute);
+            IEnumerable<AttributeValue> avList = _AttService.getValuesByAttributeId(model.Attribute_Id);
+            bool check=await _AttService.RemoveAllAttributeValues(avList);
+            if (check)
+            {
+                var res = await _AttService.RemoveAttribute(attribute);
+            }
             return RedirectToAction("Index");
 
         }
@@ -155,6 +157,48 @@ namespace EShopping.Areas.Admin.Controllers
             };
 
             return StatusSelection;
+        }
+
+        [HttpGet]
+        public ActionResult AddAttributeValues(int AttributeId)
+        {
+            var attribute = _AttService.GetAttributeById(AttributeId);
+            AttributeValueViewModel attVm = new AttributeValueViewModel
+            {
+                Attribute_Id = attribute.Attribute_Id,
+                Name = attribute.AttributeName
+            };
+            return View(attVm);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> AddAttributeValues(AttributeValueViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                AttributeValue av = new AttributeValue
+                {
+                    Value = model.Value,
+                    Attribute_Id = model.Attribute_Id
+                };
+                bool res = await _AttService.AddAttributeValue(av);
+                return RedirectToAction("AddAttributeValues", new { AttributeId = model.Attribute_Id });
+            }
+            return View(model);
+        }
+        [HttpPost]
+        public async Task<ActionResult> DeleteAttributeValue(int AttributeId, int AttributeValueId)
+        {
+            AttributeValue av = _AttService.getAttributeValueById(AttributeValueId);
+            bool res=await _AttService.RemoveAttributeValue(av);
+            return RedirectToAction("AddAttributeValues", new { AttributeId = AttributeId });
+        }
+        [ChildActionOnly]
+        public ActionResult AttributeValueList(int AttributeId)
+        {
+            var model = _AttService.getValuesByAttributeId(AttributeId).
+                Select(m => new AttributeValueListViewModel { AttributeValue_Id = m.AttributeValue_Id, Value = m.Value, Attribute_Id = m.Attribute_Id });
+            return PartialView("_AttributeValueList", model);
         }
 
     }

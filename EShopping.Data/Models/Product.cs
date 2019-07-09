@@ -19,22 +19,18 @@ namespace EShopping.Data.Models
         {
             this.Offers = new HashSet<Offer>();
             this.OrderDetails = new HashSet<OrderDetail>();
-            this.ProductAttributes = new HashSet<ProductAttribute>();
-            this.Wishlists = new HashSet<Wishlist>();
+            this.ProductVariant_AttributeValue = new HashSet<ProductVariant_AttributeValue>();
             this.ShoppingCartItems = new HashSet<ShoppingCartItem>();
+            this.Wishlists = new HashSet<Wishlist>();
+            this.ProductVariants = new HashSet<ProductVariant>();
         }
     
         public int Product_Id { get; set; }
         public string Name { get; set; }
-        public Nullable<decimal> PurchasePrice { get; set; }
-        public Nullable<decimal> SalesPrice { get; set; }
-        public Nullable<decimal> Discount { get; set; }
-        public string SKU { get; set; }
         public Nullable<int> Supplier_Id { get; set; }
         public Nullable<int> Brand_Id { get; set; }
         public Nullable<int> Category_Id { get; set; }
         public Nullable<int> ProductType_Id { get; set; }
-        public Nullable<int> Quantity { get; set; }
         public string Description { get; set; }
         public string ImageUrl { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
@@ -53,10 +49,12 @@ namespace EShopping.Data.Models
         public virtual ProductType ProductType { get; set; }
         public virtual Supplier Supplier { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ProductAttribute> ProductAttributes { get; set; }
+        public virtual ICollection<ProductVariant_AttributeValue> ProductVariant_AttributeValue { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ShoppingCartItem> ShoppingCartItems { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Wishlist> Wishlists { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ShoppingCartItem> ShoppingCartItems { get; set; }
+        public virtual ICollection<ProductVariant> ProductVariants { get; set; }
     }
 }

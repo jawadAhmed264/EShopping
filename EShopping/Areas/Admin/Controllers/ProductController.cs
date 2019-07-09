@@ -1,5 +1,9 @@
 ﻿using EShopping.Areas.Admin.Models;
+using EShopping.Areas.Admin.Models.AttributeViewModels;
 using EShopping.Areas.Admin.Models.ProductViewModel;
+using EShopping.Areas.Admin.Models.ProductViewModels;
+using EShopping.Data.Models;
+using EShopping.Service.AttributeService;
 using EShopping.Service.BrandServices;
 using EShopping.Service.CategoryServices;
 using EShopping.Service.ProductService;
@@ -19,6 +23,7 @@ namespace EShopping.Areas.Admin.Controllers
         private IBrandService _BrandService;
         private ICategoryService _CatService;
         private IProductTypeService _PtService;
+        private IAttributeService _attService;
 
         public ProductController
             (
@@ -26,7 +31,8 @@ namespace EShopping.Areas.Admin.Controllers
                 ISupplierService SuppService,
                 IBrandService BrandService,
                 ICategoryService CatService,
-                IProductTypeService PtService
+                IProductTypeService PtService,
+                IAttributeService attService
              )
         {
             _ProService = ProService;
@@ -34,48 +40,48 @@ namespace EShopping.Areas.Admin.Controllers
             _BrandService = BrandService;
             _CatService = CatService;
             _PtService = PtService;
+            _attService = attService;
         }
         public ActionResult Index()
         {
             var model = _ProService.AllProducts().
-                Select(p => new ProductViewModel
+                Select(p => new ProductIndexViewModel
                 {
                     Active = p.Active,
-                    Brand_Id = p.Brand_Id,
-                    Category_Id = p.Category_Id,
-                    CreatedBy = p.CreatedBy,
-                    CreatedDate = p.CreatedDate,
                     Description = p.Description,
-                    Discount = p.Discount,
                     ImageUrl = p.ImageUrl,
                     IsFeatured = Convert.ToBoolean(p.IsFeatured),
-                    ModifiedBy = p.ModifiedBy,
-                    ModifiedDate = p.ModifiedDate,
                     Name = p.Name,
-                    ProductType_Id = p.ProductType_Id,
                     Product_Id = p.Product_Id,
-                    PurchasePrice = p.PurchasePrice,
-                    Quantity = p.Quantity,
-                    SalesPrice = p.SalesPrice,
-                    SKU = p.SKU,
-                    Supplier_Id = p.Supplier_Id
+
                 });
             return View(model);
         }
+
         public ActionResult Create() {
-            ProductViewModel model = new ProductViewModel();
+            ProductCreateViewModel model = new ProductCreateViewModel();
             model = populateDropdown(model);
             ViewBag.Active = populateStatusCombo();
             return View(model);
         }
-
-        [HttpPost]
         public ActionResult Attribute(int Id) {
-            var model = _BrandService.GetBrandById(Id);
-            ViewBag.Name = model.BrandName;
-            return PartialView("_Attr");
+            IList<AttributeSelectViewModel> attributeSelectList = _attService.AttributeByProductType(Id).
+                Select(m=>new AttributeSelectViewModel {
+                    AttributeId=m.Attribute_Id,
+                    AttributeValue="",
+                }).ToList();
+            ViewBag.AttributeDropDown = _attService.AttributeByProductType(Id).ToList();
+            ProductCreateViewModel attributeListModel = new ProductCreateViewModel();
+            attributeListModel.AttributeValueList = attributeSelectList;
+            return PartialView("_Attr", attributeListModel);
         }
-        private ProductViewModel populateDropdown(ProductViewModel model) {
+
+        public ActionResult AddProductVariation(ProductCreateViewModel model) {
+            ViewBag.SelectedAttr = model.AttributeValueList.Count;
+            return PartialView("AddProductVariation", model);
+        }
+       
+        private ProductCreateViewModel populateDropdown(ProductCreateViewModel model) {
             model.BrandList = _BrandService.AllActiveBrands().Select(b=>new BrandViewModel
             {
                 Brand_Id=b.Brand_Id,
@@ -102,7 +108,6 @@ namespace EShopping.Areas.Admin.Controllers
 
             return model;
         }
-
         public IList<SelectListItem> populateStatusCombo()
         {
             IList<SelectListItem> StatusSelection = new List<SelectListItem>{
@@ -111,6 +116,16 @@ namespace EShopping.Areas.Admin.Controllers
             };
 
             return StatusSelection;
+        }
+
+        public JsonResult getAttributeValues(int attributeId) {
+            var attributevalueList = _attService.getValuesByAttributeId(attributeId)
+                .Select(m=>new AttributeValueViewModel {
+                    AttributeValue_Id=m.AttributeValue_Id,
+                    Attribute_Id=m.Attribute_Id,
+                    Value=m.Value
+                }).ToList();
+            return Json(attributevalueList,JsonRequestBehavior.AllowGet);
         }
     }
 }

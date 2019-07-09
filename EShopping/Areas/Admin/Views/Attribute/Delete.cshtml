@@ -22,7 +22,7 @@
             {
                 @Html.AntiForgeryToken()
                 @Html.HiddenFor(m => m.Attribute_Id)
-                
+
                 <div class="form-actions no-color">
                     <input type="submit" value="Delete" class="btn btn-outline-danger" /> |
                     <a class="btn btn-outline-dark" href="@Url.Action("Index")">Back to List</a>
@@ -32,4 +32,3 @@
     </div>
 
 </main>
-

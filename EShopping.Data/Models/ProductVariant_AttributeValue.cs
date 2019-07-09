@@ -12,14 +12,15 @@ namespace EShopping.Data.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ProductAttribute
+    public partial class ProductVariant_AttributeValue
     {
-        public int ProductAttribute_Id { get; set; }
+        public int PV_Attribute_Id { get; set; }
         public Nullable<int> Product_Id { get; set; }
-        public Nullable<int> AttributeId { get; set; }
-        public Nullable<bool> Active { get; set; }
+        public Nullable<int> ProductVariant_Id { get; set; }
+        public Nullable<int> AttributeValue_Id { get; set; }
     
-        public virtual Attribute Attribute { get; set; }
         public virtual Product Product { get; set; }
+        public virtual ProductVariant ProductVariant { get; set; }
+        public virtual AttributeValue AttributeValue { get; set; }
     }
 }

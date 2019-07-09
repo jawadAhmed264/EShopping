@@ -17,18 +17,17 @@ namespace EShopping.Data.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Attribute()
         {
-            this.ProductAttributes = new HashSet<ProductAttribute>();
+            this.AttributeValues = new HashSet<AttributeValue>();
         }
     
         public int Attribute_Id { get; set; }
         public string AttributeName { get; set; }
-        public string AttributeValue { get; set; }
         public string Description { get; set; }
         public Nullable<bool> Active { get; set; }
         public Nullable<int> ProductType_Id { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ProductAttribute> ProductAttributes { get; set; }
         public virtual ProductType ProductType { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AttributeValue> AttributeValues { get; set; }
     }
 }

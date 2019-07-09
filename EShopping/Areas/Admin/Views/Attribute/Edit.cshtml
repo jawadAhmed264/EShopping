@@ -25,17 +25,12 @@
             @using (Html.BeginForm("Edit", "Attribute", FormMethod.Post))
             {
                 @Html.AntiForgeryToken()
-                @Html.HiddenFor(m=>m.Attribute_Id)
+                @Html.HiddenFor(m => m.Attribute_Id)
                 <div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Attribute Name</label>
                         @Html.TextBoxFor(m => m.AttributeName, null, new { @class = "form-control form-mr", placeholder = "Enter Attribute Name" })
                         @Html.ValidationMessageFor(m => m.AttributeName, null, new { @class = "text-danger" })
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Attribute Value</label>
-                        @Html.TextBoxFor(m => m.AttributeValue, new { @class = "form-control form-mr", placeholder = "Enter Attribute Value", rows = "10" })
-                        @Html.ValidationMessageFor(m => m.AttributeValue, null, new { @class = "text-danger" })
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Description</label>

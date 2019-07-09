@@ -1,20 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using EShopping.Data.Models;
 using EShopping.Data;
-using System.Data.Entity;
+using System;
 
 namespace EShopping.Service.AttributeService
 {
     public class AttributeService : IAttributeService
     {
         private Repository<EShopping.Data.Models.Attribute> _AttRepo;
+        private Repository<AttributeValue> _AttValueRepo;
 
-        public AttributeService(Repository<EShopping.Data.Models.Attribute> AttRepo)
+        public AttributeService(Repository<EShopping.Data.Models.Attribute> AttRepo,
+            Repository<AttributeValue> AttValueRepo)
         {
+            _AttValueRepo = AttValueRepo;
             _AttRepo = AttRepo;
         }
 
@@ -22,6 +23,12 @@ namespace EShopping.Service.AttributeService
         {
             _AttRepo.Insert(att);
             return await _AttRepo.SaveChangesAsync();
+        }
+
+        public async Task<bool> AddAttributeValue(AttributeValue attValue)
+        {
+            _AttValueRepo.Insert(attValue);
+            return await _AttValueRepo.SaveChangesAsync();
         }
 
         public IEnumerable<Data.Models.Attribute> AllAttribute()
@@ -44,6 +51,22 @@ namespace EShopping.Service.AttributeService
             return _AttRepo.GetById(Id);
         }
 
+        public AttributeValue getAttributeValueById(int AttributeValueId)
+        {
+            return _AttValueRepo.GetById(AttributeValueId);
+        }
+
+        public IEnumerable<AttributeValue> getValuesByAttributeId(int AttributeId)
+        {
+            return _AttValueRepo.GetAllWithIncludes(new string[] {"Attribute"}).Where(m => m.Attribute_Id == AttributeId).ToList();
+        }
+
+        public async Task<bool> RemoveAttributeValue(AttributeValue av)
+        {
+            _AttValueRepo.Delete(av);
+            return await _AttValueRepo.SaveChangesAsync();
+        }
+
         public async Task<bool> RemoveAttribute(Data.Models.Attribute att)
         {
             _AttRepo.Delete(att);
@@ -54,6 +77,26 @@ namespace EShopping.Service.AttributeService
         {
             _AttRepo.Update(att);
             return await _AttRepo.SaveChangesAsync();
+        }
+
+        public async Task<bool> RemoveAllAttributeValues(IEnumerable<AttributeValue> avList)
+        {
+            bool res=false;
+            foreach (var item in avList) {
+                res=await RemoveAttributeValue(item);
+            }
+            return res;
+        }
+
+        public IEnumerable<AttributeValue> AttributeValuesByProductType(int productTypeId)
+        {
+            return _AttValueRepo.GetAllWithIncludes(new string[] { "Attribute" }).
+                Where(m => m.Attribute.ProductType_Id == productTypeId).ToList();
+        }
+
+        public IEnumerable<Data.Models.Attribute> AttributeByProductType(int ProductTypeId)
+        {
+            return _AttRepo.GetAllWithIncludes(new string[] { "ProductType" }).Where(m => m.ProductType.ProductType_Id == ProductTypeId).ToList();
         }
     }
 }

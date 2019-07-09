@@ -5,22 +5,12 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="EShoppingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="__MigrationHistory">
-          <Key>
-            <PropertyRef Name="MigrationId" />
-            <PropertyRef Name="ContextKey" />
-          </Key>
-          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
-          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
-          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
-          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Address">
+        <EntityType Name="Addresses">
           <Key>
             <PropertyRef Name="Address_Id" />
           </Key>
           <Property Name="Address_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="Address1" Type="nvarchar(max)" />
           <Property Name="City" Type="nvarchar" MaxLength="100" />
           <Property Name="Country" Type="nvarchar" MaxLength="100" />
           <Property Name="State" Type="nvarchar" MaxLength="100" />
@@ -55,11 +45,11 @@
         </EntityType>
         <EntityType Name="AspNetUserRoles">
           <Key>
-            <PropertyRef Name="UserId" />
-            <PropertyRef Name="RoleId" />
+            <PropertyRef Name="AspNetRoles_Id" />
+            <PropertyRef Name="AspNetUsers_Id" />
           </Key>
-          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="AspNetRoles_Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="AspNetUsers_Id" Type="nvarchar" MaxLength="128" Nullable="false" />
         </EntityType>
         <EntityType Name="AspNetUsers">
           <Key>
@@ -78,18 +68,25 @@
           <Property Name="AccessFailedCount" Type="int" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
         </EntityType>
-        <EntityType Name="Attribute">
+        <EntityType Name="Attributes">
           <Key>
             <PropertyRef Name="Attribute_Id" />
           </Key>
           <Property Name="Attribute_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="AttributeName" Type="nvarchar" MaxLength="200" />
-          <Property Name="AttributeValue" Type="nvarchar" MaxLength="200" />
           <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="Active" Type="bit" />
           <Property Name="ProductType_Id" Type="int" />
         </EntityType>
-        <EntityType Name="Brand">
+        <EntityType Name="AttributeValues">
+          <Key>
+            <PropertyRef Name="AttributeValue_Id" />
+          </Key>
+          <Property Name="AttributeValue_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Value" Type="nvarchar" MaxLength="200" />
+          <Property Name="Attribute_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="Brands">
           <Key>
             <PropertyRef Name="Brand_Id" />
           </Key>
@@ -99,7 +96,17 @@
           <Property Name="Description" Type="varchar(max)" />
           <Property Name="Active" Type="bit" />
         </EntityType>
-        <EntityType Name="Category">
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Categories">
           <Key>
             <PropertyRef Name="Category_Id" />
           </Key>
@@ -114,7 +121,7 @@
           <Property Name="Active" Type="bit" />
           <Property Name="IsFeatured" Type="bit" />
         </EntityType>
-        <EntityType Name="Country">
+        <EntityType Name="Countries">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -122,7 +129,7 @@
           <Property Name="Name" Type="varchar" MaxLength="255" />
           <Property Name="Code" Type="varchar" MaxLength="10" />
         </EntityType>
-        <EntityType Name="Customer">
+        <EntityType Name="Customers">
           <Key>
             <PropertyRef Name="Customer_Id" />
           </Key>
@@ -138,7 +145,7 @@
           <Property Name="User_Id" Type="nvarchar" MaxLength="128" />
           <Property Name="Active" Type="bit" />
         </EntityType>
-        <EntityType Name="FAQ">
+        <EntityType Name="FAQs">
           <Key>
             <PropertyRef Name="FAQ_Id" />
           </Key>
@@ -146,7 +153,7 @@
           <Property Name="Question" Type="nvarchar" MaxLength="200" />
           <Property Name="Answer" Type="nvarchar" MaxLength="200" />
         </EntityType>
-        <EntityType Name="Offer">
+        <EntityType Name="Offers">
           <Key>
             <PropertyRef Name="Offer_Id" />
           </Key>
@@ -158,7 +165,19 @@
           <Property Name="OfferStartDate" Type="datetime" />
           <Property Name="OfferEndDate" Type="datetime" />
         </EntityType>
-        <EntityType Name="Order">
+        <EntityType Name="OrderDetails">
+          <Key>
+            <PropertyRef Name="OrderDetails_Id" />
+          </Key>
+          <Property Name="OrderDetails_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Order_Id" Type="int" />
+          <Property Name="Product_Id" Type="int" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Discount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Active" Type="bit" />
+        </EntityType>
+        <EntityType Name="Orders">
           <Key>
             <PropertyRef Name="Order_Id" />
           </Key>
@@ -178,18 +197,6 @@
           <Property Name="Payment_Id" Type="int" />
           <Property Name="Shipper_Id" Type="int" />
         </EntityType>
-        <EntityType Name="OrderDetails">
-          <Key>
-            <PropertyRef Name="OrderDetails_Id" />
-          </Key>
-          <Property Name="OrderDetails_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Order_Id" Type="int" />
-          <Property Name="Product_Id" Type="int" />
-          <Property Name="Quantity" Type="int" />
-          <Property Name="Price" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="Discount" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="Active" Type="bit" />
-        </EntityType>
         <EntityType Name="OrderStatus">
           <Key>
             <PropertyRef Name="OrderStatus_Id" />
@@ -199,7 +206,7 @@
           <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="Active" Type="bit" />
         </EntityType>
-        <EntityType Name="Payment">
+        <EntityType Name="Payments">
           <Key>
             <PropertyRef Name="Payment_Id" />
           </Key>
@@ -207,21 +214,16 @@
           <Property Name="PaymentType" Type="nvarchar" MaxLength="200" />
           <Property Name="Allowed" Type="bit" />
         </EntityType>
-        <EntityType Name="Product">
+        <EntityType Name="Products">
           <Key>
             <PropertyRef Name="Product_Id" />
           </Key>
           <Property Name="Product_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="200" />
-          <Property Name="PurchasePrice" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="SalesPrice" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="Discount" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="SKU" Type="nvarchar" MaxLength="200" />
           <Property Name="Supplier_Id" Type="int" />
           <Property Name="Brand_Id" Type="int" />
           <Property Name="Category_Id" Type="int" />
           <Property Name="ProductType_Id" Type="int" />
-          <Property Name="Quantity" Type="int" />
           <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="ImageUrl" Type="nvarchar(max)" />
           <Property Name="CreatedDate" Type="datetime" />
@@ -231,16 +233,7 @@
           <Property Name="Active" Type="bit" />
           <Property Name="IsFeatured" Type="bit" />
         </EntityType>
-        <EntityType Name="ProductAttribute">
-          <Key>
-            <PropertyRef Name="ProductAttribute_Id" />
-          </Key>
-          <Property Name="ProductAttribute_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Product_Id" Type="int" />
-          <Property Name="AttributeId" Type="int" />
-          <Property Name="Active" Type="bit" />
-        </EntityType>
-        <EntityType Name="ProductType">
+        <EntityType Name="ProductTypes">
           <Key>
             <PropertyRef Name="ProductType_Id" />
           </Key>
@@ -249,7 +242,28 @@
           <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="Active" Type="bit" />
         </EntityType>
-        <EntityType Name="Rating">
+        <EntityType Name="ProductVariant_AttributeValue">
+          <Key>
+            <PropertyRef Name="PV_Attribute_Id" />
+          </Key>
+          <Property Name="PV_Attribute_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Product_Id" Type="int" />
+          <Property Name="ProductVariant_Id" Type="int" />
+          <Property Name="AttributeValue_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="ProductVariants">
+          <Key>
+            <PropertyRef Name="ProductVariant_Id" />
+          </Key>
+          <Property Name="ProductVariant_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="PurchasePrice" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="SalesPurchase" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Discount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="SKU" Type="nvarchar" MaxLength="200" />
+          <Property Name="Product_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="Ratings">
           <Key>
             <PropertyRef Name="Rating_Id" />
           </Key>
@@ -258,7 +272,7 @@
           <Property Name="Description" Type="nvarchar" MaxLength="500" />
           <Property Name="StarValue" Type="int" />
         </EntityType>
-        <EntityType Name="Shipper">
+        <EntityType Name="Shippers">
           <Key>
             <PropertyRef Name="Shipper_Id" />
           </Key>
@@ -266,7 +280,17 @@
           <Property Name="CompanyName" Type="nvarchar" MaxLength="200" />
           <Property Name="Phone" Type="nvarchar" MaxLength="20" />
         </EntityType>
-        <EntityType Name="ShoppingCart">
+        <EntityType Name="ShoppingCartItems">
+          <Key>
+            <PropertyRef Name="SCItem_Id" />
+          </Key>
+          <Property Name="SCItem_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductId" Type="int" />
+          <Property Name="ItemPrice" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="ItemQuantity" Type="int" />
+          <Property Name="subtotal" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="ShoppingCarts">
           <Key>
             <PropertyRef Name="ShoppingCart_Id" />
           </Key>
@@ -277,17 +301,7 @@
           <Property Name="Active" Type="bit" />
           <Property Name="SCItem_Id" Type="int" />
         </EntityType>
-        <EntityType Name="ShoppingCartItem">
-          <Key>
-            <PropertyRef Name="SCItem_Id" />
-          </Key>
-          <Property Name="SCItem_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ProductId" Type="int" />
-          <Property Name="ItemPrice" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="ItemQuantity" Type="int" />
-          <Property Name="subtotal" Type="decimal" Precision="18" Scale="0" />
-        </EntityType>
-        <EntityType Name="Supplier">
+        <EntityType Name="Suppliers">
           <Key>
             <PropertyRef Name="Supplier_Id" />
           </Key>
@@ -314,7 +328,7 @@
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
-        <EntityType Name="Wishlist">
+        <EntityType Name="Wishlists">
           <Key>
             <PropertyRef Name="Wishlist_Id" />
           </Key>
@@ -323,107 +337,119 @@
           <Property Name="product_Id" Type="int" />
           <Property Name="InsertDate" Type="datetime" />
         </EntityType>
-        <Association Name="FK__Attribute__Produ__03F0984C">
-          <End Role="ProductType" Type="Self.ProductType" Multiplicity="0..1" />
-          <End Role="Attribute" Type="Self.Attribute" Multiplicity="*" />
+        <Association Name="FK__Attribute__Attri__628FA481">
+          <End Role="Attributes" Type="Self.Attributes" Multiplicity="0..1" />
+          <End Role="AttributeValues" Type="Self.AttributeValues" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="ProductType">
+            <Principal Role="Attributes">
+              <PropertyRef Name="Attribute_Id" />
+            </Principal>
+            <Dependent Role="AttributeValues">
+              <PropertyRef Name="Attribute_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Attribute__Produ__03F0984C">
+          <End Role="ProductTypes" Type="Self.ProductTypes" Multiplicity="0..1" />
+          <End Role="Attributes" Type="Self.Attributes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductTypes">
               <PropertyRef Name="ProductType_Id" />
             </Principal>
-            <Dependent Role="Attribute">
+            <Dependent Role="Attributes">
               <PropertyRef Name="ProductType_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Customer__Addres__267ABA7A">
-          <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
-          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <End Role="Addresses" Type="Self.Addresses" Multiplicity="0..1" />
+          <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Address">
+            <Principal Role="Addresses">
               <PropertyRef Name="Address_Id" />
             </Principal>
-            <Dependent Role="Customer">
+            <Dependent Role="Customers">
               <PropertyRef Name="AddressId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Offer__product_I__300424B4">
-          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
-          <End Role="Offer" Type="Self.Offer" Multiplicity="*" />
+          <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+          <End Role="Offers" Type="Self.Offers" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Product">
+            <Principal Role="Products">
               <PropertyRef Name="Product_Id" />
             </Principal>
-            <Dependent Role="Offer">
+            <Dependent Role="Offers">
               <PropertyRef Name="product_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Order__BillingAd__3E52440B">
-          <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
-          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <End Role="Addresses" Type="Self.Addresses" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Address">
+            <Principal Role="Addresses">
               <PropertyRef Name="Address_Id" />
             </Principal>
-            <Dependent Role="Order">
+            <Dependent Role="Orders">
               <PropertyRef Name="BillingAddress_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Order__Customer___3C69FB99">
-          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
-          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Customer">
+            <Principal Role="Customers">
               <PropertyRef Name="Customer_Id" />
             </Principal>
-            <Dependent Role="Order">
+            <Dependent Role="Orders">
               <PropertyRef Name="Customer_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Order__OrderStat__3F466844">
           <End Role="OrderStatus" Type="Self.OrderStatus" Multiplicity="0..1" />
-          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="OrderStatus">
               <PropertyRef Name="OrderStatus_Id" />
             </Principal>
-            <Dependent Role="Order">
+            <Dependent Role="Orders">
               <PropertyRef Name="OrderStatus_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Order__Shipper_I__403A8C7D">
-          <End Role="Shipper" Type="Self.Shipper" Multiplicity="0..1" />
-          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <End Role="Shippers" Type="Self.Shippers" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Shipper">
+            <Principal Role="Shippers">
               <PropertyRef Name="Shipper_Id" />
             </Principal>
-            <Dependent Role="Order">
+            <Dependent Role="Orders">
               <PropertyRef Name="Shipper_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Order__ShippingA__3D5E1FD2">
-          <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
-          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <End Role="Addresses" Type="Self.Addresses" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Address">
+            <Principal Role="Addresses">
               <PropertyRef Name="Address_Id" />
             </Principal>
-            <Dependent Role="Order">
+            <Dependent Role="Orders">
               <PropertyRef Name="ShippingAddress_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__OrderDeta__Order__4316F928">
-          <End Role="Order" Type="Self.Order" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="0..1" />
           <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Order">
+            <Principal Role="Orders">
               <PropertyRef Name="Order_Id" />
             </Principal>
             <Dependent Role="OrderDetails">
@@ -432,10 +458,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__OrderDeta__Produ__440B1D61">
-          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
           <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Product">
+            <Principal Role="Products">
               <PropertyRef Name="Product_Id" />
             </Principal>
             <Dependent Role="OrderDetails">
@@ -444,145 +470,193 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Product__Brand_I__1ED998B2">
-          <End Role="Brand" Type="Self.Brand" Multiplicity="0..1" />
-          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <End Role="Brands" Type="Self.Brands" Multiplicity="0..1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Brand">
+            <Principal Role="Brands">
               <PropertyRef Name="Brand_Id" />
             </Principal>
-            <Dependent Role="Product">
+            <Dependent Role="Products">
               <PropertyRef Name="Brand_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Product__Categor__1FCDBCEB">
-          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
-          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <End Role="Categories" Type="Self.Categories" Multiplicity="0..1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Category">
+            <Principal Role="Categories">
               <PropertyRef Name="Category_Id" />
             </Principal>
-            <Dependent Role="Product">
+            <Dependent Role="Products">
               <PropertyRef Name="Category_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Product__Product__20C1E124">
-          <End Role="ProductType" Type="Self.ProductType" Multiplicity="0..1" />
-          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <End Role="ProductTypes" Type="Self.ProductTypes" Multiplicity="0..1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="ProductType">
+            <Principal Role="ProductTypes">
               <PropertyRef Name="ProductType_Id" />
             </Principal>
-            <Dependent Role="Product">
+            <Dependent Role="Products">
               <PropertyRef Name="ProductType_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Product__Supplie__1DE57479">
-          <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1" />
-          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <End Role="Suppliers" Type="Self.Suppliers" Multiplicity="0..1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Supplier">
+            <Principal Role="Suppliers">
               <PropertyRef Name="Supplier_Id" />
             </Principal>
-            <Dependent Role="Product">
+            <Dependent Role="Products">
               <PropertyRef Name="Supplier_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ProductAt__Attri__33D4B598">
-          <End Role="Attribute" Type="Self.Attribute" Multiplicity="0..1" />
-          <End Role="ProductAttribute" Type="Self.ProductAttribute" Multiplicity="*" />
+        <Association Name="FK__ProductVa__Attri__693CA210">
+          <End Role="AttributeValues" Type="Self.AttributeValues" Multiplicity="0..1" />
+          <End Role="ProductVariant_AttributeValue" Type="Self.ProductVariant_AttributeValue" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Attribute">
-              <PropertyRef Name="Attribute_Id" />
+            <Principal Role="AttributeValues">
+              <PropertyRef Name="AttributeValue_Id" />
             </Principal>
-            <Dependent Role="ProductAttribute">
-              <PropertyRef Name="AttributeId" />
+            <Dependent Role="ProductVariant_AttributeValue">
+              <PropertyRef Name="AttributeValue_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ProductAt__Produ__32E0915F">
-          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
-          <End Role="ProductAttribute" Type="Self.ProductAttribute" Multiplicity="*" />
+        <Association Name="FK__ProductVa__Produ__6754599E">
+          <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+          <End Role="ProductVariant_AttributeValue" Type="Self.ProductVariant_AttributeValue" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Product">
+            <Principal Role="Products">
               <PropertyRef Name="Product_Id" />
             </Principal>
-            <Dependent Role="ProductAttribute">
+            <Dependent Role="ProductVariant_AttributeValue">
+              <PropertyRef Name="Product_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProductVa__Produ__68487DD7">
+          <End Role="ProductVariants" Type="Self.ProductVariants" Multiplicity="0..1" />
+          <End Role="ProductVariant_AttributeValue" Type="Self.ProductVariant_AttributeValue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductVariants">
+              <PropertyRef Name="ProductVariant_Id" />
+            </Principal>
+            <Dependent Role="ProductVariant_AttributeValue">
+              <PropertyRef Name="ProductVariant_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProductVa__Produ__6A30C649">
+          <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+          <End Role="ProductVariants" Type="Self.ProductVariants" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Product_Id" />
+            </Principal>
+            <Dependent Role="ProductVariants">
               <PropertyRef Name="Product_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__ShoppingC__Custo__02084FDA">
-          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
-          <End Role="ShoppingCart" Type="Self.ShoppingCart" Multiplicity="*" />
+          <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />
+          <End Role="ShoppingCarts" Type="Self.ShoppingCarts" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Customer">
+            <Principal Role="Customers">
               <PropertyRef Name="Customer_Id" />
             </Principal>
-            <Dependent Role="ShoppingCart">
+            <Dependent Role="ShoppingCarts">
               <PropertyRef Name="Customer_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__ShoppingC__Produ__7F2BE32F">
-          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
-          <End Role="ShoppingCartItem" Type="Self.ShoppingCartItem" Multiplicity="*" />
+          <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+          <End Role="ShoppingCartItems" Type="Self.ShoppingCartItems" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Product">
+            <Principal Role="Products">
               <PropertyRef Name="Product_Id" />
             </Principal>
-            <Dependent Role="ShoppingCartItem">
+            <Dependent Role="ShoppingCartItems">
               <PropertyRef Name="ProductId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__ShoppingC__SCIte__02FC7413">
-          <End Role="ShoppingCartItem" Type="Self.ShoppingCartItem" Multiplicity="0..1" />
-          <End Role="ShoppingCart" Type="Self.ShoppingCart" Multiplicity="*" />
+          <End Role="ShoppingCartItems" Type="Self.ShoppingCartItems" Multiplicity="0..1" />
+          <End Role="ShoppingCarts" Type="Self.ShoppingCarts" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="ShoppingCartItem">
+            <Principal Role="ShoppingCartItems">
               <PropertyRef Name="SCItem_Id" />
             </Principal>
-            <Dependent Role="ShoppingCart">
+            <Dependent Role="ShoppingCarts">
               <PropertyRef Name="SCItem_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Wishlist__Custom__29572725">
-          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
-          <End Role="Wishlist" Type="Self.Wishlist" Multiplicity="*" />
+          <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />
+          <End Role="Wishlists" Type="Self.Wishlists" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Customer">
+            <Principal Role="Customers">
               <PropertyRef Name="Customer_Id" />
             </Principal>
-            <Dependent Role="Wishlist">
+            <Dependent Role="Wishlists">
               <PropertyRef Name="Customer_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Wishlist__produc__2A4B4B5E">
-          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
-          <End Role="Wishlist" Type="Self.Wishlist" Multiplicity="*" />
+          <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+          <End Role="Wishlists" Type="Self.Wishlists" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Product">
+            <Principal Role="Products">
               <PropertyRef Name="Product_Id" />
             </Principal>
-            <Dependent Role="Wishlist">
+            <Dependent Role="Wishlists">
               <PropertyRef Name="product_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUserRoles_AspNetRoles">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1" />
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="AspNetRoles_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUserRoles_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="AspNetUsers_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Customer_AspNetUsers">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
-          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AspNetUsers">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Customer">
+            <Dependent Role="Customers">
               <PropertyRef Name="User_Id" />
             </Dependent>
           </ReferentialConstraint>
@@ -615,162 +689,156 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
-          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetRoles">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AspNetUserRoles">
-              <PropertyRef Name="RoleId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AspNetUserRoles">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Order_Payment">
-          <End Role="Payment" Type="Self.Payment" Multiplicity="0..1" />
-          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <End Role="Payments" Type="Self.Payments" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Payment">
+            <Principal Role="Payments">
               <PropertyRef Name="Payment_Id" />
             </Principal>
-            <Dependent Role="Order">
+            <Dependent Role="Orders">
               <PropertyRef Name="Payment_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="EShoppingModelStoreContainer">
-          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Addresses" EntityType="Self.Addresses" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Attribute" EntityType="Self.Attribute" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Brand" EntityType="Self.Brand" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="FAQ" EntityType="Self.FAQ" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Offer" EntityType="Self.Offer" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Attributes" EntityType="Self.Attributes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AttributeValues" EntityType="Self.AttributeValues" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Brands" EntityType="Self.Brands" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Countries" EntityType="Self.Countries" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FAQs" EntityType="Self.FAQs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Offers" EntityType="Self.Offers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderDetails" EntityType="Self.OrderDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderStatus" EntityType="Self.OrderStatus" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Payment" EntityType="Self.Payment" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ProductAttribute" EntityType="Self.ProductAttribute" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ProductType" EntityType="Self.ProductType" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Rating" EntityType="Self.Rating" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Shipper" EntityType="Self.Shipper" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ShoppingCart" EntityType="Self.ShoppingCart" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ShoppingCartItem" EntityType="Self.ShoppingCartItem" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Supplier" EntityType="Self.Supplier" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Payments" EntityType="Self.Payments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductTypes" EntityType="Self.ProductTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductVariant_AttributeValue" EntityType="Self.ProductVariant_AttributeValue" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductVariants" EntityType="Self.ProductVariants" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ratings" EntityType="Self.Ratings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Shippers" EntityType="Self.Shippers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ShoppingCartItems" EntityType="Self.ShoppingCartItems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ShoppingCarts" EntityType="Self.ShoppingCarts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Suppliers" EntityType="Self.Suppliers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Wishlist" EntityType="Self.Wishlist" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Wishlists" EntityType="Self.Wishlists" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Attribute__Attri__628FA481" Association="Self.FK__Attribute__Attri__628FA481">
+            <End Role="Attributes" EntitySet="Attributes" />
+            <End Role="AttributeValues" EntitySet="AttributeValues" />
+          </AssociationSet>
           <AssociationSet Name="FK__Attribute__Produ__03F0984C" Association="Self.FK__Attribute__Produ__03F0984C">
-            <End Role="ProductType" EntitySet="ProductType" />
-            <End Role="Attribute" EntitySet="Attribute" />
+            <End Role="ProductTypes" EntitySet="ProductTypes" />
+            <End Role="Attributes" EntitySet="Attributes" />
           </AssociationSet>
           <AssociationSet Name="FK__Customer__Addres__267ABA7A" Association="Self.FK__Customer__Addres__267ABA7A">
-            <End Role="Address" EntitySet="Address" />
-            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Addresses" EntitySet="Addresses" />
+            <End Role="Customers" EntitySet="Customers" />
           </AssociationSet>
           <AssociationSet Name="FK__Offer__product_I__300424B4" Association="Self.FK__Offer__product_I__300424B4">
-            <End Role="Product" EntitySet="Product" />
-            <End Role="Offer" EntitySet="Offer" />
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Offers" EntitySet="Offers" />
           </AssociationSet>
           <AssociationSet Name="FK__Order__BillingAd__3E52440B" Association="Self.FK__Order__BillingAd__3E52440B">
-            <End Role="Address" EntitySet="Address" />
-            <End Role="Order" EntitySet="Order" />
+            <End Role="Addresses" EntitySet="Addresses" />
+            <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
           <AssociationSet Name="FK__Order__Customer___3C69FB99" Association="Self.FK__Order__Customer___3C69FB99">
-            <End Role="Customer" EntitySet="Customer" />
-            <End Role="Order" EntitySet="Order" />
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
           <AssociationSet Name="FK__Order__OrderStat__3F466844" Association="Self.FK__Order__OrderStat__3F466844">
             <End Role="OrderStatus" EntitySet="OrderStatus" />
-            <End Role="Order" EntitySet="Order" />
+            <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
           <AssociationSet Name="FK__Order__Shipper_I__403A8C7D" Association="Self.FK__Order__Shipper_I__403A8C7D">
-            <End Role="Shipper" EntitySet="Shipper" />
-            <End Role="Order" EntitySet="Order" />
+            <End Role="Shippers" EntitySet="Shippers" />
+            <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
           <AssociationSet Name="FK__Order__ShippingA__3D5E1FD2" Association="Self.FK__Order__ShippingA__3D5E1FD2">
-            <End Role="Address" EntitySet="Address" />
-            <End Role="Order" EntitySet="Order" />
+            <End Role="Addresses" EntitySet="Addresses" />
+            <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
           <AssociationSet Name="FK__OrderDeta__Order__4316F928" Association="Self.FK__OrderDeta__Order__4316F928">
-            <End Role="Order" EntitySet="Order" />
+            <End Role="Orders" EntitySet="Orders" />
             <End Role="OrderDetails" EntitySet="OrderDetails" />
           </AssociationSet>
           <AssociationSet Name="FK__OrderDeta__Produ__440B1D61" Association="Self.FK__OrderDeta__Produ__440B1D61">
-            <End Role="Product" EntitySet="Product" />
+            <End Role="Products" EntitySet="Products" />
             <End Role="OrderDetails" EntitySet="OrderDetails" />
           </AssociationSet>
           <AssociationSet Name="FK__Product__Brand_I__1ED998B2" Association="Self.FK__Product__Brand_I__1ED998B2">
-            <End Role="Brand" EntitySet="Brand" />
-            <End Role="Product" EntitySet="Product" />
+            <End Role="Brands" EntitySet="Brands" />
+            <End Role="Products" EntitySet="Products" />
           </AssociationSet>
           <AssociationSet Name="FK__Product__Categor__1FCDBCEB" Association="Self.FK__Product__Categor__1FCDBCEB">
-            <End Role="Category" EntitySet="Category" />
-            <End Role="Product" EntitySet="Product" />
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Products" EntitySet="Products" />
           </AssociationSet>
           <AssociationSet Name="FK__Product__Product__20C1E124" Association="Self.FK__Product__Product__20C1E124">
-            <End Role="ProductType" EntitySet="ProductType" />
-            <End Role="Product" EntitySet="Product" />
+            <End Role="ProductTypes" EntitySet="ProductTypes" />
+            <End Role="Products" EntitySet="Products" />
           </AssociationSet>
           <AssociationSet Name="FK__Product__Supplie__1DE57479" Association="Self.FK__Product__Supplie__1DE57479">
-            <End Role="Supplier" EntitySet="Supplier" />
-            <End Role="Product" EntitySet="Product" />
+            <End Role="Suppliers" EntitySet="Suppliers" />
+            <End Role="Products" EntitySet="Products" />
           </AssociationSet>
-          <AssociationSet Name="FK__ProductAt__Attri__33D4B598" Association="Self.FK__ProductAt__Attri__33D4B598">
-            <End Role="Attribute" EntitySet="Attribute" />
-            <End Role="ProductAttribute" EntitySet="ProductAttribute" />
+          <AssociationSet Name="FK__ProductVa__Attri__693CA210" Association="Self.FK__ProductVa__Attri__693CA210">
+            <End Role="AttributeValues" EntitySet="AttributeValues" />
+            <End Role="ProductVariant_AttributeValue" EntitySet="ProductVariant_AttributeValue" />
           </AssociationSet>
-          <AssociationSet Name="FK__ProductAt__Produ__32E0915F" Association="Self.FK__ProductAt__Produ__32E0915F">
-            <End Role="Product" EntitySet="Product" />
-            <End Role="ProductAttribute" EntitySet="ProductAttribute" />
+          <AssociationSet Name="FK__ProductVa__Produ__6754599E" Association="Self.FK__ProductVa__Produ__6754599E">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="ProductVariant_AttributeValue" EntitySet="ProductVariant_AttributeValue" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProductVa__Produ__68487DD7" Association="Self.FK__ProductVa__Produ__68487DD7">
+            <End Role="ProductVariants" EntitySet="ProductVariants" />
+            <End Role="ProductVariant_AttributeValue" EntitySet="ProductVariant_AttributeValue" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProductVa__Produ__6A30C649" Association="Self.FK__ProductVa__Produ__6A30C649">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="ProductVariants" EntitySet="ProductVariants" />
           </AssociationSet>
           <AssociationSet Name="FK__ShoppingC__Custo__02084FDA" Association="Self.FK__ShoppingC__Custo__02084FDA">
-            <End Role="Customer" EntitySet="Customer" />
-            <End Role="ShoppingCart" EntitySet="ShoppingCart" />
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="ShoppingCarts" EntitySet="ShoppingCarts" />
           </AssociationSet>
           <AssociationSet Name="FK__ShoppingC__Produ__7F2BE32F" Association="Self.FK__ShoppingC__Produ__7F2BE32F">
-            <End Role="Product" EntitySet="Product" />
-            <End Role="ShoppingCartItem" EntitySet="ShoppingCartItem" />
+            <End Role="Products" EntitySet="Products" />
+            <End Role="ShoppingCartItems" EntitySet="ShoppingCartItems" />
           </AssociationSet>
           <AssociationSet Name="FK__ShoppingC__SCIte__02FC7413" Association="Self.FK__ShoppingC__SCIte__02FC7413">
-            <End Role="ShoppingCartItem" EntitySet="ShoppingCartItem" />
-            <End Role="ShoppingCart" EntitySet="ShoppingCart" />
+            <End Role="ShoppingCartItems" EntitySet="ShoppingCartItems" />
+            <End Role="ShoppingCarts" EntitySet="ShoppingCarts" />
           </AssociationSet>
           <AssociationSet Name="FK__Wishlist__Custom__29572725" Association="Self.FK__Wishlist__Custom__29572725">
-            <End Role="Customer" EntitySet="Customer" />
-            <End Role="Wishlist" EntitySet="Wishlist" />
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Wishlists" EntitySet="Wishlists" />
           </AssociationSet>
           <AssociationSet Name="FK__Wishlist__produc__2A4B4B5E" Association="Self.FK__Wishlist__produc__2A4B4B5E">
-            <End Role="Product" EntitySet="Product" />
-            <End Role="Wishlist" EntitySet="Wishlist" />
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Wishlists" EntitySet="Wishlists" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUserRoles_AspNetRoles" Association="Self.FK_AspNetUserRoles_AspNetRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUserRoles_AspNetUsers" Association="Self.FK_AspNetUserRoles_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
           <AssociationSet Name="FK_Customer_AspNetUsers" Association="Self.FK_Customer_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Customers" EntitySet="Customers" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -780,33 +848,162 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
           </AssociationSet>
-          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
-            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
-            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
-          </AssociationSet>
           <AssociationSet Name="FK_Order_Payment" Association="Self.FK_Order_Payment">
-            <End Role="Payment" EntitySet="Payment" />
-            <End Role="Order" EntitySet="Order" />
+            <End Role="Payments" EntitySet="Payments" />
+            <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="EShoppingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="C__MigrationHistory">
-          <Key>
-            <PropertyRef Name="MigrationId" />
-            <PropertyRef Name="ContextKey" />
-          </Key>
-          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
-          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
-        </EntityType>
+        <EntityContainer Name="EShoppingEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Addresses" EntityType="EShoppingModel.Address" />
+          <EntitySet Name="AspNetRoles" EntityType="EShoppingModel.AspNetRole" />
+          <EntitySet Name="AspNetUserClaims" EntityType="EShoppingModel.AspNetUserClaim" />
+          <EntitySet Name="AspNetUserLogins" EntityType="EShoppingModel.AspNetUserLogin" />
+          <EntitySet Name="AspNetUsers" EntityType="EShoppingModel.AspNetUser" />
+          <EntitySet Name="Attributes" EntityType="EShoppingModel.Attribute" />
+          <EntitySet Name="Brands" EntityType="EShoppingModel.Brand" />
+          <EntitySet Name="C__MigrationHistory" EntityType="EShoppingModel.C__MigrationHistory" />
+          <EntitySet Name="Categories" EntityType="EShoppingModel.Category" />
+          <EntitySet Name="Countries" EntityType="EShoppingModel.Country" />
+          <EntitySet Name="Customers" EntityType="EShoppingModel.Customer" />
+          <EntitySet Name="FAQs" EntityType="EShoppingModel.FAQ" />
+          <EntitySet Name="Offers" EntityType="EShoppingModel.Offer" />
+          <EntitySet Name="OrderDetails" EntityType="EShoppingModel.OrderDetail" />
+          <EntitySet Name="Orders" EntityType="EShoppingModel.Order" />
+          <EntitySet Name="OrderStatus" EntityType="EShoppingModel.OrderStatu" />
+          <EntitySet Name="Payments" EntityType="EShoppingModel.Payment" />
+          <EntitySet Name="Products" EntityType="EShoppingModel.Product" />
+          <EntitySet Name="ProductTypes" EntityType="EShoppingModel.ProductType" />
+          <EntitySet Name="ProductVariant_AttributeValue" EntityType="EShoppingModel.ProductVariant_AttributeValue" />
+          <EntitySet Name="ProductVariants" EntityType="EShoppingModel.ProductVariant" />
+          <EntitySet Name="Ratings" EntityType="EShoppingModel.Rating" />
+          <EntitySet Name="Shippers" EntityType="EShoppingModel.Shipper" />
+          <EntitySet Name="ShoppingCartItems" EntityType="EShoppingModel.ShoppingCartItem" />
+          <EntitySet Name="ShoppingCarts" EntityType="EShoppingModel.ShoppingCart" />
+          <EntitySet Name="Suppliers" EntityType="EShoppingModel.Supplier" />
+          <EntitySet Name="sysdiagrams" EntityType="EShoppingModel.sysdiagram" />
+          <EntitySet Name="Wishlists" EntityType="EShoppingModel.Wishlist" />
+          <AssociationSet Name="FK__Customer__Addres__267ABA7A" Association="EShoppingModel.FK__Customer__Addres__267ABA7A">
+            <End Role="Address" EntitySet="Addresses" />
+            <End Role="Customer" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Order__BillingAd__3E52440B" Association="EShoppingModel.FK__Order__BillingAd__3E52440B">
+            <End Role="Address" EntitySet="Addresses" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Order__ShippingA__3D5E1FD2" Association="EShoppingModel.FK__Order__ShippingA__3D5E1FD2">
+            <End Role="Address" EntitySet="Addresses" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="EShoppingModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaim" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="EShoppingModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogin" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_AspNetUsers" Association="EShoppingModel.FK_Customer_AspNetUsers">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="Customer" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Attribute__Produ__03F0984C" Association="EShoppingModel.FK__Attribute__Produ__03F0984C">
+            <End Role="ProductType" EntitySet="ProductTypes" />
+            <End Role="Attribute" EntitySet="Attributes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product__Brand_I__1ED998B2" Association="EShoppingModel.FK__Product__Brand_I__1ED998B2">
+            <End Role="Brand" EntitySet="Brands" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product__Categor__1FCDBCEB" Association="EShoppingModel.FK__Product__Categor__1FCDBCEB">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Order__Customer___3C69FB99" Association="EShoppingModel.FK__Order__Customer___3C69FB99">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ShoppingC__Custo__02084FDA" Association="EShoppingModel.FK__ShoppingC__Custo__02084FDA">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="ShoppingCart" EntitySet="ShoppingCarts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Wishlist__Custom__29572725" Association="EShoppingModel.FK__Wishlist__Custom__29572725">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Wishlist" EntitySet="Wishlists" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Offer__product_I__300424B4" Association="EShoppingModel.FK__Offer__product_I__300424B4">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Offer" EntitySet="Offers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderDeta__Order__4316F928" Association="EShoppingModel.FK__OrderDeta__Order__4316F928">
+            <End Role="Order" EntitySet="Orders" />
+            <End Role="OrderDetail" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderDeta__Produ__440B1D61" Association="EShoppingModel.FK__OrderDeta__Produ__440B1D61">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="OrderDetail" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Order__OrderStat__3F466844" Association="EShoppingModel.FK__Order__OrderStat__3F466844">
+            <End Role="OrderStatu" EntitySet="OrderStatus" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Order__Shipper_I__403A8C7D" Association="EShoppingModel.FK__Order__Shipper_I__403A8C7D">
+            <End Role="Shipper" EntitySet="Shippers" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Payment" Association="EShoppingModel.FK_Order_Payment">
+            <End Role="Payment" EntitySet="Payments" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product__Product__20C1E124" Association="EShoppingModel.FK__Product__Product__20C1E124">
+            <End Role="ProductType" EntitySet="ProductTypes" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product__Supplie__1DE57479" Association="EShoppingModel.FK__Product__Supplie__1DE57479">
+            <End Role="Supplier" EntitySet="Suppliers" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProductVa__Produ__6754599E" Association="EShoppingModel.FK__ProductVa__Produ__6754599E">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="ProductVariant_AttributeValue" EntitySet="ProductVariant_AttributeValue" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ShoppingC__Produ__7F2BE32F" Association="EShoppingModel.FK__ShoppingC__Produ__7F2BE32F">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="ShoppingCartItem" EntitySet="ShoppingCartItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Wishlist__produc__2A4B4B5E" Association="EShoppingModel.FK__Wishlist__produc__2A4B4B5E">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Wishlist" EntitySet="Wishlists" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProductVa__Produ__68487DD7" Association="EShoppingModel.FK__ProductVa__Produ__68487DD7">
+            <End Role="ProductVariant" EntitySet="ProductVariants" />
+            <End Role="ProductVariant_AttributeValue" EntitySet="ProductVariant_AttributeValue" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ShoppingC__SCIte__02FC7413" Association="EShoppingModel.FK__ShoppingC__SCIte__02FC7413">
+            <End Role="ShoppingCartItem" EntitySet="ShoppingCartItems" />
+            <End Role="ShoppingCart" EntitySet="ShoppingCarts" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="EShoppingModel.AspNetUserRoles">
+            <End Role="AspNetRole" EntitySet="AspNetRoles" />
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProductVa__Produ__6A30C649" Association="EShoppingModel.FK__ProductVa__Produ__6A30C649">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="ProductVariant" EntitySet="ProductVariants" />
+          </AssociationSet>
+          <EntitySet Name="AttributeValues" EntityType="EShoppingModel.AttributeValue" />
+          <AssociationSet Name="FK__Attribute__Attri__628FA481" Association="EShoppingModel.FK__Attribute__Attri__628FA481">
+            <End Role="Attribute" EntitySet="Attributes" />
+            <End Role="AttributeValue" EntitySet="AttributeValues" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProductVa__Attri__693CA210" Association="EShoppingModel.FK__ProductVa__Attri__693CA210">
+            <End Role="AttributeValue" EntitySet="AttributeValues" />
+            <End Role="ProductVariant_AttributeValue" EntitySet="ProductVariant_AttributeValue" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="Address">
           <Key>
             <PropertyRef Name="Address_Id" />
@@ -818,27 +1015,27 @@
           <Property Name="State" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="ZipCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Active" Type="Boolean" />
-          <NavigationProperty Name="Customers" Relationship="Self.FK__Customer__Addres__267ABA7A" FromRole="Address" ToRole="Customer" />
-          <NavigationProperty Name="Orders" Relationship="Self.FK__Order__BillingAd__3E52440B" FromRole="Address" ToRole="Order" />
-          <NavigationProperty Name="Orders1" Relationship="Self.FK__Order__ShippingA__3D5E1FD2" FromRole="Address" ToRole="Order" />
+          <NavigationProperty Name="Customers" Relationship="EShoppingModel.FK__Customer__Addres__267ABA7A" FromRole="Address" ToRole="Customer" />
+          <NavigationProperty Name="Orders" Relationship="EShoppingModel.FK__Order__BillingAd__3E52440B" FromRole="Address" ToRole="Order" />
+          <NavigationProperty Name="Orders1" Relationship="EShoppingModel.FK__Order__ShippingA__3D5E1FD2" FromRole="Address" ToRole="Order" />
         </EntityType>
         <EntityType Name="AspNetRole">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="EShoppingModel.AspNetUserRoles" FromRole="AspNetRole" ToRole="AspNetUser" />
         </EntityType>
         <EntityType Name="AspNetUserClaim">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+          <NavigationProperty Name="AspNetUser" Relationship="EShoppingModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaim" ToRole="AspNetUser" />
         </EntityType>
         <EntityType Name="AspNetUserLogin">
           <Key>
@@ -846,16 +1043,16 @@
             <PropertyRef Name="ProviderKey" />
             <PropertyRef Name="UserId" />
           </Key>
-          <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+          <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="EShoppingModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogin" ToRole="AspNetUser" />
         </EntityType>
         <EntityType Name="AspNetUser">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
           <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -866,11 +1063,11 @@
           <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
           <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
           <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
-          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
-          <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
-          <NavigationProperty Name="Customers" Relationship="Self.FK_Customer_AspNetUsers" FromRole="AspNetUsers" ToRole="Customer" />
-          <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="EShoppingModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="EShoppingModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
+          <NavigationProperty Name="Customers" Relationship="EShoppingModel.FK_Customer_AspNetUsers" FromRole="AspNetUser" ToRole="Customer" />
+          <NavigationProperty Name="AspNetRoles" Relationship="EShoppingModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
         </EntityType>
         <EntityType Name="Attribute">
           <Key>
@@ -878,12 +1075,11 @@
           </Key>
           <Property Name="Attribute_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="AttributeName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="AttributeValue" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Active" Type="Boolean" />
-          <NavigationProperty Name="ProductAttributes" Relationship="Self.FK__ProductAt__Attri__33D4B598" FromRole="Attribute" ToRole="ProductAttribute" />
           <Property Name="ProductType_Id" Type="Int32" />
           <NavigationProperty Name="ProductType" Relationship="EShoppingModel.FK__Attribute__Produ__03F0984C" FromRole="Attribute" ToRole="ProductType" />
+          <NavigationProperty Name="AttributeValues" Relationship="EShoppingModel.FK__Attribute__Attri__628FA481" FromRole="Attribute" ToRole="AttributeValue" />
         </EntityType>
         <EntityType Name="Brand">
           <Key>
@@ -895,6 +1091,16 @@
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Active" Type="Boolean" />
           <NavigationProperty Name="Products" Relationship="EShoppingModel.FK__Product__Brand_I__1ED998B2" FromRole="Brand" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ContextKey" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
@@ -912,6 +1118,14 @@
           <Property Name="IsFeatured" Type="Boolean" />
           <NavigationProperty Name="Products" Relationship="EShoppingModel.FK__Product__Categor__1FCDBCEB" FromRole="Category" ToRole="Product" />
         </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Code" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
         <EntityType Name="Customer">
           <Key>
             <PropertyRef Name="Customer_Id" />
@@ -927,11 +1141,11 @@
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="User_Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="Active" Type="Boolean" />
-          <NavigationProperty Name="Address" Relationship="Self.FK__Customer__Addres__267ABA7A" FromRole="Customer" ToRole="Address" />
-          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Customer_AspNetUsers" FromRole="Customer" ToRole="AspNetUsers" />
-          <NavigationProperty Name="Orders" Relationship="Self.FK__Order__Customer___3C69FB99" FromRole="Customer" ToRole="Order" />
-          <NavigationProperty Name="Wishlists" Relationship="Self.FK__Wishlist__Custom__29572725" FromRole="Customer" ToRole="Wishlist" />
+          <NavigationProperty Name="Address" Relationship="EShoppingModel.FK__Customer__Addres__267ABA7A" FromRole="Customer" ToRole="Address" />
+          <NavigationProperty Name="AspNetUser" Relationship="EShoppingModel.FK_Customer_AspNetUsers" FromRole="Customer" ToRole="AspNetUser" />
+          <NavigationProperty Name="Orders" Relationship="EShoppingModel.FK__Order__Customer___3C69FB99" FromRole="Customer" ToRole="Order" />
           <NavigationProperty Name="ShoppingCarts" Relationship="EShoppingModel.FK__ShoppingC__Custo__02084FDA" FromRole="Customer" ToRole="ShoppingCart" />
+          <NavigationProperty Name="Wishlists" Relationship="EShoppingModel.FK__Wishlist__Custom__29572725" FromRole="Customer" ToRole="Wishlist" />
         </EntityType>
         <EntityType Name="FAQ">
           <Key>
@@ -954,6 +1168,20 @@
           <Property Name="OfferEndDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Product" Relationship="EShoppingModel.FK__Offer__product_I__300424B4" FromRole="Offer" ToRole="Product" />
         </EntityType>
+        <EntityType Name="OrderDetail">
+          <Key>
+            <PropertyRef Name="OrderDetails_Id" />
+          </Key>
+          <Property Name="OrderDetails_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Order_Id" Type="Int32" />
+          <Property Name="Product_Id" Type="Int32" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Discount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Active" Type="Boolean" />
+          <NavigationProperty Name="Order" Relationship="EShoppingModel.FK__OrderDeta__Order__4316F928" FromRole="OrderDetail" ToRole="Order" />
+          <NavigationProperty Name="Product" Relationship="EShoppingModel.FK__OrderDeta__Produ__440B1D61" FromRole="OrderDetail" ToRole="Product" />
+        </EntityType>
         <EntityType Name="Order">
           <Key>
             <PropertyRef Name="Order_Id" />
@@ -973,27 +1201,13 @@
           <Property Name="OrderStatus_Id" Type="Int32" />
           <Property Name="Payment_Id" Type="Int32" />
           <Property Name="Shipper_Id" Type="Int32" />
-          <NavigationProperty Name="Address" Relationship="Self.FK__Order__BillingAd__3E52440B" FromRole="Order" ToRole="Address" />
-          <NavigationProperty Name="Address1" Relationship="Self.FK__Order__ShippingA__3D5E1FD2" FromRole="Order" ToRole="Address" />
-          <NavigationProperty Name="Customer" Relationship="Self.FK__Order__Customer___3C69FB99" FromRole="Order" ToRole="Customer" />
-          <NavigationProperty Name="OrderStatu" Relationship="Self.FK__Order__OrderStat__3F466844" FromRole="Order" ToRole="OrderStatus" />
-          <NavigationProperty Name="Shipper" Relationship="Self.FK__Order__Shipper_I__403A8C7D" FromRole="Order" ToRole="Shipper" />
-          <NavigationProperty Name="OrderDetails" Relationship="Self.FK__OrderDeta__Order__4316F928" FromRole="Order" ToRole="OrderDetails" />
-          <NavigationProperty Name="Payment" Relationship="Self.FK_Order_Payment" FromRole="Order" ToRole="Payment" />
-        </EntityType>
-        <EntityType Name="OrderDetail">
-          <Key>
-            <PropertyRef Name="OrderDetails_Id" />
-          </Key>
-          <Property Name="OrderDetails_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Order_Id" Type="Int32" />
-          <Property Name="Product_Id" Type="Int32" />
-          <Property Name="Quantity" Type="Int32" />
-          <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="Discount" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="Active" Type="Boolean" />
-          <NavigationProperty Name="Order" Relationship="Self.FK__OrderDeta__Order__4316F928" FromRole="OrderDetails" ToRole="Order" />
-          <NavigationProperty Name="Product" Relationship="EShoppingModel.FK__OrderDeta__Produ__440B1D61" FromRole="OrderDetail" ToRole="Product" />
+          <NavigationProperty Name="Address" Relationship="EShoppingModel.FK__Order__BillingAd__3E52440B" FromRole="Order" ToRole="Address" />
+          <NavigationProperty Name="Address1" Relationship="EShoppingModel.FK__Order__ShippingA__3D5E1FD2" FromRole="Order" ToRole="Address" />
+          <NavigationProperty Name="Customer" Relationship="EShoppingModel.FK__Order__Customer___3C69FB99" FromRole="Order" ToRole="Customer" />
+          <NavigationProperty Name="OrderDetails" Relationship="EShoppingModel.FK__OrderDeta__Order__4316F928" FromRole="Order" ToRole="OrderDetail" />
+          <NavigationProperty Name="OrderStatu" Relationship="EShoppingModel.FK__Order__OrderStat__3F466844" FromRole="Order" ToRole="OrderStatu" />
+          <NavigationProperty Name="Shipper" Relationship="EShoppingModel.FK__Order__Shipper_I__403A8C7D" FromRole="Order" ToRole="Shipper" />
+          <NavigationProperty Name="Payment" Relationship="EShoppingModel.FK_Order_Payment" FromRole="Order" ToRole="Payment" />
         </EntityType>
         <EntityType Name="OrderStatu">
           <Key>
@@ -1003,7 +1217,7 @@
           <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Active" Type="Boolean" />
-          <NavigationProperty Name="Orders" Relationship="Self.FK__Order__OrderStat__3F466844" FromRole="OrderStatus" ToRole="Order" />
+          <NavigationProperty Name="Orders" Relationship="EShoppingModel.FK__Order__OrderStat__3F466844" FromRole="OrderStatu" ToRole="Order" />
         </EntityType>
         <EntityType Name="Payment">
           <Key>
@@ -1012,18 +1226,36 @@
           <Property Name="Payment_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="PaymentType" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Allowed" Type="Boolean" />
-          <NavigationProperty Name="Orders" Relationship="Self.FK_Order_Payment" FromRole="Payment" ToRole="Order" />
+          <NavigationProperty Name="Orders" Relationship="EShoppingModel.FK_Order_Payment" FromRole="Payment" ToRole="Order" />
         </EntityType>
-        <EntityType Name="ProductAttribute">
+        <EntityType Name="Product">
           <Key>
-            <PropertyRef Name="ProductAttribute_Id" />
+            <PropertyRef Name="Product_Id" />
           </Key>
-          <Property Name="ProductAttribute_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Product_Id" Type="Int32" />
-          <Property Name="AttributeId" Type="Int32" />
+          <Property Name="Product_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Supplier_Id" Type="Int32" />
+          <Property Name="Brand_Id" Type="Int32" />
+          <Property Name="Category_Id" Type="Int32" />
+          <Property Name="ProductType_Id" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ImageUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Active" Type="Boolean" />
-          <NavigationProperty Name="Attribute" Relationship="Self.FK__ProductAt__Attri__33D4B598" FromRole="ProductAttribute" ToRole="Attribute" />
-          <NavigationProperty Name="Product" Relationship="EShoppingModel.FK__ProductAt__Produ__32E0915F" FromRole="ProductAttribute" ToRole="Product" />
+          <Property Name="IsFeatured" Type="Boolean" />
+          <NavigationProperty Name="Brand" Relationship="EShoppingModel.FK__Product__Brand_I__1ED998B2" FromRole="Product" ToRole="Brand" />
+          <NavigationProperty Name="Category" Relationship="EShoppingModel.FK__Product__Categor__1FCDBCEB" FromRole="Product" ToRole="Category" />
+          <NavigationProperty Name="Offers" Relationship="EShoppingModel.FK__Offer__product_I__300424B4" FromRole="Product" ToRole="Offer" />
+          <NavigationProperty Name="OrderDetails" Relationship="EShoppingModel.FK__OrderDeta__Produ__440B1D61" FromRole="Product" ToRole="OrderDetail" />
+          <NavigationProperty Name="ProductType" Relationship="EShoppingModel.FK__Product__Product__20C1E124" FromRole="Product" ToRole="ProductType" />
+          <NavigationProperty Name="Supplier" Relationship="EShoppingModel.FK__Product__Supplie__1DE57479" FromRole="Product" ToRole="Supplier" />
+          <NavigationProperty Name="ProductVariant_AttributeValue" Relationship="EShoppingModel.FK__ProductVa__Produ__6754599E" FromRole="Product" ToRole="ProductVariant_AttributeValue" />
+          <NavigationProperty Name="ShoppingCartItems" Relationship="EShoppingModel.FK__ShoppingC__Produ__7F2BE32F" FromRole="Product" ToRole="ShoppingCartItem" />
+          <NavigationProperty Name="Wishlists" Relationship="EShoppingModel.FK__Wishlist__produc__2A4B4B5E" FromRole="Product" ToRole="Wishlist" />
+          <NavigationProperty Name="ProductVariants" Relationship="EShoppingModel.FK__ProductVa__Produ__6A30C649" FromRole="Product" ToRole="ProductVariant" />
         </EntityType>
         <EntityType Name="ProductType">
           <Key>
@@ -1033,8 +1265,34 @@
           <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Active" Type="Boolean" />
-          <NavigationProperty Name="Products" Relationship="EShoppingModel.FK__Product__Product__20C1E124" FromRole="ProductType" ToRole="Product" />
           <NavigationProperty Name="Attributes" Relationship="EShoppingModel.FK__Attribute__Produ__03F0984C" FromRole="ProductType" ToRole="Attribute" />
+          <NavigationProperty Name="Products" Relationship="EShoppingModel.FK__Product__Product__20C1E124" FromRole="ProductType" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="ProductVariant_AttributeValue">
+          <Key>
+            <PropertyRef Name="PV_Attribute_Id" />
+          </Key>
+          <Property Name="PV_Attribute_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Product_Id" Type="Int32" />
+          <Property Name="ProductVariant_Id" Type="Int32" />
+          <Property Name="AttributeValue_Id" Type="Int32" />
+          <NavigationProperty Name="Product" Relationship="EShoppingModel.FK__ProductVa__Produ__6754599E" FromRole="ProductVariant_AttributeValue" ToRole="Product" />
+          <NavigationProperty Name="ProductVariant" Relationship="EShoppingModel.FK__ProductVa__Produ__68487DD7" FromRole="ProductVariant_AttributeValue" ToRole="ProductVariant" />
+          <NavigationProperty Name="AttributeValue" Relationship="EShoppingModel.FK__ProductVa__Attri__693CA210" FromRole="ProductVariant_AttributeValue" ToRole="AttributeValue" />
+        </EntityType>
+        <EntityType Name="ProductVariant">
+          <Key>
+            <PropertyRef Name="ProductVariant_Id" />
+          </Key>
+          <Property Name="ProductVariant_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Product_Id" Type="Int32" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="PurchasePrice" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SalesPurchase" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Discount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SKU" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ProductVariant_AttributeValue" Relationship="EShoppingModel.FK__ProductVa__Produ__68487DD7" FromRole="ProductVariant" ToRole="ProductVariant_AttributeValue" />
+          <NavigationProperty Name="Product" Relationship="EShoppingModel.FK__ProductVa__Produ__6A30C649" FromRole="ProductVariant" ToRole="Product" />
         </EntityType>
         <EntityType Name="Rating">
           <Key>
@@ -1052,7 +1310,32 @@
           <Property Name="Shipper_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CompanyName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Orders" Relationship="Self.FK__Order__Shipper_I__403A8C7D" FromRole="Shipper" ToRole="Order" />
+          <NavigationProperty Name="Orders" Relationship="EShoppingModel.FK__Order__Shipper_I__403A8C7D" FromRole="Shipper" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="ShoppingCartItem">
+          <Key>
+            <PropertyRef Name="SCItem_Id" />
+          </Key>
+          <Property Name="SCItem_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductId" Type="Int32" />
+          <Property Name="ItemPrice" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="ItemQuantity" Type="Int32" />
+          <Property Name="subtotal" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Product" Relationship="EShoppingModel.FK__ShoppingC__Produ__7F2BE32F" FromRole="ShoppingCartItem" ToRole="Product" />
+          <NavigationProperty Name="ShoppingCarts" Relationship="EShoppingModel.FK__ShoppingC__SCIte__02FC7413" FromRole="ShoppingCartItem" ToRole="ShoppingCart" />
+        </EntityType>
+        <EntityType Name="ShoppingCart">
+          <Key>
+            <PropertyRef Name="ShoppingCart_Id" />
+          </Key>
+          <Property Name="ShoppingCart_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Customer_Id" Type="Int32" />
+          <Property Name="TotalQuantity" Type="Int32" />
+          <Property Name="TotalPrice" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="SCItem_Id" Type="Int32" />
+          <NavigationProperty Name="Customer" Relationship="EShoppingModel.FK__ShoppingC__Custo__02084FDA" FromRole="ShoppingCart" ToRole="Customer" />
+          <NavigationProperty Name="ShoppingCartItem" Relationship="EShoppingModel.FK__ShoppingC__SCIte__02FC7413" FromRole="ShoppingCart" ToRole="ShoppingCartItem" />
         </EntityType>
         <EntityType Name="Supplier">
           <Key>
@@ -1076,7 +1359,7 @@
           <Key>
             <PropertyRef Name="diagram_id" />
           </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="principal_id" Type="Int32" Nullable="false" />
           <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="version" Type="Int32" />
@@ -1090,12 +1373,12 @@
           <Property Name="Customer_Id" Type="Int32" />
           <Property Name="product_Id" Type="Int32" />
           <Property Name="InsertDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Customer" Relationship="Self.FK__Wishlist__Custom__29572725" FromRole="Wishlist" ToRole="Customer" />
+          <NavigationProperty Name="Customer" Relationship="EShoppingModel.FK__Wishlist__Custom__29572725" FromRole="Wishlist" ToRole="Customer" />
           <NavigationProperty Name="Product" Relationship="EShoppingModel.FK__Wishlist__produc__2A4B4B5E" FromRole="Wishlist" ToRole="Product" />
         </EntityType>
         <Association Name="FK__Customer__Addres__267ABA7A">
-          <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
-          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <End Type="EShoppingModel.Address" Role="Address" Multiplicity="0..1" />
+          <End Type="EShoppingModel.Customer" Role="Customer" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Address">
               <PropertyRef Name="Address_Id" />
@@ -1106,8 +1389,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Order__BillingAd__3E52440B">
-          <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
-          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <End Type="EShoppingModel.Address" Role="Address" Multiplicity="0..1" />
+          <End Type="EShoppingModel.Order" Role="Order" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Address">
               <PropertyRef Name="Address_Id" />
@@ -1118,8 +1401,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Order__ShippingA__3D5E1FD2">
-          <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
-          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <End Type="EShoppingModel.Address" Role="Address" Multiplicity="0..1" />
+          <End Type="EShoppingModel.Order" Role="Order" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Address">
               <PropertyRef Name="Address_Id" />
@@ -1130,38 +1413,38 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+          <End Type="EShoppingModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaim" Multiplicity="*" />
+          <End Type="EShoppingModel.AspNetUserClaim" Role="AspNetUserClaim" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
+            <Principal Role="AspNetUser">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="AspNetUserClaims">
+            <Dependent Role="AspNetUserClaim">
               <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+          <End Type="EShoppingModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogin" Multiplicity="*" />
+          <End Type="EShoppingModel.AspNetUserLogin" Role="AspNetUserLogin" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
+            <Principal Role="AspNetUser">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="AspNetUserLogins">
+            <Dependent Role="AspNetUserLogin">
               <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Customer_AspNetUsers">
-          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
-          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <End Type="EShoppingModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+          <End Type="EShoppingModel.Customer" Role="Customer" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
+            <Principal Role="AspNetUser">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Customer">
@@ -1169,268 +1452,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ProductAt__Attri__33D4B598">
-          <End Role="Attribute" Type="Self.Attribute" Multiplicity="0..1" />
-          <End Role="ProductAttribute" Type="Self.ProductAttribute" Multiplicity="*" />
+        <Association Name="FK__Attribute__Produ__03F0984C">
+          <End Type="EShoppingModel.ProductType" Role="ProductType" Multiplicity="0..1" />
+          <End Type="EShoppingModel.Attribute" Role="Attribute" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Attribute">
-              <PropertyRef Name="Attribute_Id" />
+            <Principal Role="ProductType">
+              <PropertyRef Name="ProductType_Id" />
             </Principal>
-            <Dependent Role="ProductAttribute">
-              <PropertyRef Name="AttributeId" />
+            <Dependent Role="Attribute">
+              <PropertyRef Name="ProductType_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Order__Customer___3C69FB99">
-          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
-          <End Role="Order" Type="Self.Order" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Customer">
-              <PropertyRef Name="Customer_Id" />
-            </Principal>
-            <Dependent Role="Order">
-              <PropertyRef Name="Customer_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Wishlist__Custom__29572725">
-          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
-          <End Role="Wishlist" Type="Self.Wishlist" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Customer">
-              <PropertyRef Name="Customer_Id" />
-            </Principal>
-            <Dependent Role="Wishlist">
-              <PropertyRef Name="Customer_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Order__OrderStat__3F466844">
-          <End Role="OrderStatus" Type="Self.OrderStatu" Multiplicity="0..1" />
-          <End Role="Order" Type="Self.Order" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="OrderStatus">
-              <PropertyRef Name="OrderStatus_Id" />
-            </Principal>
-            <Dependent Role="Order">
-              <PropertyRef Name="OrderStatus_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Order__Shipper_I__403A8C7D">
-          <End Role="Shipper" Type="Self.Shipper" Multiplicity="0..1" />
-          <End Role="Order" Type="Self.Order" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Shipper">
-              <PropertyRef Name="Shipper_Id" />
-            </Principal>
-            <Dependent Role="Order">
-              <PropertyRef Name="Shipper_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__OrderDeta__Order__4316F928">
-          <End Role="Order" Type="Self.Order" Multiplicity="0..1" />
-          <End Role="OrderDetails" Type="Self.OrderDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Order">
-              <PropertyRef Name="Order_Id" />
-            </Principal>
-            <Dependent Role="OrderDetails">
-              <PropertyRef Name="Order_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Order_Payment">
-          <End Role="Payment" Type="Self.Payment" Multiplicity="0..1" />
-          <End Role="Order" Type="Self.Order" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Payment">
-              <PropertyRef Name="Payment_Id" />
-            </Principal>
-            <Dependent Role="Order">
-              <PropertyRef Name="Payment_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="AspNetUserRoles">
-          <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
-          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
-        </Association>
-        <EntityContainer Name="EShoppingEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
-          <EntitySet Name="Addresses" EntityType="Self.Address" />
-          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
-          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
-          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
-          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
-          <EntitySet Name="Attributes" EntityType="Self.Attribute" />
-          <EntitySet Name="Brands" EntityType="Self.Brand" />
-          <EntitySet Name="Categories" EntityType="Self.Category" />
-          <EntitySet Name="Customers" EntityType="Self.Customer" />
-          <EntitySet Name="FAQs" EntityType="Self.FAQ" />
-          <EntitySet Name="Offers" EntityType="Self.Offer" />
-          <EntitySet Name="Orders" EntityType="Self.Order" />
-          <EntitySet Name="OrderDetails" EntityType="Self.OrderDetail" />
-          <EntitySet Name="OrderStatus" EntityType="Self.OrderStatu" />
-          <EntitySet Name="Payments" EntityType="Self.Payment" />
-          <EntitySet Name="ProductAttributes" EntityType="Self.ProductAttribute" />
-          <EntitySet Name="ProductTypes" EntityType="Self.ProductType" />
-          <EntitySet Name="Ratings" EntityType="Self.Rating" />
-          <EntitySet Name="Shippers" EntityType="Self.Shipper" />
-          <EntitySet Name="Suppliers" EntityType="Self.Supplier" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
-          <EntitySet Name="Wishlists" EntityType="Self.Wishlist" />
-          <AssociationSet Name="FK__Customer__Addres__267ABA7A" Association="Self.FK__Customer__Addres__267ABA7A">
-            <End Role="Address" EntitySet="Addresses" />
-            <End Role="Customer" EntitySet="Customers" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Order__BillingAd__3E52440B" Association="Self.FK__Order__BillingAd__3E52440B">
-            <End Role="Address" EntitySet="Addresses" />
-            <End Role="Order" EntitySet="Orders" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Order__ShippingA__3D5E1FD2" Association="Self.FK__Order__ShippingA__3D5E1FD2">
-            <End Role="Address" EntitySet="Addresses" />
-            <End Role="Order" EntitySet="Orders" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Customer_AspNetUsers" Association="Self.FK_Customer_AspNetUsers">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="Customer" EntitySet="Customers" />
-          </AssociationSet>
-          <AssociationSet Name="FK__ProductAt__Attri__33D4B598" Association="Self.FK__ProductAt__Attri__33D4B598">
-            <End Role="Attribute" EntitySet="Attributes" />
-            <End Role="ProductAttribute" EntitySet="ProductAttributes" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Order__Customer___3C69FB99" Association="Self.FK__Order__Customer___3C69FB99">
-            <End Role="Customer" EntitySet="Customers" />
-            <End Role="Order" EntitySet="Orders" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Wishlist__Custom__29572725" Association="Self.FK__Wishlist__Custom__29572725">
-            <End Role="Customer" EntitySet="Customers" />
-            <End Role="Wishlist" EntitySet="Wishlists" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Order__OrderStat__3F466844" Association="Self.FK__Order__OrderStat__3F466844">
-            <End Role="OrderStatus" EntitySet="OrderStatus" />
-            <End Role="Order" EntitySet="Orders" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Order__Shipper_I__403A8C7D" Association="Self.FK__Order__Shipper_I__403A8C7D">
-            <End Role="Shipper" EntitySet="Shippers" />
-            <End Role="Order" EntitySet="Orders" />
-          </AssociationSet>
-          <AssociationSet Name="FK__OrderDeta__Order__4316F928" Association="Self.FK__OrderDeta__Order__4316F928">
-            <End Role="Order" EntitySet="Orders" />
-            <End Role="OrderDetails" EntitySet="OrderDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Order_Payment" Association="Self.FK_Order_Payment">
-            <End Role="Payment" EntitySet="Payments" />
-            <End Role="Order" EntitySet="Orders" />
-          </AssociationSet>
-          <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
-            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-          </AssociationSet>
-          <EntitySet Name="Countries" EntityType="EShoppingModel.Country" />
-          <EntitySet Name="Products" EntityType="EShoppingModel.Product" />
-          <AssociationSet Name="FK__Product__Brand_I__1ED998B2" Association="EShoppingModel.FK__Product__Brand_I__1ED998B2">
-            <End Role="Brand" EntitySet="Brands" />
-            <End Role="Product" EntitySet="Products" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Product__Categor__1FCDBCEB" Association="EShoppingModel.FK__Product__Categor__1FCDBCEB">
-            <End Role="Category" EntitySet="Categories" />
-            <End Role="Product" EntitySet="Products" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Offer__product_I__300424B4" Association="EShoppingModel.FK__Offer__product_I__300424B4">
-            <End Role="Product" EntitySet="Products" />
-            <End Role="Offer" EntitySet="Offers" />
-          </AssociationSet>
-          <AssociationSet Name="FK__OrderDeta__Produ__440B1D61" Association="EShoppingModel.FK__OrderDeta__Produ__440B1D61">
-            <End Role="Product" EntitySet="Products" />
-            <End Role="OrderDetail" EntitySet="OrderDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Product__Product__20C1E124" Association="EShoppingModel.FK__Product__Product__20C1E124">
-            <End Role="ProductType" EntitySet="ProductTypes" />
-            <End Role="Product" EntitySet="Products" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Product__Supplie__1DE57479" Association="EShoppingModel.FK__Product__Supplie__1DE57479">
-            <End Role="Supplier" EntitySet="Suppliers" />
-            <End Role="Product" EntitySet="Products" />
-          </AssociationSet>
-          <AssociationSet Name="FK__ProductAt__Produ__32E0915F" Association="EShoppingModel.FK__ProductAt__Produ__32E0915F">
-            <End Role="Product" EntitySet="Products" />
-            <End Role="ProductAttribute" EntitySet="ProductAttributes" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Wishlist__produc__2A4B4B5E" Association="EShoppingModel.FK__Wishlist__produc__2A4B4B5E">
-            <End Role="Product" EntitySet="Products" />
-            <End Role="Wishlist" EntitySet="Wishlists" />
-          </AssociationSet>
-          <EntitySet Name="ShoppingCarts" EntityType="EShoppingModel.ShoppingCart" />
-          <EntitySet Name="ShoppingCartItems" EntityType="EShoppingModel.ShoppingCartItem" />
-          <AssociationSet Name="FK__ShoppingC__Custo__02084FDA" Association="EShoppingModel.FK__ShoppingC__Custo__02084FDA">
-            <End Role="Customer" EntitySet="Customers" />
-            <End Role="ShoppingCart" EntitySet="ShoppingCarts" />
-          </AssociationSet>
-          <AssociationSet Name="FK__ShoppingC__Produ__7F2BE32F" Association="EShoppingModel.FK__ShoppingC__Produ__7F2BE32F">
-            <End Role="Product" EntitySet="Products" />
-            <End Role="ShoppingCartItem" EntitySet="ShoppingCartItems" />
-          </AssociationSet>
-          <AssociationSet Name="FK__ShoppingC__SCIte__02FC7413" Association="EShoppingModel.FK__ShoppingC__SCIte__02FC7413">
-            <End Role="ShoppingCartItem" EntitySet="ShoppingCartItems" />
-            <End Role="ShoppingCart" EntitySet="ShoppingCarts" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Attribute__Produ__03F0984C" Association="EShoppingModel.FK__Attribute__Produ__03F0984C">
-            <End Role="ProductType" EntitySet="ProductTypes" />
-            <End Role="Attribute" EntitySet="Attributes" />
-          </AssociationSet>
-        </EntityContainer>
-        <EntityType Name="Country">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="Code" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="Product">
-          <Key>
-            <PropertyRef Name="Product_Id" />
-          </Key>
-          <Property Name="Product_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="PurchasePrice" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="SalesPrice" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="Discount" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="SKU" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Supplier_Id" Type="Int32" />
-          <Property Name="Brand_Id" Type="Int32" />
-          <Property Name="Category_Id" Type="Int32" />
-          <Property Name="ProductType_Id" Type="Int32" />
-          <Property Name="Quantity" Type="Int32" />
-          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ImageUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <Property Name="CreatedBy" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
-          <Property Name="ModifiedBy" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Active" Type="Boolean" />
-          <Property Name="IsFeatured" Type="Boolean" />
-          <NavigationProperty Name="Brand" Relationship="EShoppingModel.FK__Product__Brand_I__1ED998B2" FromRole="Product" ToRole="Brand" />
-          <NavigationProperty Name="Category" Relationship="EShoppingModel.FK__Product__Categor__1FCDBCEB" FromRole="Product" ToRole="Category" />
-          <NavigationProperty Name="Offers" Relationship="EShoppingModel.FK__Offer__product_I__300424B4" FromRole="Product" ToRole="Offer" />
-          <NavigationProperty Name="OrderDetails" Relationship="EShoppingModel.FK__OrderDeta__Produ__440B1D61" FromRole="Product" ToRole="OrderDetail" />
-          <NavigationProperty Name="ProductType" Relationship="EShoppingModel.FK__Product__Product__20C1E124" FromRole="Product" ToRole="ProductType" />
-          <NavigationProperty Name="Supplier" Relationship="EShoppingModel.FK__Product__Supplie__1DE57479" FromRole="Product" ToRole="Supplier" />
-          <NavigationProperty Name="ProductAttributes" Relationship="EShoppingModel.FK__ProductAt__Produ__32E0915F" FromRole="Product" ToRole="ProductAttribute" />
-          <NavigationProperty Name="Wishlists" Relationship="EShoppingModel.FK__Wishlist__produc__2A4B4B5E" FromRole="Product" ToRole="Wishlist" />
-          <NavigationProperty Name="ShoppingCartItems" Relationship="EShoppingModel.FK__ShoppingC__Produ__7F2BE32F" FromRole="Product" ToRole="ShoppingCartItem" />
-        </EntityType>
         <Association Name="FK__Product__Brand_I__1ED998B2">
           <End Type="EShoppingModel.Brand" Role="Brand" Multiplicity="0..1" />
           <End Type="EShoppingModel.Product" Role="Product" Multiplicity="*" />
@@ -1455,6 +1488,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Order__Customer___3C69FB99">
+          <End Type="EShoppingModel.Customer" Role="Customer" Multiplicity="0..1" />
+          <End Type="EShoppingModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Customer_Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="Customer_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ShoppingC__Custo__02084FDA">
+          <End Type="EShoppingModel.Customer" Role="Customer" Multiplicity="0..1" />
+          <End Type="EShoppingModel.ShoppingCart" Role="ShoppingCart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Customer_Id" />
+            </Principal>
+            <Dependent Role="ShoppingCart">
+              <PropertyRef Name="Customer_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Wishlist__Custom__29572725">
+          <End Type="EShoppingModel.Customer" Role="Customer" Multiplicity="0..1" />
+          <End Type="EShoppingModel.Wishlist" Role="Wishlist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Customer_Id" />
+            </Principal>
+            <Dependent Role="Wishlist">
+              <PropertyRef Name="Customer_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Offer__product_I__300424B4">
           <End Type="EShoppingModel.Product" Role="Product" Multiplicity="0..1" />
           <End Type="EShoppingModel.Offer" Role="Offer" Multiplicity="*" />
@@ -1467,6 +1536,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__OrderDeta__Order__4316F928">
+          <End Type="EShoppingModel.Order" Role="Order" Multiplicity="0..1" />
+          <End Type="EShoppingModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="Order_Id" />
+            </Principal>
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="Order_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__OrderDeta__Produ__440B1D61">
           <End Type="EShoppingModel.Product" Role="Product" Multiplicity="0..1" />
           <End Type="EShoppingModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
@@ -1476,6 +1557,42 @@
             </Principal>
             <Dependent Role="OrderDetail">
               <PropertyRef Name="Product_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Order__OrderStat__3F466844">
+          <End Type="EShoppingModel.OrderStatu" Role="OrderStatu" Multiplicity="0..1" />
+          <End Type="EShoppingModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderStatu">
+              <PropertyRef Name="OrderStatus_Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="OrderStatus_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Order__Shipper_I__403A8C7D">
+          <End Type="EShoppingModel.Shipper" Role="Shipper" Multiplicity="0..1" />
+          <End Type="EShoppingModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shipper">
+              <PropertyRef Name="Shipper_Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="Shipper_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Payment">
+          <End Type="EShoppingModel.Payment" Role="Payment" Multiplicity="0..1" />
+          <End Type="EShoppingModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Payment">
+              <PropertyRef Name="Payment_Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="Payment_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1503,64 +1620,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ProductAt__Produ__32E0915F">
+        <Association Name="FK__ProductVa__Produ__6754599E">
           <End Type="EShoppingModel.Product" Role="Product" Multiplicity="0..1" />
-          <End Type="EShoppingModel.ProductAttribute" Role="ProductAttribute" Multiplicity="*" />
+          <End Type="EShoppingModel.ProductVariant_AttributeValue" Role="ProductVariant_AttributeValue" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Product">
               <PropertyRef Name="Product_Id" />
             </Principal>
-            <Dependent Role="ProductAttribute">
+            <Dependent Role="ProductVariant_AttributeValue">
               <PropertyRef Name="Product_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Wishlist__produc__2A4B4B5E">
-          <End Type="EShoppingModel.Product" Role="Product" Multiplicity="0..1" />
-          <End Type="EShoppingModel.Wishlist" Role="Wishlist" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="Product_Id" />
-            </Principal>
-            <Dependent Role="Wishlist">
-              <PropertyRef Name="product_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="ShoppingCart">
-          <Key>
-            <PropertyRef Name="ShoppingCart_Id" />
-          </Key>
-          <Property Name="ShoppingCart_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Customer_Id" Type="Int32" />
-          <Property Name="TotalQuantity" Type="Int32" />
-          <Property Name="TotalPrice" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="Active" Type="Boolean" />
-          <Property Name="SCItem_Id" Type="Int32" />
-          <NavigationProperty Name="Customer" Relationship="EShoppingModel.FK__ShoppingC__Custo__02084FDA" FromRole="ShoppingCart" ToRole="Customer" />
-          <NavigationProperty Name="ShoppingCartItem" Relationship="EShoppingModel.FK__ShoppingC__SCIte__02FC7413" FromRole="ShoppingCart" ToRole="ShoppingCartItem" />
-        </EntityType>
-        <EntityType Name="ShoppingCartItem">
-          <Key>
-            <PropertyRef Name="SCItem_Id" />
-          </Key>
-          <Property Name="SCItem_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ProductId" Type="Int32" />
-          <Property Name="ItemPrice" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="ItemQuantity" Type="Int32" />
-          <Property Name="subtotal" Type="Decimal" Precision="18" Scale="0" />
-          <NavigationProperty Name="Product" Relationship="EShoppingModel.FK__ShoppingC__Produ__7F2BE32F" FromRole="ShoppingCartItem" ToRole="Product" />
-          <NavigationProperty Name="ShoppingCarts" Relationship="EShoppingModel.FK__ShoppingC__SCIte__02FC7413" FromRole="ShoppingCartItem" ToRole="ShoppingCart" />
-        </EntityType>
-        <Association Name="FK__ShoppingC__Custo__02084FDA">
-          <End Type="EShoppingModel.Customer" Role="Customer" Multiplicity="0..1" />
-          <End Type="EShoppingModel.ShoppingCart" Role="ShoppingCart" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Customer">
-              <PropertyRef Name="Customer_Id" />
-            </Principal>
-            <Dependent Role="ShoppingCart">
-              <PropertyRef Name="Customer_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1576,6 +1644,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Wishlist__produc__2A4B4B5E">
+          <End Type="EShoppingModel.Product" Role="Product" Multiplicity="0..1" />
+          <End Type="EShoppingModel.Wishlist" Role="Wishlist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Product_Id" />
+            </Principal>
+            <Dependent Role="Wishlist">
+              <PropertyRef Name="product_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProductVa__Produ__68487DD7">
+          <End Type="EShoppingModel.ProductVariant" Role="ProductVariant" Multiplicity="0..1" />
+          <End Type="EShoppingModel.ProductVariant_AttributeValue" Role="ProductVariant_AttributeValue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductVariant">
+              <PropertyRef Name="ProductVariant_Id" />
+            </Principal>
+            <Dependent Role="ProductVariant_AttributeValue">
+              <PropertyRef Name="ProductVariant_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__ShoppingC__SCIte__02FC7413">
           <End Type="EShoppingModel.ShoppingCartItem" Role="ShoppingCartItem" Multiplicity="0..1" />
           <End Type="EShoppingModel.ShoppingCart" Role="ShoppingCart" Multiplicity="*" />
@@ -1588,321 +1680,272 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Attribute__Produ__03F0984C">
-          <End Type="EShoppingModel.ProductType" Role="ProductType" Multiplicity="0..1" />
-          <End Type="EShoppingModel.Attribute" Role="Attribute" Multiplicity="*" />
+        <Association Name="AspNetUserRoles">
+          <End Type="EShoppingModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
+          <End Type="EShoppingModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+        </Association>
+        <Association Name="FK__ProductVa__Produ__6A30C649">
+          <End Type="EShoppingModel.Product" Role="Product" Multiplicity="0..1" />
+          <End Type="EShoppingModel.ProductVariant" Role="ProductVariant" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="ProductType">
-              <PropertyRef Name="ProductType_Id" />
+            <Principal Role="Product">
+              <PropertyRef Name="Product_Id" />
             </Principal>
-            <Dependent Role="Attribute">
-              <PropertyRef Name="ProductType_Id" />
+            <Dependent Role="ProductVariant">
+              <PropertyRef Name="Product_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <EntityType Name="AttributeValue">
+          <Key>
+            <PropertyRef Name="AttributeValue_Id" />
+          </Key>
+          <Property Name="AttributeValue_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Value" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Attribute_Id" Type="Int32" />
+          <NavigationProperty Name="Attribute" Relationship="EShoppingModel.FK__Attribute__Attri__628FA481" FromRole="AttributeValue" ToRole="Attribute" />
+          <NavigationProperty Name="ProductVariant_AttributeValue" Relationship="EShoppingModel.FK__ProductVa__Attri__693CA210" FromRole="AttributeValue" ToRole="ProductVariant_AttributeValue" />
+        </EntityType>
+        <Association Name="FK__Attribute__Attri__628FA481">
+          <End Type="EShoppingModel.Attribute" Role="Attribute" Multiplicity="0..1" />
+          <End Type="EShoppingModel.AttributeValue" Role="AttributeValue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Attribute">
+              <PropertyRef Name="Attribute_Id" />
+            </Principal>
+            <Dependent Role="AttributeValue">
+              <PropertyRef Name="Attribute_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProductVa__Attri__693CA210">
+          <End Type="EShoppingModel.AttributeValue" Role="AttributeValue" Multiplicity="0..1" />
+          <End Type="EShoppingModel.ProductVariant_AttributeValue" Role="ProductVariant_AttributeValue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AttributeValue">
+              <PropertyRef Name="AttributeValue_Id" />
+            </Principal>
+            <Dependent Role="ProductVariant_AttributeValue">
+              <PropertyRef Name="AttributeValue_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="EShoppingModelStoreContainer" CdmEntityContainer="EShoppingEntities">
-          <EntitySetMapping Name="C__MigrationHistory">
-            <EntityTypeMapping TypeName="EShoppingModel.C__MigrationHistory">
-              <MappingFragment StoreEntitySet="__MigrationHistory">
-                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
-                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
-                <ScalarProperty Name="Model" ColumnName="Model" />
-                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Addresses">
             <EntityTypeMapping TypeName="EShoppingModel.Address">
-              <MappingFragment StoreEntitySet="Address">
-                <ScalarProperty Name="Address_Id" ColumnName="Address_Id" />
-                <ScalarProperty Name="Address1" ColumnName="Address" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="Country" ColumnName="Country" />
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+              <MappingFragment StoreEntitySet="Addresses">
                 <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="Address_Id" ColumnName="Address_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetRoles">
             <EntityTypeMapping TypeName="EShoppingModel.AspNetRole">
               <MappingFragment StoreEntitySet="AspNetRoles">
-                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetUserClaims">
             <EntityTypeMapping TypeName="EShoppingModel.AspNetUserClaim">
               <MappingFragment StoreEntitySet="AspNetUserClaims">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
                 <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetUserLogins">
             <EntityTypeMapping TypeName="EShoppingModel.AspNetUserLogin">
               <MappingFragment StoreEntitySet="AspNetUserLogins">
-                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
-                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetUsers">
             <EntityTypeMapping TypeName="EShoppingModel.AspNetUser">
               <MappingFragment StoreEntitySet="AspNetUsers">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
-                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
-                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
-                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
-                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
-                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
-                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Attributes">
             <EntityTypeMapping TypeName="EShoppingModel.Attribute">
-              <MappingFragment StoreEntitySet="Attribute">
+              <MappingFragment StoreEntitySet="Attributes">
                 <ScalarProperty Name="ProductType_Id" ColumnName="ProductType_Id" />
-                <ScalarProperty Name="Attribute_Id" ColumnName="Attribute_Id" />
-                <ScalarProperty Name="AttributeName" ColumnName="AttributeName" />
-                <ScalarProperty Name="AttributeValue" ColumnName="AttributeValue" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="AttributeName" ColumnName="AttributeName" />
+                <ScalarProperty Name="Attribute_Id" ColumnName="Attribute_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Brands">
             <EntityTypeMapping TypeName="EShoppingModel.Brand">
-              <MappingFragment StoreEntitySet="Brand">
-                <ScalarProperty Name="Brand_Id" ColumnName="Brand_Id" />
-                <ScalarProperty Name="BrandName" ColumnName="BrandName" />
-                <ScalarProperty Name="Logo" ColumnName="Logo" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
+              <MappingFragment StoreEntitySet="Brands">
                 <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Logo" ColumnName="Logo" />
+                <ScalarProperty Name="BrandName" ColumnName="BrandName" />
+                <ScalarProperty Name="Brand_Id" ColumnName="Brand_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="EShoppingModel.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="C__MigrationHistory">
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Categories">
             <EntityTypeMapping TypeName="EShoppingModel.Category">
-              <MappingFragment StoreEntitySet="Category">
+              <MappingFragment StoreEntitySet="Categories">
                 <ScalarProperty Name="IsFeatured" ColumnName="IsFeatured" />
-                <ScalarProperty Name="Category_Id" ColumnName="Category_Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Customers">
-            <EntityTypeMapping TypeName="EShoppingModel.Customer">
-              <MappingFragment StoreEntitySet="Customer">
-                <ScalarProperty Name="Customer_Id" ColumnName="Customer_Id" />
-                <ScalarProperty Name="FName" ColumnName="FName" />
-                <ScalarProperty Name="LName" ColumnName="LName" />
-                <ScalarProperty Name="DOB" ColumnName="DOB" />
-                <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="AddressId" ColumnName="AddressId" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="User_Id" ColumnName="User_Id" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="FAQs">
-            <EntityTypeMapping TypeName="EShoppingModel.FAQ">
-              <MappingFragment StoreEntitySet="FAQ">
-                <ScalarProperty Name="FAQ_Id" ColumnName="FAQ_Id" />
-                <ScalarProperty Name="Question" ColumnName="Question" />
-                <ScalarProperty Name="Answer" ColumnName="Answer" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Offers">
-            <EntityTypeMapping TypeName="EShoppingModel.Offer">
-              <MappingFragment StoreEntitySet="Offer">
-                <ScalarProperty Name="OfferEndDate" ColumnName="OfferEndDate" />
-                <ScalarProperty Name="OfferStartDate" ColumnName="OfferStartDate" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="OfferPrice" ColumnName="OfferPrice" />
-                <ScalarProperty Name="Offer_Id" ColumnName="Offer_Id" />
-                <ScalarProperty Name="product_Id" ColumnName="product_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Orders">
-            <EntityTypeMapping TypeName="EShoppingModel.Order">
-              <MappingFragment StoreEntitySet="Order">
-                <ScalarProperty Name="Order_Id" ColumnName="Order_Id" />
-                <ScalarProperty Name="Customer_Id" ColumnName="Customer_Id" />
-                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
-                <ScalarProperty Name="ShipDate" ColumnName="ShipDate" />
-                <ScalarProperty Name="OrderAmount" ColumnName="OrderAmount" />
-                <ScalarProperty Name="Discount" ColumnName="Discount" />
-                <ScalarProperty Name="ShippingAmount" ColumnName="ShippingAmount" />
-                <ScalarProperty Name="TaxAmount" ColumnName="TaxAmount" />
-                <ScalarProperty Name="NetAmount" ColumnName="NetAmount" />
-                <ScalarProperty Name="ShippingDate" ColumnName="ShippingDate" />
-                <ScalarProperty Name="ShippingAddress_Id" ColumnName="ShippingAddress_Id" />
-                <ScalarProperty Name="BillingAddress_Id" ColumnName="BillingAddress_Id" />
-                <ScalarProperty Name="OrderStatus_Id" ColumnName="OrderStatus_Id" />
-                <ScalarProperty Name="Payment_Id" ColumnName="Payment_Id" />
-                <ScalarProperty Name="Shipper_Id" ColumnName="Shipper_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="OrderDetails">
-            <EntityTypeMapping TypeName="EShoppingModel.OrderDetail">
-              <MappingFragment StoreEntitySet="OrderDetails">
-                <ScalarProperty Name="OrderDetails_Id" ColumnName="OrderDetails_Id" />
-                <ScalarProperty Name="Order_Id" ColumnName="Order_Id" />
-                <ScalarProperty Name="Product_Id" ColumnName="Product_Id" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="Discount" ColumnName="Discount" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="OrderStatus">
-            <EntityTypeMapping TypeName="EShoppingModel.OrderStatu">
-              <MappingFragment StoreEntitySet="OrderStatus">
-                <ScalarProperty Name="OrderStatus_Id" ColumnName="OrderStatus_Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Category_Id" ColumnName="Category_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Payments">
-            <EntityTypeMapping TypeName="EShoppingModel.Payment">
-              <MappingFragment StoreEntitySet="Payment">
-                <ScalarProperty Name="Payment_Id" ColumnName="Payment_Id" />
-                <ScalarProperty Name="PaymentType" ColumnName="PaymentType" />
-                <ScalarProperty Name="Allowed" ColumnName="Allowed" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ProductAttributes">
-            <EntityTypeMapping TypeName="EShoppingModel.ProductAttribute">
-              <MappingFragment StoreEntitySet="ProductAttribute">
-                <ScalarProperty Name="ProductAttribute_Id" ColumnName="ProductAttribute_Id" />
-                <ScalarProperty Name="Product_Id" ColumnName="Product_Id" />
-                <ScalarProperty Name="AttributeId" ColumnName="AttributeId" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ProductTypes">
-            <EntityTypeMapping TypeName="EShoppingModel.ProductType">
-              <MappingFragment StoreEntitySet="ProductType">
-                <ScalarProperty Name="ProductType_Id" ColumnName="ProductType_Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Ratings">
-            <EntityTypeMapping TypeName="EShoppingModel.Rating">
-              <MappingFragment StoreEntitySet="Rating">
-                <ScalarProperty Name="Rating_Id" ColumnName="Rating_Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="StarValue" ColumnName="StarValue" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Shippers">
-            <EntityTypeMapping TypeName="EShoppingModel.Shipper">
-              <MappingFragment StoreEntitySet="Shipper">
-                <ScalarProperty Name="Shipper_Id" ColumnName="Shipper_Id" />
-                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Suppliers">
-            <EntityTypeMapping TypeName="EShoppingModel.Supplier">
-              <MappingFragment StoreEntitySet="Supplier">
-                <ScalarProperty Name="Supplier_Id" ColumnName="Supplier_Id" />
-                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
-                <ScalarProperty Name="ContactFName" ColumnName="ContactFName" />
-                <ScalarProperty Name="ContactLName" ColumnName="ContactLName" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="Address1" ColumnName="Address1" />
-                <ScalarProperty Name="Address2" ColumnName="Address2" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="Country" ColumnName="Country" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="URL" ColumnName="URL" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="EShoppingModel.sysdiagram">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Wishlists">
-            <EntityTypeMapping TypeName="EShoppingModel.Wishlist">
-              <MappingFragment StoreEntitySet="Wishlist">
-                <ScalarProperty Name="Wishlist_Id" ColumnName="Wishlist_Id" />
-                <ScalarProperty Name="Customer_Id" ColumnName="Customer_Id" />
-                <ScalarProperty Name="product_Id" ColumnName="product_Id" />
-                <ScalarProperty Name="InsertDate" ColumnName="InsertDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <AssociationSetMapping Name="AspNetUserRoles" TypeName="EShoppingModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
-            <EndProperty Name="AspNetRoles">
-              <ScalarProperty Name="Id" ColumnName="RoleId" />
-            </EndProperty>
-            <EndProperty Name="AspNetUsers">
-              <ScalarProperty Name="Id" ColumnName="UserId" />
-            </EndProperty>
-          </AssociationSetMapping>
           <EntitySetMapping Name="Countries">
             <EntityTypeMapping TypeName="EShoppingModel.Country">
-              <MappingFragment StoreEntitySet="Country">
+              <MappingFragment StoreEntitySet="Countries">
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="EShoppingModel.Customer">
+              <MappingFragment StoreEntitySet="Customers">
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="AddressId" ColumnName="AddressId" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="LName" ColumnName="LName" />
+                <ScalarProperty Name="FName" ColumnName="FName" />
+                <ScalarProperty Name="Customer_Id" ColumnName="Customer_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FAQs">
+            <EntityTypeMapping TypeName="EShoppingModel.FAQ">
+              <MappingFragment StoreEntitySet="FAQs">
+                <ScalarProperty Name="Answer" ColumnName="Answer" />
+                <ScalarProperty Name="Question" ColumnName="Question" />
+                <ScalarProperty Name="FAQ_Id" ColumnName="FAQ_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Offers">
+            <EntityTypeMapping TypeName="EShoppingModel.Offer">
+              <MappingFragment StoreEntitySet="Offers">
+                <ScalarProperty Name="OfferEndDate" ColumnName="OfferEndDate" />
+                <ScalarProperty Name="OfferStartDate" ColumnName="OfferStartDate" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="OfferPrice" ColumnName="OfferPrice" />
+                <ScalarProperty Name="product_Id" ColumnName="product_Id" />
+                <ScalarProperty Name="Offer_Id" ColumnName="Offer_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderDetails">
+            <EntityTypeMapping TypeName="EShoppingModel.OrderDetail">
+              <MappingFragment StoreEntitySet="OrderDetails">
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Product_Id" ColumnName="Product_Id" />
+                <ScalarProperty Name="Order_Id" ColumnName="Order_Id" />
+                <ScalarProperty Name="OrderDetails_Id" ColumnName="OrderDetails_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="EShoppingModel.Order">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="Shipper_Id" ColumnName="Shipper_Id" />
+                <ScalarProperty Name="Payment_Id" ColumnName="Payment_Id" />
+                <ScalarProperty Name="OrderStatus_Id" ColumnName="OrderStatus_Id" />
+                <ScalarProperty Name="BillingAddress_Id" ColumnName="BillingAddress_Id" />
+                <ScalarProperty Name="ShippingAddress_Id" ColumnName="ShippingAddress_Id" />
+                <ScalarProperty Name="ShippingDate" ColumnName="ShippingDate" />
+                <ScalarProperty Name="NetAmount" ColumnName="NetAmount" />
+                <ScalarProperty Name="TaxAmount" ColumnName="TaxAmount" />
+                <ScalarProperty Name="ShippingAmount" ColumnName="ShippingAmount" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="OrderAmount" ColumnName="OrderAmount" />
+                <ScalarProperty Name="ShipDate" ColumnName="ShipDate" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="Customer_Id" ColumnName="Customer_Id" />
+                <ScalarProperty Name="Order_Id" ColumnName="Order_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderStatus">
+            <EntityTypeMapping TypeName="EShoppingModel.OrderStatu">
+              <MappingFragment StoreEntitySet="OrderStatus">
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="OrderStatus_Id" ColumnName="OrderStatus_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Payments">
+            <EntityTypeMapping TypeName="EShoppingModel.Payment">
+              <MappingFragment StoreEntitySet="Payments">
+                <ScalarProperty Name="Allowed" ColumnName="Allowed" />
+                <ScalarProperty Name="PaymentType" ColumnName="PaymentType" />
+                <ScalarProperty Name="Payment_Id" ColumnName="Payment_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="EShoppingModel.Product">
-              <MappingFragment StoreEntitySet="Product">
+              <MappingFragment StoreEntitySet="Products">
                 <ScalarProperty Name="IsFeatured" ColumnName="IsFeatured" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
@@ -1911,23 +1954,81 @@
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="ProductType_Id" ColumnName="ProductType_Id" />
                 <ScalarProperty Name="Category_Id" ColumnName="Category_Id" />
                 <ScalarProperty Name="Brand_Id" ColumnName="Brand_Id" />
                 <ScalarProperty Name="Supplier_Id" ColumnName="Supplier_Id" />
-                <ScalarProperty Name="SKU" ColumnName="SKU" />
-                <ScalarProperty Name="Discount" ColumnName="Discount" />
-                <ScalarProperty Name="SalesPrice" ColumnName="SalesPrice" />
-                <ScalarProperty Name="PurchasePrice" ColumnName="PurchasePrice" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Product_Id" ColumnName="Product_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ProductTypes">
+            <EntityTypeMapping TypeName="EShoppingModel.ProductType">
+              <MappingFragment StoreEntitySet="ProductTypes">
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ProductType_Id" ColumnName="ProductType_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductVariant_AttributeValue">
+            <EntityTypeMapping TypeName="EShoppingModel.ProductVariant_AttributeValue">
+              <MappingFragment StoreEntitySet="ProductVariant_AttributeValue">
+                <ScalarProperty Name="AttributeValue_Id" ColumnName="AttributeValue_Id" />
+                <ScalarProperty Name="ProductVariant_Id" ColumnName="ProductVariant_Id" />
+                <ScalarProperty Name="Product_Id" ColumnName="Product_Id" />
+                <ScalarProperty Name="PV_Attribute_Id" ColumnName="PV_Attribute_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductVariants">
+            <EntityTypeMapping TypeName="EShoppingModel.ProductVariant">
+              <MappingFragment StoreEntitySet="ProductVariants">
+                <ScalarProperty Name="SKU" ColumnName="SKU" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="SalesPurchase" ColumnName="SalesPurchase" />
+                <ScalarProperty Name="PurchasePrice" ColumnName="PurchasePrice" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Product_Id" ColumnName="Product_Id" />
+                <ScalarProperty Name="ProductVariant_Id" ColumnName="ProductVariant_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ratings">
+            <EntityTypeMapping TypeName="EShoppingModel.Rating">
+              <MappingFragment StoreEntitySet="Ratings">
+                <ScalarProperty Name="StarValue" ColumnName="StarValue" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Rating_Id" ColumnName="Rating_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Shippers">
+            <EntityTypeMapping TypeName="EShoppingModel.Shipper">
+              <MappingFragment StoreEntitySet="Shippers">
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="Shipper_Id" ColumnName="Shipper_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ShoppingCartItems">
+            <EntityTypeMapping TypeName="EShoppingModel.ShoppingCartItem">
+              <MappingFragment StoreEntitySet="ShoppingCartItems">
+                <ScalarProperty Name="subtotal" ColumnName="subtotal" />
+                <ScalarProperty Name="ItemQuantity" ColumnName="ItemQuantity" />
+                <ScalarProperty Name="ItemPrice" ColumnName="ItemPrice" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="SCItem_Id" ColumnName="SCItem_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="ShoppingCarts">
             <EntityTypeMapping TypeName="EShoppingModel.ShoppingCart">
-              <MappingFragment StoreEntitySet="ShoppingCart">
+              <MappingFragment StoreEntitySet="ShoppingCarts">
                 <ScalarProperty Name="SCItem_Id" ColumnName="SCItem_Id" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
@@ -1937,14 +2038,59 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ShoppingCartItems">
-            <EntityTypeMapping TypeName="EShoppingModel.ShoppingCartItem">
-              <MappingFragment StoreEntitySet="ShoppingCartItem">
-                <ScalarProperty Name="subtotal" ColumnName="subtotal" />
-                <ScalarProperty Name="ItemQuantity" ColumnName="ItemQuantity" />
-                <ScalarProperty Name="ItemPrice" ColumnName="ItemPrice" />
-                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
-                <ScalarProperty Name="SCItem_Id" ColumnName="SCItem_Id" />
+          <EntitySetMapping Name="Suppliers">
+            <EntityTypeMapping TypeName="EShoppingModel.Supplier">
+              <MappingFragment StoreEntitySet="Suppliers">
+                <ScalarProperty Name="URL" ColumnName="URL" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="ContactLName" ColumnName="ContactLName" />
+                <ScalarProperty Name="ContactFName" ColumnName="ContactFName" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="Supplier_Id" ColumnName="Supplier_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="EShoppingModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Wishlists">
+            <EntityTypeMapping TypeName="EShoppingModel.Wishlist">
+              <MappingFragment StoreEntitySet="Wishlists">
+                <ScalarProperty Name="InsertDate" ColumnName="InsertDate" />
+                <ScalarProperty Name="product_Id" ColumnName="product_Id" />
+                <ScalarProperty Name="Customer_Id" ColumnName="Customer_Id" />
+                <ScalarProperty Name="Wishlist_Id" ColumnName="Wishlist_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="EShoppingModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetUser">
+              <ScalarProperty Name="Id" ColumnName="AspNetUsers_Id" />
+            </EndProperty>
+            <EndProperty Name="AspNetRole">
+              <ScalarProperty Name="Id" ColumnName="AspNetRoles_Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="AttributeValues">
+            <EntityTypeMapping TypeName="EShoppingModel.AttributeValue">
+              <MappingFragment StoreEntitySet="AttributeValues">
+                <ScalarProperty Name="Attribute_Id" ColumnName="Attribute_Id" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="AttributeValue_Id" ColumnName="AttributeValue_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
